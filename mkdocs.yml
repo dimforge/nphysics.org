@@ -13,7 +13,7 @@ pages:
   - '<i class="fa fa-align-left"></i>&nbsp API Documentation':
     - 'nphysics2d': rustdoc_nphysics2d.md
     - 'nphysics3d': rustdoc_nphysics3d.md
-  - '<i class="fa fa-play"></i>&nbsp Demonstrations':
+  - '<i class="fa fa-play"></i>&nbsp Demos':
     - '2D demos':
         - 'ball2': demo_balls3.md
     - '3D demos':
