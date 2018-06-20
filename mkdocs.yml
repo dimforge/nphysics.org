@@ -15,19 +15,19 @@ pages:
     - 'nphysics3d': rustdoc_nphysics3d.md
   - '<i class="fa fa-play"></i>&nbsp Demonstrations':
     - '2D demos':
-        - 'ball2': demo_ball3.md
+        - 'ball2': demo_balls3.md
     - '3D demos':
-        - 'balls3': demo_ball3.md
-        - 'boxes3': demo_ball3.md
-        - 'convex3': demo_ball3.md
-        - 'trimesh3': demo_ball3.md
-        - 'cross3': demo_ball3.md
-        - 'body_status3': demo_ball3.md
-        - 'collision_groups3': demo_ball3.md
-        - 'joints3': demo_ball3.md
-        - 'constraints3': demo_ball3.md
-        - 'ragdoll3': demo_ball3.md
-        - 'sensor3': demo_ball3.md
+        - 'Stack of balls': demo_balls3.md
+        - 'Stack of boxes': demo_boxes3.md
+        - 'Convex solids': demo_convex3.md
+        - 'Triangle mesh terrain': demo_trimesh3.md
+        - 'Compound shapes': demo_cross3.md
+        - 'Kinematic body': demo_body_status3.md
+        - 'Collision groups': demo_collision_groups3.md
+        - 'Multibody joints': demo_joints3.md
+        - 'Joint constraints': demo_constraints3.md
+        - 'Ragdolls': demo_ragdoll3.md
+        - 'Sensor': demo_sensor3.md
 
   - '<i class="fa fa-question-circle"></i>&nbsp About':
       - 'Contributing': about.md

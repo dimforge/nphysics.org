@@ -15,4 +15,6 @@ site
 deploy
 docs/rustdoc
 docs/demo
+docs/demo_*3.md
+docs/demo_*2.md
 .DS_Store

@@ -4,7 +4,6 @@ set -x
 nphysics_dir="../rust-dev/nphysics-dev"
 nphysics3d_dir="../rust-dev/nphysics-dev/build/nphysics3d"
 testbed3d_dir="../rust-dev/nphysics-dev/nphysics_testbed3d"
-index="boxes3"
 
 mkdir -p deploy
 mkdir -p static
@@ -18,12 +17,13 @@ for demo in $demos; do
     sed -i '' -e "s#{{testbed3d_dir}}#$testbed3d_dir#g" Cargo.toml
     sed -e "s/{{demo}}/$demo/g" template/index.html > static/index.html
     cargo web deploy --target=wasm32-unknown-unknown --release
-    cp target/deploy/$demo.js deploy/.
-    cp target/deploy/$demo.wasm deploy/.
-    cp target/deploy/index.html deploy/$demo.html
+    cp target/deploy/$demo.js docs/demo/.
+    cp target/deploy/$demo.wasm docs/demo/.
+    sed -i '' -e "s#$demo.wasm#/demo/$demo.wasm#g" docs/demo/$demo.js
+    sed -e "s/{{demo}}/$demo/g" template/demo.md > docs/demo_$demo.md
+
     rm $demo.rs
 done
 
-cp deploy/$index.html deploy/index.html
 rm Cargo.toml
 rm -r static
