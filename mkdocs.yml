@@ -1,0 +1,58 @@
+site_name: nphysics
+pages:
+  - Home: index.md
+  - '<i class="fa fa-book"></i>&nbsp User Guide':
+    - 'Getting started': getting_started.md
+    - 'Rigid body simulations': rigid_body_simulations_with_contacts.md
+    - 'Joint constraints and multibodies': joint_constraints_and_multibodies.md
+    - 'Event handling and sensors': event_handling_and_sensors.md
+    - 'WASM compatibility': wasm_compatibility.md
+    - 'Performance tuning': performance_tuning.md
+#       # - 'The nphysics Testbeds': nphysics_testbeds.md
+#     - 'FAQ': faq.md
+  - '<i class="fa fa-align-left"></i>&nbsp API Documentation':
+    - 'nphysics2d': rustdoc_nphysics2d.md
+    - 'nphysics3d': rustdoc_nphysics3d.md
+  - '<i class="fa fa-play"></i>&nbsp Demonstrations':
+    - '2D demos':
+        - 'ball2': demo_ball3.md
+    - '3D demos':
+        - 'balls3': demo_ball3.md
+        - 'boxes3': demo_ball3.md
+        - 'convex3': demo_ball3.md
+        - 'trimesh3': demo_ball3.md
+        - 'cross3': demo_ball3.md
+        - 'body_status3': demo_ball3.md
+        - 'collision_groups3': demo_ball3.md
+        - 'joints3': demo_ball3.md
+        - 'constraints3': demo_ball3.md
+        - 'ragdoll3': demo_ball3.md
+        - 'sensor3': demo_ball3.md
+
+  - '<i class="fa fa-question-circle"></i>&nbsp About':
+      - 'Contributing': about.md
+      - 'Release notes': changelog.md
+theme:
+    name: null
+    custom_dir: 'custom_flatly'
+site_author: 'Sébastion Crozet'
+site_favicon: img/favicon.ico
+site_url: http://nphysics.org
+
+# the third-party extenison mdx_math.py comes with a setup.py script
+# Thank you Dmitry Shachnev (https://github.com/mitya57/python-markdown-math)
+markdown_extensions:
+    - extra
+    - mdx_math:
+        enable_dollar_delimiter: True #for use of inline $..$
+    - fenced_code
+    - codehilite:
+        use_pygments: False
+    - footnotes
+    - smarty
+    - admonition
+    - toc:
+        permalink: '§'
+
+# Required to load the MathJax javascript for the mdx_math.py
+extra_javascript: ['https://cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS_HTML']

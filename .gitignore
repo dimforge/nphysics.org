@@ -11,3 +11,8 @@ Cargo.lock
 target
 deploy
 Cargo.lock
+site
+deploy
+docs/rustdoc
+docs/demo
+.DS_Store
