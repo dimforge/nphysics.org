@@ -1,0 +1,22 @@
+[package]
+name    = "{{demo}}"
+version = "0.1.0"
+authors = [ "Sébastien Crozet <developer@crozet.re>" ]
+
+[dependencies]
+rand       = { version = "0.5", features = [ "stdweb" ] }
+num-traits = "0.2"
+nalgebra   = "0.15"
+ncollide3d = "0.16"
+kiss3d     = "0.15"
+
+[dependencies.nphysics3d]
+path = "{{nphysics3d_dir}}"
+
+[dependencies.nphysics_testbed3d]
+path = "{{testbed3d_dir}}"
+
+
+[[bin]]
+name = "{{demo}}"
+path = "./{{demo}}.rs"

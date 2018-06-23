@@ -170,4 +170,4 @@ open an issue on [GitHub](https://github.com/sebcrozet/nphysics/issues).
 Some images were downloaded from [flaticon](http://www.flaticon.com). Some have
 been modified to fit with the overall theme. We thank the authors for providing
 those images under the CC 3.0 BY license: [Vectors Market](https://www.flaticon.com/authors/vectors-market),
-[Alfredo Hernandez](https://www.flaticon.com/authors/alfredo-hernandez), [Maxim Basinski](https://www.flaticon.com/authors/maxim-basinski), and [OCHA](https://www.flaticon.com/authors/ocha).
+[Alfredo Hernandez](https://www.flaticon.com/authors/alfredo-hernandez), [Maxim Basinski](https://www.flaticon.com/authors/maxim-basinski), [Freepik](http://www.freepik.com), and [OCHA](https://www.flaticon.com/authors/ocha).

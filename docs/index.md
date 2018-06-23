@@ -25,7 +25,7 @@
     <big>**Rigid body simulations with contacts**</big>
     <span class="home_dummy_link">&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></span>
     <br>
-    FIXME
+    Setup a physics world to simulate rigid solids with external forces and contacts.
     </div>
     </a>
     </td>
@@ -38,7 +38,8 @@
     <big>**Joint constraints and multibodies**</big>
     <span class="home_dummy_link">&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></span>
     <br>
-    FIXME
+    Constraint the relative motion of two bodies either using forces (with joint constraints) or by
+    reducing their relative degrees of freedom (with multibodies).
     </div>
     </a>
     </td>
@@ -51,9 +52,9 @@
     <big>**Event handling and sensors**</big>
     <span class="home_dummy_link">&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></span>
     <br>
-    Collision events can be retrieved so you can apply logic depending on the interaction between objects.
-    In addition, a special type of collider exists: sensors. They won't interact physically with other objects
-    but will generate events.
+    Retrieve collision events to apply logic depending on the interaction between objects.
+    Use a special type of collider, sensors, which won't interact physically with other objects
+    but will still generate events.
     </div>
     </a>
     </td>
@@ -66,7 +67,7 @@
     <big>**WASM compatibility**</big>
     <span class="home_dummy_link">&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></span>
     <br>
-    Learn how to use **nphysics** on a project expected to run on a web browser.
+    Use **nphysics** on a project expected to run on a web browser.
     </div>
     </a>
     </td>
@@ -79,7 +80,21 @@
     <big>**Performance tuning**</big>
     <span class="home_dummy_link">&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></span>
     <br>
-    Learn some tips and tricks for improving the performances of your physics simulation.
+    Learn some tips and tricks for tunning your simulation and improving its performances.
+    </div>
+    </a>
+    </td>
+</tr>
+<tr>
+    <td>[![](../img/nphysics_testbed.svg)](../nphysics_testbed)</td>
+    <td style="vertical-align:middle">
+    <a href="../nphysics_testbed" id="no_highlight">
+    <div>
+    <big>**The nphysics testbed**</big>
+    <span class="home_dummy_link">&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></span>
+    <br>
+    Setup a physical scene and use the **nphysics_testbed2d** or **nphysics_testbed3d** crate to display and
+    interact with it.
     </div>
     </a>
     </td>

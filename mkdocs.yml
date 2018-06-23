@@ -8,14 +8,24 @@ pages:
     - 'Event handling and sensors': event_handling_and_sensors.md
     - 'WASM compatibility': wasm_compatibility.md
     - 'Performance tuning': performance_tuning.md
-#       # - 'The nphysics Testbeds': nphysics_testbeds.md
+    - 'The nphysics Testbed': nphysics_testbed.md
 #     - 'FAQ': faq.md
   - '<i class="fa fa-align-left"></i>&nbsp API Documentation':
     - 'nphysics2d': rustdoc_nphysics2d.md
     - 'nphysics3d': rustdoc_nphysics3d.md
   - '<i class="fa fa-play"></i>&nbsp Demos':
     - '2D demos':
-        - 'ball2': demo_balls3.md
+        - 'Stack of balls': demo_balls2.md
+        - 'Stack of boxes': demo_boxes2.md
+        - 'Convex solids': demo_convex2.md
+        - 'Polyline terrain': demo_polyline2.md
+        - 'Compound shapes': demo_cross2.md
+        - 'Kinematic body': demo_body_status2.md
+        - 'Collision groups': demo_collision_groups2.md
+        - 'Multibody joints': demo_joints2.md
+        - 'Joint constraints': demo_constraints2.md
+        - 'Ragdolls': demo_ragdoll2.md
+        - 'Sensor': demo_sensor2.md
     - '3D demos':
         - 'Stack of balls': demo_balls3.md
         - 'Stack of boxes': demo_boxes3.md
