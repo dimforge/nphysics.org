@@ -5,6 +5,7 @@ pages:
     - 'Getting started': getting_started.md
     - 'Rigid body simulations': rigid_body_simulations_with_contacts.md
     - 'Joint constraints and multibodies': joint_constraints_and_multibodies.md
+    - 'Contact models': contact_models.md
     - 'Event handling and sensors': event_handling_and_sensors.md
     - 'WASM compatibility': wasm_compatibility.md
     - 'Performance tuning': performance_tuning.md

@@ -22,7 +22,7 @@
     <td style="vertical-align:middle">
     <a href="../rigid_body_simulations_with_contacts" id="no_highlight">
     <div>
-    <big>**Rigid body simulations with contacts**</big>
+    <big>**Rigid-body simulations with contacts**</big>
     <span class="home_dummy_link">&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></span>
     <br>
     Setup a physics world to simulate rigid solids with external forces and contacts.
@@ -68,6 +68,21 @@
     <span class="home_dummy_link">&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></span>
     <br>
     Use **nphysics** on a project expected to run on a web browser.
+    </div>
+    </a>
+    </td>
+</tr>
+<tr>
+    <td>[![](../img/contact_models.svg)](../contact_models)</td>
+    <td style="vertical-align:middle">
+    <a href="../contact_models" id="no_highlight">
+    <div>
+    <big>**Customizable contact model**</big>
+    <span class="home_dummy_link">&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></span>
+    <br>
+    Choose the appropriate contact model to achieve the desired level of accuracy and performances.
+    Are included the Sinorini and Signorini-Coulomb contact models (with various approximation of the
+    friction cone).
     </div>
     </a>
     </td>
