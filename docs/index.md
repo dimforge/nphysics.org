@@ -92,10 +92,10 @@
     <td style="vertical-align:middle">
     <a href="../performance_tuning" id="no_highlight">
     <div>
-    <big>**Performance tuning**</big>
+    <big>**Performance and accuracy tuning**</big>
     <span class="home_dummy_link">&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></span>
     <br>
-    Learn some tips and tricks for tunning your simulation and improving its performances.
+    Choose the right compromise between performances and accuracy for your application.
     </div>
     </a>
     </td>
