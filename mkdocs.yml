@@ -7,9 +7,9 @@ pages:
     - 'Joint constraints and multibodies': joint_constraints_and_multibodies.md
     - 'Contact models': contact_models.md
     - 'Event handling and sensors': event_handling_and_sensors.md
-    - 'WASM compatibility': wasm_compatibility.md
     - 'Performance tuning': performance_tuning.md
-    - 'The nphysics Testbed': nphysics_testbed.md
+    - 'The nphysics testbed': nphysics_testbed.md
+    - 'WASM compatibility': wasm_compatibility.md
 #     - 'FAQ': faq.md
   - '<i class="fa fa-align-left"></i>&nbsp API Documentation':
     - 'nphysics2d': rustdoc_nphysics2d.md

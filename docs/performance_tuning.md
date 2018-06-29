@@ -1,7 +1,12 @@
 # Performance and accuracy tuning
+## Choice of contact model
+Contact models control the nature and number of constraints generated for each contact. Therefore, the choice of a contact model adapted to your simulation is strongly affect the overall performance and accuracy. Contact models are presented on a dedicated [chapter](contact_models.md) of this guide. As a rule of thumb, you should:
+
+* Use the `SignoriniModel` if you only care about non-penetration (and don't care about friction).
+* Use the `SignoriniCoulombPyramidModel` for handling of friction as well.
 
 ## Integration parameters
-Various aspects of the integrator implemented on **nphysics** can be modified through the [integration parameters](/rustdoc/nphysics3d/solver/struct.IntegrationParameters.html). Those parameters can be modified by retrieving a mutable reference to the `IntegrationParameters` structure associated to a physics world: `world.integration_parameters_mut()`. Most of those parameters are somewhat advanced and should not be modified unless you know their meaning and impact. Most of them are about making a compromise between efficiency and accuracy and are given default values that work well in the context of a video-game or for animation. For more realistic simulations you may want to change those parameters to favor accuracy over performances:
+Various aspects of the integrator implemented on **nphysics** can be modified through the [integration parameters](/rustdoc/nphysics3d/solver/struct.IntegrationParameters.html). Those parameters can be modified by retrieving a mutable reference to the `IntegrationParameters` structure associated to a physics world: `world.integration_parameters_mut()`. Most of those parameters are somewhat advanced and should not be modified unless you know their meaning and impact. Several of them are about tuning parameters for optimal simulation stability, or for compromising between efficiency and accuracy. They are given default values that work well in the context of a video-game or for animation. For more realistic simulations you may want to change those parameters to favor accuracy over performances:
 
 
 | Field                 | Description                                                           |
@@ -15,5 +20,5 @@ Various aspects of the integrator implemented on **nphysics** can be modified th
 | `max_linear_correction` | Maximum translation-based penetration correction during one step of the non-linear position solver. The default is $100.0$. A value too small would prevent penetration from being corrected fast enough while a large value could cause jittering due to the solver overshooting (i.e. applying a correction that is too large). |
 | `max_angular_correction` | Maximum rotation-based penetration correction during one step of the non-linear position solver. The default is $0.2$ radians. A value too small would make positional correction unrealistic because most of it would be using translations. A value too large would cause the solver to apply rotations that are large enough to disturb penetration correction of other contact points from the same contact manifold. |
 | `max_stabilization_multiplier` | Maximum non-linear position-based penetration correction scaling parameter when the constraint correction direction is close to the kernel of the involved multibody's jacobian. The default is $0.2$. This is necessary when the position correction requires a motion that is not feasible for a given multibody. In those situations, the solver would attempt to apply a correction that is too large, causing the multibody joints to change position significantly. |
-| `max_velocity_iterations` | Maximum number of iterations performed by the velocity constraints solver for impulse computation. |
-| `max_position_iterations` | Maximum number of iterations performed by the position-based constraints solver for penetration correction. |
+| `max_velocity_iterations` | Maximum number of iterations performed by the velocity constraints solver for impulse computation. More iterations imply greater accuracy at the cost of increased computation times. |
+| `max_position_iterations` | Maximum number of iterations performed by the position-based constraints solver for penetration correction. More iterations imply greater accuracy at the cost of increased computation times. |

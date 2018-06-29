@@ -25,7 +25,8 @@
     <big>**Rigid-body simulations with contacts**</big>
     <span class="home_dummy_link">&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></span>
     <br>
-    Setup a physics world to simulate rigid solids with external forces and contacts.
+    Setup a physics world to simulate rigid solids with external forces and contacts. Includes dynamic, static,
+    and kinematic rigid bodies, as well as colliders for collision detection.
     </div>
     </a>
     </td>
@@ -60,29 +61,15 @@
     </td>
 </tr>
 <tr>
-    <td>[![](../img/feature_wasm.svg)](../wasm_compatibility)</td>
-    <td style="vertical-align:middle">
-    <a href="../wasm_compatibility" id="no_highlight">
-    <div>
-    <big>**WASM compatibility**</big>
-    <span class="home_dummy_link">&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></span>
-    <br>
-    Use **nphysics** on a project expected to run on a web browser.
-    </div>
-    </a>
-    </td>
-</tr>
-<tr>
     <td>[![](../img/contact_models.svg)](../contact_models)</td>
     <td style="vertical-align:middle">
     <a href="../contact_models" id="no_highlight">
     <div>
-    <big>**Customizable contact model**</big>
+    <big>**Contact models**</big>
     <span class="home_dummy_link">&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></span>
     <br>
     Choose the appropriate contact model to achieve the desired level of accuracy and performances.
-    Are included the Sinorini and Signorini-Coulomb contact models (with various approximation of the
-    friction cone).
+    Are included the Signorini and an approximate Signorini-Coulomb contact models.
     </div>
     </a>
     </td>
@@ -92,10 +79,10 @@
     <td style="vertical-align:middle">
     <a href="../performance_tuning" id="no_highlight">
     <div>
-    <big>**Performance and accuracy tuning**</big>
+    <big>**Accuracy and performance tuning**</big>
     <span class="home_dummy_link">&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></span>
     <br>
-    Choose the right compromise between performances and accuracy for your application.
+    Choose the right compromise between accuracy and performances for your application.
     </div>
     </a>
     </td>
@@ -110,6 +97,19 @@
     <br>
     Setup a physical scene and use the **nphysics_testbed2d** or **nphysics_testbed3d** crate to display and
     interact with it.
+    </div>
+    </a>
+    </td>
+</tr>
+<tr>
+    <td>[![](../img/feature_wasm.svg)](../wasm_compatibility)</td>
+    <td style="vertical-align:middle">
+    <a href="../wasm_compatibility" id="no_highlight">
+    <div>
+    <big>**WASM compatibility**</big>
+    <span class="home_dummy_link">&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></span>
+    <br>
+    Use **nphysics** on a project expected to run on a web browser.
     </div>
     </a>
     </td>
