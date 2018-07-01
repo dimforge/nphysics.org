@@ -61,7 +61,7 @@
     </td>
 </tr>
 <tr>
-    <td>[![](../img/contact_models.svg)](../contact_models)</td>
+    <td>[![](../img/feature_contact_models.svg)](../contact_models)</td>
     <td style="vertical-align:middle">
     <a href="../contact_models" id="no_highlight">
     <div>
