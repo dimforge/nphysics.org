@@ -1,4 +1,6 @@
 # Performance and accuracy tuning
+Unfortunately in the world of physics simulation, performance and accuracy are not always compatible. It is often necessary to sacrifice performance for accuracy and vice versa. For example, video games will ofter favor performance to simulate a visually-appealing but not totally realistic scene. On the other hand, higher accuracy is often needed for, e.g., virtual training where the accuracy of the simulation directly affects the quality of the training. This section discusses several parameters that may be worth tunning to achieve the best performance/accuracy compromise for your application.
+
 ## Choice of contact model
 Contact models control the nature and number of constraints generated for each contact. Therefore, the choice of a contact model adapted to your simulation is strongly affect the overall performance and accuracy. Contact models are presented on a dedicated [chapter](contact_models.md) of this guide. As a rule of thumb, you should:
 

@@ -1,4 +1,8 @@
 # Rigid-body simulation with contacts
+The real-time simulation of rigid-bodies subjected to forces and contacts is the main feature of a physics engine for video-games or animation. Rigid-bodies are typically used to simulate the dynamics of non-deformable solids as well as well as to integrate the trajectory of solids controlled as the velocity level by the user (e.g. moving platforms). On the other hand, rigid-bodies are not enough to simulate, e.g., cars, ragdolls, or robotic systems, as those use-cases require adding restrictions on the relative motion between their parts with joints. Joints are the topic of [another chapter](joint_constraints_and_multibodies.md).
+
+In this chapter, we first show how to initialize a [physics world](#initializing-the-physics-world) which will construct all that is to be physically simulated and will drive the physics simulation. Then we introduce the [rigid-bodies](#rigid-bodies) themselves as well as their construction and statuses. Though note that a rigid-body alone will deal with all the dynamics but without any contact. Another type of entities, [colliders](#colliders), have to be created and attached to rigid-bodies (or any kind of body part actually) afterward in order to generate contacts. Finally, external forces can be applied to some bodies of the world by creating [force generators](#gravity-and-external-forces).
+
 
 ## Initializing the physics world
 The [`World`](/rustdoc/nphysics3d/world/struct.World.html) structure is at the core of **nphysics**. It will contain all the objects to be handled by the physics engine and will perform all the collision detection, dynamics integrations, and event generation. It is easily initialized with `World::new()`. This constructor will initialize the physics engine with all its default parameters, including:
@@ -8,18 +12,41 @@ The [`World`](/rustdoc/nphysics3d/world/struct.World.html) structure is at the c
 * The use of an impulse-based constraint solver to handle contacts. By default a Sinorini-Coulomb contact model with
 polyhedral friction cones is used. Other contact models can be chosen afterward. See the dedicated [section](contact_models.md)).
 
-Once you created the physics world, it will be empty. The next steps are then to add bodies like [rigid-bodies](/rigid_body_simulations_with_contacts/#rigid-bodies) or [multibody parts](/joint_constraints_and_multibodies/#multibodies) to which [colliders](/rigid_body_simulations_with_contacts/#colliders) or [sensors](/event_handling_and_sensors/#sensors) can be attached.
+Once the physics world is created, it will be empty. The next steps are then to add bodies like [rigid-bodies](/rigid_body_simulations_with_contacts/#rigid-bodies) or [multibody parts](/joint_constraints_and_multibodies/#multibodies) to which [colliders](/rigid_body_simulations_with_contacts/#colliders) or [sensors](/event_handling_and_sensors/#sensors) can be attached.
 
 ## Rigid-bodies
 A rigid-body is the most simple type of body supported by **nphysics**. It can be seen as the aggregation of a position, orientation, and mass properties (rotational inertia tensor, mass, and center of mass). It does not holds any information regarding its shape which can optionally be specified by attaching one or multiple [colliders](/rigid_body_simulations_with_contacts/#colliders) to it. A rigid-body with no collider with be affected by all the forces the world is aware of, but not by contacts (because it does not have any shape that can be collided to).
 
 ### Adding a rigid-body to the world
+A rigid-body can only created by the physics `World`. This is achieved by the `world.add_rigid_body(position, local_inertia, local_center_of_mass)` method where:
+
+* `position`:  the initial position (including orientation) of the rigid body in space. This is represented as an isometry, i.e., as the composition of a translation and a rotation.
+* `local_inertia`: the inertia (both rotational and linear) expressed in the local frame of the rigid-body, i.e., this is the inertia the rigid-body would have if is position was the identity.
+* `local_center_of_mass`: the rigid-body center of mass expressed in its local frame, i.e., this is the position of the rigid-body center of mass if its position was the identity.
+
+Both `local_inertia` and `local_center_of_mass` have a strong impact on the quality of the simulation. They are usually determined by the object the rigid-body is supposed to represent. This typically matches the inertia and the center of mass of some geometric shapes. Therefore, it is possible to retrieve those properties from any `Shape` from the **ncollide** crate using the `shape.inertia()` and `shape.center_of_mass()` methods. For example:
+
+```rust
+let cuboid = ShapeHandle::new(Cuboid::new(Vector3::new(1.0, 2.0, 1.0)));
+let local_inertia = cuboid.inertia();
+let local_center_of_mass = cuboid.center_of_mass();
+let rigid_body_handle = world.add_rigid_body(
+    Isometry::new(Vector3::x() * 2.0, na::zero()),
+    local_inertia,
+    local_center_of_mass,
+);
+```
+
+Note that this works with [compound shapes]() as well. Typically, the inertia and center of mass are set to the inertia and center of mass resulting from the shapes of the [colliders](#colliders) attached to the rigid body, however this is not a requirement.
+
+!!! Note
+    The `world.add_rigid_body(...)` method returns an handle to the world-created rigid-body. This handle is unique for this world thus no two calls to `world.add_rigid_body(...)` will return the same handle. This handle is useful for various operations including: attaching colliders or constraints to the rigid-body, retrieving a reference to the underlying `RigidBody` structure created by the `World` (as described in the next section), and removing the rigid-body from the world.
 
 ### Getting a rigid-body from the world
 A reference to a rigid-body added to the world can be retrieved from its handle. Three methods are available on the world:
 
 * **`world.rigid_body(handle)`:** returns a reference to a [RigidBody](/rustdoc/nphysics3d/object/struct.RigidBody.html) structure if it has been found.
-* **`world.body(handle)`:** returns a reference to a [Body](/rustdoc/nphysics3d/object/enum.Body.html) which itself is an enum encapsulating all the bodies supported by **nphysics** (currently rigid bodies and multibodies are supported).
+* **`world.body(handle)`:** returns a reference to a [Body](/rustdoc/nphysics3d/object/enum.Body.html) which itself is an enum encapsulating all the bodies supported by **nphysics** (currently rigid-bodies and multibodies are supported).
 * **`world.body_part(handle)`:** returns a reference to a [BodyPart](/rustdoc/nphysics3d/object/enum.Body.html) which itself is an enum encapsulating all the body parts supported by **nphysics**. Since a rigid-body is composed of only one piece, the `BodyPart::RigidBody` simply contains a reference to the `RigidBody` structure. The distinction between a _body_ and a _body part_ becomes apparent for [multibodies](/joint_constraints_and_multibodies/#multibodies).
 
 The method to be chose depends on the context. `.rigid_body(...)` should cover most scenarios. The other methods are generally useful when writing code that operate independently from the actual variant of body or body part.
@@ -28,14 +55,18 @@ The method to be chose depends on the context. `.rigid_body(...)` should cover m
 A rigid-body can be four different statuses identified by the [`object::BodyStatus`](/rustdoc/nphysics3d/object/enum.BodyStatus.html) enum:
 
 * **`BodyStatus::Dynamic`:** This is the default status. Indicates the rigid-body is affected by external forces, inertial forces (gyroscopic, coriolis, etc.) and contacts.
-* **`BodyStatus::Static`:** Indicates the rigid-body does not move. It acts as if it has an infinite mass and won't be affected by any force. It will continue to collide with dynamic rigid-bodies but not with static and kinematic ones. This is typically used for temporarily freezing a rigid-body. Note that, as mentioned in the [next section](/rigid_body_simulations_with_contacts/#colliders) it is possible to add colliders attached to a special `BodyHandle::ground()` body. Therefore, objects that will never move should be simulated with colliders attached to the `BodyHandle::ground()` instead of with a collider attached with a rigid-body with a `Static` status.
+* **`BodyStatus::Static`:** Indicates the rigid-body does not move. It acts as if it has an infinite mass and will not be affected by any force. It will continue to collide with dynamic rigid-bodies but not with static nor with kinematic ones. This is typically used for temporarily freezing a rigid-body.
+
+!!! Note
+    As mentioned in the [next section](/rigid_body_simulations_with_contacts/#colliders) it is possible to add colliders attached to a special `BodyHandle::ground()` body. Therefore, objects that will never move should be simulated with colliders attached to the `BodyHandle::ground()` instead of with a collider attached with a rigid-body with a `Static` status.
+
 * **`BodyStatus::Kinematic`:** Indicates the rigid-body velocity must not be altered by the physics engine. The user is free to set any velocity and the rigid-body position will be integrated at each update accordingly. This is typically used for **platforms** as shown is that [demo](/demo_body_status3/).
 * **`BodyStatus::Disabled`:** Indicates the rigid-body should be completely ignored by the physics engine. This will effectively remove all contacts this rigid-body is involved with, and disable (but not remove) all joint constraints.
 
 To change the status of a rigid-body, you need to retrieve a mutable reference to it and then call the `.set_status(...)` method. For example:
 
 ```rust
-let mut rb = world.rigid_body_mut(handle).expect("Rigid body not found.");
+let mut rb = world.rigid_body_mut(handle).expect("Rigid-body not found.");
 rb.set_status(BodyStatus::Kinematic);
 // Sets the velocity of the kinematic rigid-body.
 rb.set_velocity(Velocity::linear(0.0, 0.0, 1.0));
@@ -87,7 +118,7 @@ let collider1 = world.add_collider(
 );
 
 
-// Create a collider attached to a previously-added rigid body with handle `body_handle`.
+// Create a collider attached to a previously-added rigid-body with handle `body_handle`.
 let material = Material::new(0.5, 0.3); // Custom material.
 let collider2 = world.add_collider(
     0.04,
@@ -113,7 +144,7 @@ let mut world = World::new();
 world.set_gravity(Vector3::y() * -9.81); // or Vector2 in 2D.
 ```
 
-Other external forces can also be applied to the bodies on the physics world. This is what [`ForceGenerators`](/rustdoc/nphysics3d/force_generator/trait.ForceGenerator.html) are for. A force generator as a structure implementing the `ForceGenerator` trait which requires one method: `.apply(params, bodies)`. The `params` is a reference to [integration parameters](/performance_tuning/#integration-parameters) allowing you to retrieve, e.g., the timestep duration (in second) for the current update of the physical world with `params.dt`. The `bodies` parameter allows you to retrieve mutable references to the rigid bodies to be affected by the force generator. The following example shows the definition of a generator of a radial force proportional to the position of a body wrt. a point:
+Other external forces can also be applied to the bodies on the physics world. This is what [`ForceGenerators`](/rustdoc/nphysics3d/force_generator/trait.ForceGenerator.html) are for. A force generator as a structure implementing the `ForceGenerator` trait which requires one method: `.apply(params, bodies)`. The `params` is a reference to [integration parameters](/performance_tuning/#integration-parameters) allowing you to retrieve, e.g., the timestep duration (in second) for the current update of the physical world with `params.dt`. The `bodies` parameter allows you to retrieve mutable references to the rigid-bodies to be affected by the force generator. The following example shows the definition of a generator of a radial force proportional to the position of a body wrt. a point:
 
 <ul class="nav nav-tabs">
   <li class="active"><a id="tab_nav_link" data-toggle="tab" href="#force_generator_2D">2D example</a></li>

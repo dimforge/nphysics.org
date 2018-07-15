@@ -3,7 +3,7 @@
 [Cargo](http://crates.io) for dependency resolution and compilation. Therefore,
 making **nphysics** ready to be used by your project is simply a matter of
 adding a new dependency to your `Cargo.toml` file. You can either use the **nphysics2d**
-crate for 2D geometry or the **nphysics3d** crate for 3D geometry. You can even use both
+crate for 2D physics simulation or the **nphysics3d** crate for 3D physics simulation. You can even use both
 if you need both 2D and 3D in your application. Note that you will probably
 need **nalgebra** as well because it defines algebraic entities
 (vectors, points, transformation matrices) used by most types of **nphysics**. Similarly,
@@ -31,8 +31,7 @@ extern crate nphysics3d; // If you need 3D.
 ```
 
 ## Cargo example
-You may use this `Cargo.toml` file to compile the downloadable examples of this
-guide. Simply replace `example.rs` by the actual example's file name.
+Here is an example of Cargo file for compiling an executable depending on **nphysics**:
 
 <ul class="nav nav-tabs">
   <li class="active"><a id="tab_nav_link" data-toggle="tab" href="#cargo_2D">2D example</a></li>
@@ -49,7 +48,6 @@ authors = [ "You" ]
 
 [dependencies]
 approx   = "0.2.0"
-alga     = "0.6.0"
 nalgebra = "0.15.0"
 ncollide2d = "0.16.0"
 nphysics2d = "0.8.0"
@@ -68,7 +66,6 @@ authors = [ "You" ]
 
 [dependencies]
 approx   = "0.2.0"
-alga     = "0.6.0"
 nalgebra = "0.15.0"
 ncollide3d = "0.16.0"
 nphysics3d = "0.8.0"

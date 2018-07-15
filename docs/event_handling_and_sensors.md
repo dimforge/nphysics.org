@@ -1,4 +1,5 @@
 # Event handling and sensors
+Besides the physics simulation itself, applications, especially video games, ofter need to perform additional actions when some specific event occur inside of the physics world. For example, we might want to generate sounds when two solids collide, or open a door when a player comes close to it, detect when a projectile hits a target, etc. To allow this kind of actions, it is possible to know when two objects start/stop colliding by [polling physics events](). In addition, a special kind of colliders, called [sensors](#sensors) allow the addition of geometric shapes (that may be attached to some body part) to the world that do not generate any collisions, but will still detect when they start/stop touching another collider (be it a sensor or not). This is often useful to detect, e.g., that a player entered a specific area.
 
 ## Sensors
 Sensors are a special type of [colliders](/rigid_body_simulations_with_contacts/#colliders) that don't generate any contact.

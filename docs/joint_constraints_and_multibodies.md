@@ -1,7 +1,7 @@
 # Joint constraints and multibodies
 One of the most appealing features of a physics engines is to simulate articulations. Articulation, or joints, allow the restriction of motion of one body part with regard to another. For example, one well-known joint is the ball-in-socket joint also known as the spherical joint: it allows one object to rotate freely with regard to the other but not to translate. This is typically used to simulate the shoulder of a ragdoll.
 
-We can think of joint in several ways but first let's talk about the concept of **Degrees Of Freedom (DOF)**. In 3D, a rigid-body is capable of translating along the 3 coordinates axis $\mathbf{x}$, $\mathbf{y}$ and $\mathbf{z}$, and to rotate along those free axis as well. Therefore, a rigid-body is said to have  **6 translational DOF** and **3 rotational DOF**. We can also say a 3D rigid body has a total of **6 DOF**. The 2D case is similar but with less possibilities of movements: a 2D rigid body has 2 translational DOF and only 1 rotational DOF. The **relative DOF** of a body part wrt. another body part is the number of possible relative translations and rotations.
+Joints can be modeled in various ways but let's talk about the concept of **Degrees Of Freedom (DOF)** first. In 3D, a rigid-body is capable of translating along the 3 coordinates axis $\mathbf{x}$, $\mathbf{y}$ and $\mathbf{z}$, and to rotate along those free axis as well. Therefore, a rigid-body is said to have  **6 translational DOF** and **3 rotational DOF**. We can also say a 3D rigid body has a total of **6 DOF**. The 2D case is similar but with less possibilities of movements: a 2D rigid body has 2 translational DOF and only 1 rotational DOF. The **relative DOF** of a body part wrt. another body part is the number of possible relative translations and rotations.
 
 !!! Note
     The `BodyHandle::ground()` on the other hand cannot move at all. Therefore it has 0 DOFs. Moreover a [multibody](#multibodies) has a number of DOF that depend on its joints.
@@ -40,17 +40,17 @@ This description shows only one aspect of the difference between the reduced-coo
 |------------------------------|----------------------------|
 | <font color="green">Joints cannot be violated.</font>                 | <font color="IndianRed">Joints can be violated if the solver does not converge.</font> |
 | <font color="green">Moderately large time-step are possible.</font>   | <font color="IndianRed">Moderately large time-step may make the simulation explode.</font> |
-| <font color="green">Large assembly are stable.</font>                                | <font color="IndianRed">Large assembly easily break without a large number of solver iterations.</font> |
+| <font color="green">Large assemblies are stable.</font>                                | <font color="IndianRed">Large assemblies easily break without a large number of solver iterations.</font> |
 | <font color="IndianRed">Adding/removing a join is slower.</font>          | <font color="green">Adding/removing a joint is fast.</font> |
 | <font color="IndianRed">Joint forces are never computed, thus cannot be retrieved.</font>       | <font color="green">Joint forces are computed and can be retrieved.</font> |
-| <font color="IndianRed">Topological restriction: body parts must be linked following a tree structure.</font> | <font color="green">The set of linked body parts can form any graph.</font> |
+| <font color="IndianRed">Topological restriction: body parts must be linked following a tree structure.</font> | <font color="green">The link between body parts can form any graph.</font> |
 
 !!! Note "Which approach should I use?"
     The choice of approach **depends on the application**. For **robotics**, the **reduced-coordinates** approach is generally preferred because of its accuracy and ease of use, e.g., for control, inverse kinematics, etc.
 
     ---------
 
-    **Video games** traditionally favor the **constraints-based** approach since most existing physics libraries either implement only this. Some other physics libraries also implement the reduced-coordinates approach as well but using the Featherstone algorithm which is extremely unstable in practice. In addition, the lower performance for addition and removal of reduced-coordinates joints may also preclude their use for some applications.
+    **Video games** traditionally favor the **constraints-based** approach since most existing physics libraries implement only this. Some other physics libraries also implement the reduced-coordinates approach as well but using the Featherstone algorithm which is extremely unstable in practice. In addition, the lower performance for addition and removal of reduced-coordinates joints may also preclude their use for some applications.
 
     ---------
 
@@ -117,3 +117,29 @@ You may refer to the [code](https://github.com/sebcrozet/nphysics/blob/master/ex
 
 
 ## Combining multibodies and joint constraints
+Combining multibodies and joint constraint is an useful way of combining the stability of multibodies with the flexibility of joint constraints. Indeed, one of the most appealing feature of multibodies are its stability and ease of use (especially for robotics). However its greatest weakness is its inability to represent assemblies that do not match a tree structure, i.e., an articulated body composed of graph-like assembly of solids (each graph node being a solid and each graph edge being an articulation) cannot be simulated by a multibody. A common approach is thus to:
+
+1. Define a multibody from a spanning-tree of the graph.
+2. Create joint constraints for each articulation missing from this multibody to complete the graph. Those joint constraints are therefore attached to two body parts. They are often called "loop-closing constraints" since they close the loops of the assembly's graph structure.
+
+The following shows an example of combination of multibodies and joint constraints for the simulation of a necklace. It is composed of 10 links forming a single loop with 10 spherical articulations:
+
+![FIXME](FIXME image loop.)
+
+Since such a loop cannot be simulated by a multibody, we first start to create 10 multibody links attached together with 9 `BallJoint`. Only 9 joints can be added here since a 10th would close the loop:
+
+```rust
+// Create the first multibody link with 6DOFs.
+let mut parent;
+for i in 0..9 {
+    // Create the next multibody link attached to its parent.
+    parent = world.add_multibody_link(
+        FIXME
+    );
+}
+```
+
+!!! Note
+    Note that using the world to create multibody links removes any risk of inadvertently creating multibody links attached in such a way that they would form a loop.
+
+The 10th joint that closes the loop must be modeled as a joint constraint, here a `BallConstraint`.

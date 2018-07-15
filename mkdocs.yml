@@ -3,7 +3,7 @@ pages:
   - Home: index.md
   - '<i class="fa fa-book"></i>&nbsp User Guide':
     - 'Getting started': getting_started.md
-    - 'Rigid body simulations': rigid_body_simulations_with_contacts.md
+    - 'Rigid body simulation': rigid_body_simulations_with_contacts.md
     - 'Joint constraints and multibodies': joint_constraints_and_multibodies.md
     - 'Contact models': contact_models.md
     - 'Event handling and sensors': event_handling_and_sensors.md
