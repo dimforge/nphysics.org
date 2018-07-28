@@ -1,0 +1,62 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<!DOCTYPE svg PUBLIC "-//W3C//DTD SVG 1.1//EN" "http://www.w3.org/Graphics/SVG/1.1/DTD/svg11.dtd">
+<svg width="1287px" height="988px" version="1.1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" xml:space="preserve" xmlns:serif="http://www.serif.com/" style="fill-rule:evenodd;clip-rule:evenodd;stroke-linecap:round;stroke-linejoin:round;stroke-miterlimit:1.5;">
+    <g transform="matrix(1,0,0,1,-415.546,-109.182)">
+        <g transform="matrix(1,0,0,4.12796,0,-705.68)">
+            <path d="M1152.18,223.838C1152.18,220.516 1141.05,217.82 1127.34,217.82L1077.65,217.82C1063.94,217.82 1052.81,220.516 1052.81,223.838L1052.81,298.134C1052.81,301.456 1063.94,304.153 1077.65,304.153L1127.34,304.153C1141.05,304.153 1152.18,301.456 1152.18,298.134L1152.18,223.838Z" style="fill:rgb(0,33,255);stroke:black;stroke-width:1.39px;"/>
+        </g>
+        <g transform="matrix(1,0,0,1.392,-51.096,-321.008)">
+            <path d="M1461.26,797.718C1461.26,793.385 1456.36,789.866 1450.33,789.866L1428.47,789.866C1422.43,789.866 1417.54,793.385 1417.54,797.718L1417.54,859.167C1417.54,863.501 1422.43,867.019 1428.47,867.019L1450.33,867.019C1456.36,867.019 1461.26,863.501 1461.26,859.167L1461.26,797.718Z" style="fill:rgb(243,126,0);stroke:black;stroke-width:3.44px;"/>
+        </g>
+        <g transform="matrix(0.582985,0,0,1.05315,290.027,-83.9765)">
+            <path d="M695.484,455.902C695.484,436.338 666.79,420.454 631.448,420.454L503.375,420.454C468.033,420.454 439.339,436.338 439.339,455.902L439.339,1077.44C439.339,1097 468.033,1112.89 503.375,1112.89L631.448,1112.89C666.79,1112.89 695.484,1097 695.484,1077.44L695.484,455.902Z" style="fill:rgb(255,0,0);stroke:black;stroke-width:4.9px;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,-137.566,3.23823)">
+            <path d="M1598.82,144.596C1598.82,124.413 1582.43,108.027 1562.25,108.027L1489.11,108.027C1468.93,108.027 1452.55,124.413 1452.55,144.596L1452.55,773.18C1452.55,793.363 1468.93,809.749 1489.11,809.749L1562.25,809.749C1582.43,809.749 1598.82,793.363 1598.82,773.18L1598.82,144.596Z" style="fill:rgb(235,235,235);stroke:black;stroke-width:4.17px;"/>
+        </g>
+        <g transform="matrix(1.38789,0,0,1.30599,-536.145,-141.407)">
+            <path d="M1439.16,221.473C1439.16,206.018 1427.35,193.472 1412.81,193.472L1360.11,193.472C1345.57,193.472 1333.77,206.018 1333.77,221.473L1333.77,434.125C1333.77,449.579 1439.16,449.579 1439.16,434.125L1439.16,221.473Z" style="fill:rgb(0,184,48);stroke:black;stroke-width:3.09px;"/>
+        </g>
+        <g transform="matrix(1.09079,-0.0143019,0.0143019,1.09079,160.77,4.25698)">
+            <path d="M913.647,355.478C898.203,338.482 851.886,353.205 829.66,353.205L490.915,371.403C447.606,401.713 381.556,404.064 348.406,365.795C326.18,365.795 287.187,361.435 287.187,383.661L287.187,464.203C287.187,486.429 305.232,504.474 327.458,504.474L813.228,493.657C841.876,480.492 877.787,483.996 902.393,496.209C920.871,488.076 921.442,465.185 922.323,455.18C924.397,431.62 929.091,372.474 913.647,355.478Z" style="fill:rgb(235,235,235);stroke:black;stroke-width:3.82px;"/>
+        </g>
+        <g transform="matrix(0.903802,0.00124052,-0.00124052,0.903802,735.938,-78.0689)">
+            <path d="M899.156,383.661C899.156,361.435 832.807,346.661 810.581,346.661C726.065,389.125 700.099,388.24 637.902,343.391L467.427,343.575C425.264,369.954 386.502,369.817 351.072,343.701C328.846,343.701 305.232,504.474 327.458,504.474L858.885,504.474C881.111,504.474 899.156,486.429 899.156,464.203L899.156,383.661Z" style="fill:rgb(235,235,235);stroke:black;stroke-width:4.61px;"/>
+        </g>
+        <g transform="matrix(2.84438,0,0,0.981343,-606.285,204.115)">
+            <path d="M573.61,907.568L573.61,769.642L359.978,769.642L359.978,907.568" style="fill:rgb(235,235,235);stroke:black;stroke-width:1.96px;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,200.679,194.587)">
+            <text x="437.865px" y="850.383px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:50px;">Ground</text>
+        </g>
+        <g transform="matrix(1,0,0,1,326.228,-362.813)">
+            <text x="437.865px" y="850.383px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:50px;">Link 1</text>
+        </g>
+        <g transform="matrix(1,0,0,1,755.506,-526.442)">
+            <text x="437.865px" y="850.383px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:50px;">Link 2</text>
+        </g>
+        <g transform="matrix(1,0,0,1,883.102,-223.143)">
+            <text x="437.865px" y="850.383px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:50px;">Link 3</text>
+        </g>
+        <g transform="matrix(1,0,0,1,175.299,-21.1384)">
+            <text x="542.224px" y="757.215px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:50px;fill:rgb(255,0,0);">Revolute joint</text>
+        </g>
+        <g transform="matrix(1,0,0,1,407.014,-610.159)">
+            <text x="542.224px" y="757.215px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:50px;fill:rgb(0,33,255);">Revolute joint</text>
+        </g>
+        <g transform="matrix(1,0,0,1,938.892,48.6092)">
+            <text x="542.224px" y="757.215px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:50px;fill:rgb(243,126,0);">Revolute</text>
+            <text x="542.224px" y="808.851px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:50px;fill:rgb(243,126,0);">joint</text>
+        </g>
+        <g transform="matrix(1,0,0,1,954.766,-610.159)">
+            <text x="542.224px" y="757.215px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:50px;fill:rgb(0,184,48);">Prismatic</text>
+            <text x="542.224px" y="808.851px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:50px;fill:rgb(0,184,48);">joint</text>
+        </g>
+        <g transform="matrix(1.33104,0,0,1,-552.451,-22.1567)">
+            <path d="M1518.09,870.851C1518.09,860.206 1511.6,851.563 1503.6,851.563L1412,851.563C1404,851.563 1397.51,860.206 1397.51,870.851L1397.51,909.428C1397.51,920.073 1404,928.716 1412,928.716L1503.6,928.716C1511.6,928.716 1518.09,920.073 1518.09,909.428L1518.09,870.851Z" style="fill:rgb(235,235,235);stroke:black;stroke-width:3.54px;"/>
+        </g>
+        <g transform="matrix(1,0,0,1,884.061,35.495)">
+            <text x="437.865px" y="850.383px" style="font-family:'ArialMT', 'Arial', sans-serif;font-size:50px;">Link 4</text>
+        </g>
+    </g>
+</svg>

@@ -68,13 +68,13 @@
                     </a>
                 </li>
                 -->
-          <li id="hide_medium" {% if not previous_page %}class="disabled"{% endif %}>
-          <a rel="next" {% if previous_page %}href="{{ previous_page.url }}"{% endif %}>
+          <li id="hide_medium" {% if not page.previous_page or page.previous_page.title == "nphysics3d" or page.previous_page.title == "nphysics2d" %}class="disabled"{% endif %}>
+          <a rel="next" {% if page.previous_page and page.previous_page.title != "nphysics3d" and page.previous_page.title != "nphysics2d" %}href="{{ page.previous_page.url }}"{% endif %}>
             <i class="fa fa-arrow-left"></i> Previous
           </a>
           </li>
-          <li id="hide_medium" {% if not next_page %}class="disabled"{% endif %}>
-          <a rel="prev" {% if next_page %}href="{{ next_page.url }}"{% endif %}>
+          <li id="hide_medium" {% if not page.next_page or page.next_page.title == "nphysics2d" or page.next_page.title == "nphysics3d" %}class="disabled"{% endif %}>
+          <a rel="prev" {% if page.next_page and page.next_page.title != "nphysics2d" and page.next_page.title != "nphysics3d" %}href="{{ page.next_page.url }}"{% endif %}>
             Next <i class="fa fa-arrow-right"></i>
           </a>
           </li>

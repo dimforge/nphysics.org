@@ -6,6 +6,9 @@
 [![Travis.ci Status](https://travis-ci.org/sebcrozet/nphysics.svg?branch=master)](https://travis-ci.org/sebcrozet/nphysics)
 [![Crates.io Status](http://meritbadge.herokuapp.com/nphysics3d)](https://crates.io/crates/nphysics3d)
 [![License (3-Clause BSD)](https://img.shields.io/badge/license-BSD%203--Clause-blue.svg?style=flat)](http://opensource.org/licenses/BSD-3-Clause)
+<div style="text-align:center">
+<br/>
+<a href="https://www.patreon.com/bePatron?u=7111380" ><img src="../img/become_a_patron_button.png" alt="Become a Patron!" /></a>
 
 -----
 
