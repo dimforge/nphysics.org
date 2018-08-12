@@ -27,7 +27,7 @@ A rigid-body can only created by the physics `World`. This is achieved by the `w
 * `local_inertia` is the inertia (both rotational and linear) expressed in the local frame of the rigid-body, i.e., this is the inertia the rigid-body would have if its position was the identity.
 * `local_center_of_mass` is the rigid-body center of mass expressed in its local frame, i.e., this is the position of the rigid-body center of mass if its position was the identity.
 
-Both `local_inertia` and `local_center_of_mass` have a strong impact on the quality of the simulation. They are usually determined by the object the rigid-body is supposed to represent. This typically matches the inertia and the center of mass of some geometric shapes. Therefore, it is possible to retrieve those properties from any `Shape` from the **ncollide2d** or **ncollide3d** crate using the `shape.inertia()` and `shape.center_of_mass()` methods (this requires to `use` the [Volumetric](http://127.0.0.1:8000/rustdoc/nphysics3d/volumetric/trait.Volumetric.html) trait). For example:
+Both `local_inertia` and `local_center_of_mass` have a strong impact on the quality of the simulation. They are usually determined by the object the rigid-body is supposed to represent. This typically matches the inertia and the center of mass of some geometric shapes. Therefore, it is possible to retrieve those properties from any `Shape` from the **ncollide2d** or **ncollide3d** crate using the `shape.inertia()` and `shape.center_of_mass()` methods (this requires to `use` the [Volumetric](rustdoc/nphysics3d/volumetric/trait.Volumetric.html) trait). For example:
 
 ```rust
 let cuboid = ShapeHandle::new(Cuboid::new(Vector3::new(1.0, 2.0, 1.0)));
