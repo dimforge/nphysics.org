@@ -64,7 +64,7 @@ A rigid-body can be four different statuses identified by the [`object::BodyStat
     As mentioned in the [next section](/rigid_body_simulations_with_contacts/#colliders) it is possible to add colliders attached to a special `BodyHandle::ground()` body. Therefore, objects that will never move should be simulated with colliders attached to the `BodyHandle::ground()` instead of with a collider attached with a rigid-body with a `Static` status.
 
 * **`BodyStatus::Kinematic`:** Indicates the rigid-body velocity must not be altered by the physics engine. The user is free to set any velocity and the rigid-body position will be integrated at each update accordingly. This is typically used for **platforms** as shown in this [demo](/demo_body_status3/).
-* **`BodyStatus::Disabled`:** Indicates the rigid-body should be completely ignored by the physics engine. In practive, This will remove all contacts this rigid-body is involved with and disable (but not remove) all joint constraints attached to it.
+* **`BodyStatus::Disabled`:** Indicates the rigid-body should be completely ignored by the physics engine. In practice, this will remove all contacts this rigid-body is involved with and disable (but not remove) all joint constraints attached to it.
 
 To change the status of a rigid-body, you need to retrieve a mutable reference to it and then call the `.set_status(...)` method. For example:
 
