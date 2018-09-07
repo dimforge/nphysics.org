@@ -30,7 +30,7 @@ Edit the `Cargo.toml` file to include **nphysics2d** as a dependency:
 [package]
 name = "demo_nphysics_wasm"
 version = "0.1.0"
-authors = ["you" ]
+authors = [ "you" ]
 
 [dependencies]
 nphysics2d = "0.9"
