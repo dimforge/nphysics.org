@@ -104,14 +104,17 @@ The list of contributors can be found [there](https://github.com/sebcrozet/nphys
 * Andreas Longva
 * Andrei Vasiliu
 * Anselm Eickhoff
+* Alain Cuvillier
 * Alexander Atman
 * Alexandre Chêne
 * Andre Braga Reis
 * Camille Viot
 * Casey Primozic
 * Casey Rodarmor
+* Chris Heyes
 * Connor McCluskey
 * Danny Fritz
+* Eduard Knyshov
 * Erlend Sogge Heggen
 * Florian Hanke
 * Frederic Wagner
@@ -137,8 +140,11 @@ The list of contributors can be found [there](https://github.com/sebcrozet/nphys
 * Michael Carpenter
 * moyashi
 * Nathan Flurry
+* Nathaniel Pisarski
 * Nerijus Arlauskas
 * Nico Orrù
+* Nicholas Farley
+* Nifker
 * Olivier Saut
 * Pascal
 * Paul Houghton
