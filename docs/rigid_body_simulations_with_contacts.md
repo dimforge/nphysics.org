@@ -18,7 +18,7 @@ polyhedral friction cones is used. Other contact models can be chosen afterward.
 Once the physics world is created, it will be empty. The next steps are then to add bodies like [rigid-bodies](/rigid_body_simulations_with_contacts/#rigid-bodies) or [multibody links](/joint_constraints_and_multibodies/#multibodies) to which [colliders](/rigid_body_simulations_with_contacts/#colliders) or [sensors](/event_handling_and_sensors/#sensors) can be attached.
 
 ## Rigid-bodies
-A rigid-body is the most simple type of body supported by **nphysics**. It can be seen as the aggregation of a position, orientation, and mass properties (rotational inertia tensor, mass, and center of mass). It does not holds any information regarding its shape which can optionally be specified by attaching one or multiple [colliders](/rigid_body_simulations_with_contacts/#colliders) to it. A rigid-body with no collider with be affected by all the forces the world is aware of, but not by contacts (because it does not have any shape that can be collided to).
+A rigid-body is the most simple type of body supported by **nphysics**. It can be seen as the aggregation of a position, orientation, and mass properties (rotational inertia tensor, mass, and center of mass). It does not hold any information regarding its shape which can optionally be specified by attaching one or multiple [colliders](/rigid_body_simulations_with_contacts/#colliders) to it. A rigid-body with no collider will be affected by all the forces the world is aware of, but not by contacts (because it does not have any shape that can be collided to).
 
 ### Adding a rigid-body to the world
 A rigid-body can only created by the physics `World`. This is achieved by the `world.add_rigid_body(position, local_inertia, local_center_of_mass)` method where:
@@ -63,8 +63,8 @@ A rigid-body can be four different statuses identified by the [`object::BodyStat
 !!! Note
     As mentioned in the [next section](/rigid_body_simulations_with_contacts/#colliders) it is possible to add colliders attached to a special `BodyHandle::ground()` body. Therefore, objects that will never move should be simulated with colliders attached to the `BodyHandle::ground()` instead of with a collider attached with a rigid-body with a `Static` status.
 
-* **`BodyStatus::Kinematic`:** Indicates the rigid-body velocity must not be altered by the physics engine. The user is free to set any velocity and the rigid-body position will be integrated at each update accordingly. This is typically used for **platforms** as shown is that [demo](/demo_body_status3/).
-* **`BodyStatus::Disabled`:** Indicates the rigid-body should be completely ignored by the physics engine. In practive, This will remove all contacts this rigid-body is involved with and disable (but not remove) all joint constraints attached to it.
+* **`BodyStatus::Kinematic`:** Indicates the rigid-body velocity must not be altered by the physics engine. The user is free to set any velocity and the rigid-body position will be integrated at each update accordingly. This is typically used for **platforms** as shown in this [demo](/demo_body_status3/).
+* **`BodyStatus::Disabled`:** Indicates the rigid-body should be completely ignored by the physics engine. In practice, this will remove all contacts this rigid-body is involved with and disable (but not remove) all joint constraints attached to it.
 
 To change the status of a rigid-body, you need to retrieve a mutable reference to it and then call the `.set_status(...)` method. For example:
 
