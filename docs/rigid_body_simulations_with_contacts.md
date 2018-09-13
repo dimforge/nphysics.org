@@ -31,7 +31,7 @@ Both `local_inertia` and `local_center_of_mass` have a strong impact on the qual
 
 ```rust
 let cuboid = ShapeHandle::new(Cuboid::new(Vector3::new(1.0, 2.0, 1.0)));
-let local_inertia = cuboid.inertia();
+let local_inertia = cuboid.inertia(1.0);
 let local_center_of_mass = cuboid.center_of_mass();
 let rigid_body_handle = world.add_rigid_body(
     Isometry::new(Vector3::x() * 2.0, na::zero()),
