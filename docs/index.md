@@ -3,7 +3,7 @@
 </center>
 <br/>
 <center>
-[![Travis.ci Status](https://travis-ci.org/sebcrozet/nphysics.svg?branch=master)](https://travis-ci.org/sebcrozet/nphysics)
+[![Travis.ci Status](https://travis-ci.org/rustsim/nphysics.svg?branch=master)](https://travis-ci.org/rustsim/nphysics)
 [![Crates.io Status](https://meritbadge.herokuapp.com/nphysics3d)](https://crates.io/crates/nphysics3d)
 [![License (3-Clause BSD)](https://img.shields.io/badge/license-BSD%203--Clause-blue.svg?style=flat)](https://opensource.org/licenses/BSD-3-Clause)
 <div style="text-align:center">
