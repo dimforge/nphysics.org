@@ -139,7 +139,7 @@ let collider = world.collider(collider_handle).expect("Collider not found.");
 let body_handle = collider.data().body();
 ```
 ### Collision groups
-It is possible to configure a subset of colliders to collide only with another subset of colliders. This is the goal of **collision groups**. Collision groups are demonstrated on the [Collision groups](demo_collision_groups3) example where only colliders with the same colors can collide with one another. The source-code of the demo is available on [github](https://github.com/sebcrozet/nphysics/blob/master/examples3d/collision_groups3.rs). A collider's collision group can be modified by first retrieving the `CollisionWorld` managed by the physics world:
+It is possible to configure a subset of colliders to collide only with another subset of colliders. This is the goal of **collision groups**. Collision groups are demonstrated on the [Collision groups](demo_collision_groups3) example where only colliders with the same colors can collide with one another. The source-code of the demo is available on [github](https://github.com/rustsim/nphysics/blob/master/examples3d/collision_groups3.rs). A collider's collision group can be modified by first retrieving the `CollisionWorld` managed by the physics world:
 
 ```rust
 let collision_world = world.collision_world_mut();

@@ -104,7 +104,7 @@ The following table summarizes the types corresponding to the joints mentioned a
 !!! Warning
     The `FreeJoint` can be used only if `parent` is set to `BodyHandle::ground()` otherwise, the creation of the multibody link with `.add_multibody_link(...)` will panic.
 
-You may refer to the [code](https://github.com/sebcrozet/nphysics/blob/master/examples3d/joints3.rs) of this [demo](/demo_joints3/) for concrete examples of multibody creation.
+You may refer to the [code](https://github.com/rustsim/nphysics/blob/master/examples3d/joints3.rs) of this [demo](/demo_joints3/) for concrete examples of multibody creation.
 
 ### Removing a multibody
 It is possible to either remove a multibody completely or to just remove some of its links. The removal of a multibody uses the same method as the removal of a rigid-body: `world.remove_bodies(handles)`. This will remove all the multibody links part of the same multibody as at least one link with an handle given in the slice `handles`.
@@ -173,7 +173,7 @@ A joint constraint is completely configured at its creation, and added to the wo
 1. The handles of the two body parts attached at each end of the joint. Handle of **any** type of body part is accepted. This includes rigid-bodies, `BodyHandle::ground()`, as well as a multibody link. Attaching a joint to a multibody link can be especially useful to handle complex assemblies with loops as described in the [next section](#combining-both).
 2. The position of the joint endpoints with regard to each body part. A joint endpoint is often referred to as an **anchor** throughout the documentation of **nphysics**.
 
-You may refer to the [code](https://github.com/sebcrozet/nphysics/blob/master/examples3d/constraints3.rs) of this [demo](/demo_constraints3/) for concrete examples of joint constraint configurations.
+You may refer to the [code](https://github.com/rustsim/nphysics/blob/master/examples3d/constraints3.rs) of this [demo](/demo_constraints3/) for concrete examples of joint constraint configurations.
 
 
 ## Combining both
