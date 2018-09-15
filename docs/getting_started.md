@@ -1,6 +1,6 @@
 # Getting started
 **nphysics** relies on the official Rust package manager
-[Cargo](http://crates.io) for dependency resolution and compilation. Therefore,
+[Cargo](https://crates.io) for dependency resolution and compilation. Therefore,
 making **nphysics** ready to be used by your project is simply a matter of
 adding a new dependency to your `Cargo.toml` file. You can either use the **nphysics2d**
 crate for 2D physics simulation or the **nphysics3d** crate for 3D physics simulation. You can even use both

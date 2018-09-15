@@ -11,7 +11,7 @@ In this chapter, we first show how to initialize a [physics world](#initializing
 The [`World`](/rustdoc/nphysics3d/world/struct.World.html) structure is at the core of **nphysics**. It will contain all the objects to be handled by the physics engine and will perform all the collision detection, dynamics integrations, and event generation. It is easily initialized with `World::new()`. This constructor will initialize the physics engine with all its default parameters, including:
 
 * A gravity set to zero. This can be changed using, e.g., `world.set_gravity(Vector3::y() * -9.81)`.
-* The initialization a `CollisionWorld` from the **ncollide2d** or **ncollide3d** [crate](http://ncollide.org) to handle collision detection.
+* The initialization a `CollisionWorld` from the **ncollide2d** or **ncollide3d** [crate](https://ncollide.org) to handle collision detection.
 * The use of an impulse-based constraint solver to handle contacts. By default a Sinorini-Coulomb contact model with
 polyhedral friction cones is used. Other contact models can be chosen afterward. Refer to the dedicated [section](contact_models.md).
 
@@ -85,12 +85,12 @@ Colliders represent the geometric shapes that generate contacts and contact even
 <center>
 ![Collider margin](img/collider_margin.svg)
 </center>
-* `shape`: the collider's shape. Possible shapes are [planes](http://ncollide.org/geometric_representations/#plane), [balls](http://ncollide.org/geometric_representations/#ball), [cuboids](http://ncollide.org/geometric_representations/#cuboid), [convex polyhedra](http://ncollide.org/geometric_representations/#convex-hull), [polylines](http://ncollide.org/geometric_representations/#polyline), [triangle meshes](http://ncollide.org/geometric_representations/#trimesh), and [compound shapes](http://ncollide.org/geometric_representations/#compound). All those structures are defined by the **ncollide2d** or **ncollide3d** crate.
+* `shape`: the collider's shape. Possible shapes are [planes](https://ncollide.org/geometric_representations/#plane), [balls](https://ncollide.org/geometric_representations/#ball), [cuboids](https://ncollide.org/geometric_representations/#cuboid), [convex polyhedra](https://ncollide.org/geometric_representations/#convex-hull), [polylines](https://ncollide.org/geometric_representations/#polyline), [triangle meshes](https://ncollide.org/geometric_representations/#trimesh), and [compound shapes](https://ncollide.org/geometric_representations/#compound). All those structures are defined by the **ncollide2d** or **ncollide3d** crate.
 * `parent`: the body part the collider is attached to. This can be set to `BodyHandle::ground()` if the collider is to be attached to the ground (i.e. it will be static).
 * `to_parent`: the position of the collider relative to its parent body part. At each timestep, the actual world-space position of the collider is updated if its parent moved. If the parent is `BodyHandle::ground()`, the collider has a constant world-space position equal to `to_parent`.
-* `material`: the [material](http://localhost:8000/rustdoc/nphysics3d/object/struct.Material.html) of the collider describing the friction and restitution coefficient to be applied during contact resolution.
+* `material`: the [material](https://localhost:8000/rustdoc/nphysics3d/object/struct.Material.html) of the collider describing the friction and restitution coefficient to be applied during contact resolution.
 
-After adding a collider to the world, a collider handle is returned by the physics world. This handle is to be used to retrieve a reference to the corresponding `Collider` [structure](/rustdoc/nphysics3d/object/type.Collider.html) or to remove it from the world using `world.remove_colliders(...)`. Note that the `Collider`structure is simply a [CollisionObject](http://ncollide.org/collision_detection_pipeline/#collision-objects) from the **ncollide2d** or **ncollide3d** crate under the hood. Therefore, all the [methods](http://ncollide.org/rustdoc/ncollide3d/world/struct.CollisionObject.html) of `CollisionObject` are available, including:
+After adding a collider to the world, a collider handle is returned by the physics world. This handle is to be used to retrieve a reference to the corresponding `Collider` [structure](/rustdoc/nphysics3d/object/type.Collider.html) or to remove it from the world using `world.remove_colliders(...)`. Note that the `Collider`structure is simply a [CollisionObject](https://ncollide.org/collision_detection_pipeline/#collision-objects) from the **ncollide2d** or **ncollide3d** crate under the hood. Therefore, all the [methods](https://ncollide.org/rustdoc/ncollide3d/world/struct.CollisionObject.html) of `CollisionObject` are available, including:
 
 | Method                | Description                                                  |
 |--                     | --                                                           |
@@ -152,7 +152,7 @@ let collision_world = world.collision_world_mut();
 collision_world.set_collision_groups(collider_handle, new_group);
 ```
 
-Because this is a feature from the **ncollide2d** and **ncollide3d** crates, an in-depth description of collision groups is given in [that section](http://ncollide.org/collision_detection_pipeline/#collision-groups) of their dedicated user guide.
+Because this is a feature from the **ncollide2d** and **ncollide3d** crates, an in-depth description of collision groups is given in [that section](https://ncollide.org/collision_detection_pipeline/#collision-groups) of their dedicated user guide.
 
 
 ## Gravity and external forces

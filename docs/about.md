@@ -3,7 +3,7 @@
 <table markdown="1">
 <tr>
 <td id="nostyle_table" style="vertical-align:middle">
-<a href="https://github.com/sebcrozet"><img id="left_float_img" src="http://www.gravatar.com/avatar/24f8431a2a28f633cba972f1176921e4?s=125"></img></a>
+<a href="https://github.com/sebcrozet"><img id="left_float_img" src="https://www.gravatar.com/avatar/24f8431a2a28f633cba972f1176921e4?s=125"></img></a>
 </td>
 <td id="nostyle_table">
 As of today, this website and the **nphysics** project are mostly developed by
@@ -41,7 +41,7 @@ it. Do not hesitate to correct even the smallest, insignificant detail
 (especially English mistakes, including typography). We love nitpicking!  This
 website is composed of a set of markdown files located on the
 [nphysics.org](https://github.com/rustsim/nphysics.org) repository. It is compiled using
-[MkDocs v0.17.3](http://www.mkdocs.org/). As explained in the next section,
+[MkDocs v0.17.3](https://www.mkdocs.org/). As explained in the next section,
 you need to fork, fix, and create a pull request to make your contribution
 integrable into our code base. There are no
 specific rules, except that all compilable code to generate illustrations must
@@ -181,7 +181,7 @@ open an issue on [GitHub](https://github.com/rustsim/nphysics/issues).
 
 
 # Image credits
-Some images were downloaded from [flaticon](http://www.flaticon.com). Some have
+Some images were downloaded from [flaticon](https://www.flaticon.com). Some have
 been modified to fit with the overall theme. We thank the authors for providing
 those images under the CC 3.0 BY license: [Vectors Market](https://www.flaticon.com/authors/vectors-market),
-[Alfredo Hernandez](https://www.flaticon.com/authors/alfredo-hernandez), [Maxim Basinski](https://www.flaticon.com/authors/maxim-basinski), [Freepik](http://www.freepik.com), and [OCHA](https://www.flaticon.com/authors/ocha).
+[Alfredo Hernandez](https://www.flaticon.com/authors/alfredo-hernandez), [Maxim Basinski](https://www.flaticon.com/authors/maxim-basinski), [Freepik](https://www.freepik.com), and [OCHA](https://www.flaticon.com/authors/ocha).
