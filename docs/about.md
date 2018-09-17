@@ -112,6 +112,7 @@ The list of contributors can be found [there](https://github.com/rustsim/nphysic
 * Casey Primozic
 * Casey Rodarmor
 * Chris Heyes
+* Christopher Armstrong
 * Connor McCluskey
 * Danny Fritz
 * Eduard Knyshov
@@ -124,6 +125,7 @@ The list of contributors can be found [there](https://github.com/rustsim/nphysic
 * Jack Wrenn
 * Jan Nockemann
 * Jason Knight
+* Jean Mertz
 * Jeb Brooks
 * Jeff Muizelaar
 * Jeff Parsons
