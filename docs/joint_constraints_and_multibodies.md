@@ -33,7 +33,7 @@ In 3D, a special _Helical joint_ also exists: it allows only one DOF which is a 
 
 In practice, there are two main ways of modeling joints. Both are implemented by **nphysics** because each have very different advantages and limitations:
 
-1. The **reduced-coordinates approach** encodes the reduction of DOF directly into the equations of motion. For example, a 3D rigid-body attached to the ground with a revolute joint will have its position encoded by only one variable: the rotation angle. Therefore, integrating its motion only changes this one variable and don't need additional forces or mathematical constraints to be generated. The clear advantage is that there is no way for the physics engine to apply any motion other than that single rotation to this boby, meaning there is no way the body shifts to a position that is not realistic, event if the dynamics solver does not converge completely.
+1. The **reduced-coordinates approach** encodes the reduction of DOF directly into the equations of motion. For example, a 3D rigid-body attached to the ground with a revolute joint will have its position encoded by only one variable: the rotation angle. Therefore, integrating its motion only changes this one variable and don't need additional forces or mathematical constraints to be generated. The clear advantage is that there is no way for the physics engine to apply any motion other than that single rotation to this boby, meaning there is no way the body shifts to a position that is not realistic, even if the dynamics solver does not converge completely.
 2. The **constraints-based approach** (or full-coordinates approach) is the most commonly available approach on other physics engines for video-games and animations. Here, a 3D rigid-body attached to the ground with a revolute joint will still have its position encoded by 6 variables (3 for translations and 3 for rotations) just like any rigid-body without joint. Then the integrator will add mathematical constraints to the dynamic system to ensure forces are applied to simulate the reduction of the number of DOF as imposed by the joints. In practice, this means that the rigid-body will break the joint constraint if the constrain solver does not converge completely.
 
 This description shows only one aspect of the difference between the reduced-coordinates approach and the constraints-based approach. More generally, the reduced-coordinates approach favors accuracy while the constraints-based approach favors versatility. The following table compares the advantages and limitations of both approaches:
@@ -43,7 +43,7 @@ This description shows only one aspect of the difference between the reduced-coo
 | <font color="green">Joints cannot be violated.</font>                 | <font color="IndianRed">Joints can be violated if the solver does not converge.</font> |
 | <font color="green">Moderately large time-step are possible.</font>   | <font color="IndianRed">Moderately large time-step may make the simulation explode.</font> |
 | <font color="green">Large assemblies are stable.</font>                                | <font color="IndianRed">Large assemblies easily break without a large number of solver iterations.</font> |
-| <font color="IndianRed">Adding/removing a join is slower.</font>          | <font color="green">Adding/removing a joint is fast.</font> |
+| <font color="IndianRed">Adding/removing a joint is slower.</font>          | <font color="green">Adding/removing a joint is fast.</font> |
 | <font color="IndianRed">Joint forces are never computed, thus cannot be retrieved.</font>       | <font color="green">Joint forces are always computed and can be retrieved.</font> |
 | <font color="IndianRed">Topological restriction: body parts must be linked following a tree structure.</font> | <font color="green">The link between body parts can form any graph.</font> |
 
@@ -75,7 +75,7 @@ Multibodies implement the reduced-coordinates approach. A multibody is a set of 
 ### Creating a multibody
 Creating a multibody is implicitly done by adding multibody links to the scene. Indeed, two multibody links that are attached together (by a multibody joint) as considered part of the same multibody. Adding a multibody link to the world is very similar to adding a rigid-body, but with more arguments passed to the `.add_multibody_link(...)`:
 
-* `parent`: The other multibody link this is link is attached to. This can also be set to `BodyHandle::ground()` to indicate the multibody link is attached to the ground.
+* `parent`: The other multibody link this link is attached to. This can also be set to `BodyHandle::ground()` to indicate the multibody link is attached to the ground.
 * `joint`: The multibody joint linking the newly created multibody link to its `parent`.
 * `parent_shift`: The position of the joint wrt. `parent`, expressed in the local frame of `parent`.
 * `body_shift`: The position of the newly created multibody link wrt. the joint, expressed in the local frame of the joint.
@@ -99,7 +99,7 @@ The following table summarizes the types corresponding to the joints mentioned a
 | _Universal joint_   | [`UniversalJoint`](/rustdoc/nphysics3d/joint/struct.UniversalJoint.html)   |
 
 !!! Note
-    The first multibody link of a multibody is necessarily attached to `BodyHandle::ground()`. Note however that "attached" is a bit misleading here. Indeed if `joint` is set to an instance of `FreeJoint`, then this first multibody link will have all the possible degrees of freedom, making it completely free of perform any movement wrt. the ground.
+    The first multibody link of a multibody is necessarily attached to `BodyHandle::ground()`. Note however that "attached" is a bit misleading here. Indeed if `joint` is set to an instance of `FreeJoint`, then this first multibody link will have all the possible degrees of freedom, making it completely free to perform any movement wrt. the ground.
 
 !!! Warning
     The `FreeJoint` can be used only if `parent` is set to `BodyHandle::ground()` otherwise, the creation of the multibody link with `.add_multibody_link(...)` will panic.
@@ -177,7 +177,7 @@ You may refer to the [code](https://github.com/rustsim/nphysics/blob/master/exam
 
 
 ## Combining both
-Combining multibodies and joint constraints is an useful way of combining the stability of multibodies with the flexibility of joint constraints. Indeed, one of the most appealing feature of a multibody is its stability and ease of use (especially for robotics). However its greatest weakness is its inability to represent assemblies that do not match a tree structure, i.e., an articulated body composed of graph-like assembly of solids (each graph node being a solid and each graph edge being an articulation) cannot be simulated by a multibody. A common approach is thus to:
+Combining multibodies and joint constraints is a useful way of combining the stability of multibodies with the flexibility of joint constraints. Indeed, one of the most appealing features of a multibody is its stability and ease of use (especially for robotics). However its greatest weakness is its inability to represent assemblies that do not match a tree structure, i.e., an articulated body composed of graph-like assembly of solids (each graph node being a solid and each graph edge being an articulation) cannot be simulated by a multibody. A common approach is thus to:
 
 1. Define a multibody from a spanning-tree of the graph.
 2. Create joint constraints for each articulation missing from this multibody to complete the graph. Those joint constraints are therefore attached to two multibody links. They are often called "loop-closing constraints" since they close the loops of the assembly's graph structure.
