@@ -3,7 +3,7 @@ Besides the physics simulation itself, applications often need to perform specif
 
 ## Sensors
 Sensors are a special type of [colliders](/rigid_body_simulations_with_contacts/#colliders) that don't generate any contact.
-Like colliders, the have to be added to the world, are given a geometric shape, and are attached to a body part (or the `BodyHandle::ground()`).
+Like colliders, they have to be added to the world, are given a geometric shape, and are attached to a body part (or the `BodyHandle::ground()`).
 They are commonly used for detecting proximity, e.g., to detect when a player enters a specific area or is close to a door. The sensor [demo](/demo_sensor3/) shows a ball-shaped sensor attached to a cube. All colliders (except the ground) that intersect this ball are coloured in yellow.
 
 The creation of a sensor is almost identical to the creation of a regular collider:

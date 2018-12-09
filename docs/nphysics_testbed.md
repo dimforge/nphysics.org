@@ -2,9 +2,9 @@
 The **nphysics_testbed2d** and **nphysic_testbed3d** crates provide pure-Rust, WASM-compatible, tools for displaying and interacting easily with a physical scene. They are based on the [kiss3d](https://crates.io/crates/kiss3d) graphics engine. Basically, all you have to do is setup your physics `World`, and then call `Testbed::new(world).run()` to obtain a fully-functional windowed application with 2D or 3D display of every colliders on your `World`. This application will allow some controls like starting/stopping/pausing the simulation, and grabbing an object with the mouse.
 
 !!! Note
-    All the interactive demos from this website have been build using those testbeds. Their source codes can be found on the [examples2d](https://github.com/rustsim/nphysics/tree/master/examples2d) and [examples3d](https://github.com/rustsim/nphysics/tree/master/examples3d) of the **nphysics** repository.
+    All the interactive demos from this website have been built using those testbeds. Their source codes can be found on the [examples2d](https://github.com/rustsim/nphysics/tree/master/examples2d) and [examples3d](https://github.com/rustsim/nphysics/tree/master/examples3d) of the **nphysics** repository.
 
-In this chapter we will describe an example of the setup of a 3D physical scene with a pile of boxes. This scene will then be displayed and simulated using the **nphysics_testbed3d** crate. The full code can be found [on github](https://github.com/rustsim/nphysics/blob/master/examples3d/boxes3.rs). The end-result corresponds to the 3D [Stack of boxes](/demo_boxes3/) demo. The code fore 2D analogous of this demo can be found [on github](https://github.com/rustsim/nphysics/blob/master/examples2d/boxes2.rs) which corresponds to the 2D [Stack of boxes](/demo_boxes2/) demo.
+In this chapter we will describe an example of the setup of a 3D physical scene with a pile of boxes. This scene will then be displayed and simulated using the **nphysics_testbed3d** crate. The full code can be found [on github](https://github.com/rustsim/nphysics/blob/master/examples3d/boxes3.rs). The end-result corresponds to the 3D [Stack of boxes](/demo_boxes3/) demo. The code for 2D analogous of this demo can be found [on github](https://github.com/rustsim/nphysics/blob/master/examples2d/boxes2.rs) which corresponds to the 2D [Stack of boxes](/demo_boxes2/) demo.
 
 ## Initializing the project
 First, initialize a new binary project, e.g., using cargo:
@@ -50,7 +50,7 @@ use nphysics3d::world::World;                    // The physics world to be init
 use nphysics_testbed3d::Testbed;                 // The testbed to display/run the simulation.
 ```
 
-The first thing we want to do is create a new physics world with its default parameters, and change the default gravity (initialized to zero by default) so that is points toward the negative $y$-axis:
+The first thing we want to do is create a new physics world with its default parameters, and change the default gravity (initialized to zero by default) so that it points toward the negative $y$-axis:
 
 ```rust
 let mut world = World::new();
@@ -103,8 +103,8 @@ for i in 0usize..num {
             let z = k as f32 * shift - centerz;
 
             /*
-                * Create the rigid-body.
-                */
+             * Create the rigid-body.
+             */
             let pos = Isometry3::new(Vector3::new(x, y, z), na::zero());
             let handle = world.add_rigid_body(pos, inertia, center_of_mass);
 
