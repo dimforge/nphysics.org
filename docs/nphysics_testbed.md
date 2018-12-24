@@ -26,7 +26,7 @@ authors = [ "you" ]
 nalgebra   = "0.16"
 ncollide3d = "0.17"
 nphysics3d = "0.9"
-nphysics-testbed3d = "0.1"
+nphysics_testbed3d = "0.1"
 ```
 
 Now modify the `src/main.rs` to add the corresponding `extern crate` directives. Here, we use `na` as an alias for `nalgebra`:
