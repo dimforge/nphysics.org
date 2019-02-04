@@ -42,9 +42,9 @@ This description shows only one aspect of the difference between the reduced-coo
 |------------------------------|----------------------------|
 | <font color="green">Joints cannot be violated.</font>                 | <font color="IndianRed">Joints can be violated if the solver does not converge.</font> |
 | <font color="green">Moderately large time-step are possible.</font>   | <font color="IndianRed">Moderately large time-step may make the simulation explode.</font> |
-| <font color="green">Large assemblies are stable.</font>                                | <font color="IndianRed">Large assemblies easily break without a large number of solver iterations.</font> |
-| <font color="IndianRed">Adding/removing a joint is slower.</font>          | <font color="green">Adding/removing a joint is fast.</font> |
-| <font color="IndianRed">Joint forces are never computed, thus cannot be retrieved.</font>       | <font color="green">Joint forces are always computed and can be retrieved.</font> |
+| <font color="green">Large assemblies are stable.</font>               | <font color="IndianRed">Large assemblies easily break without a large number of solver iterations.</font> |
+| <font color="IndianRed">Adding/removing a joint is slower.</font>     | <font color="green">Adding/removing a joint is fast.</font> |
+| <font color="IndianRed">Joint forces are never computed, thus cannot be retrieved.</font> | <font color="green">Joint forces are always computed and can be retrieved.</font> |
 | <font color="IndianRed">Topological restriction: body parts must be linked following a tree structure.</font> | <font color="green">The link between body parts can form any graph.</font> |
 
 The following schematics illustrate a configuration that can be simulated by a multibody (left assembly with a tree structure), and one that cannot (right assembly with a graph structure). The assembly on the left models a SCARA robotic arm with 3 rotational DOF (due to three revolute joints) and 1 translational DOF (due to one prismatic joint). The assembly on the right models a necklace with five perls. It has a total of 15 rotational DOF (due to five ball joints):
@@ -73,17 +73,138 @@ Multibodies implement the reduced-coordinates approach. A multibody is a set of 
 
 
 ### Creating a multibody
-Creating a multibody is implicitly done by adding multibody links to the scene. Indeed, two multibody links that are attached together (by a multibody joint) as considered part of the same multibody. Adding a multibody link to the world is very similar to adding a rigid-body, but with more arguments passed to the `.add_multibody_link(...)`:
-
-* `parent`: The other multibody link this link is attached to. This can also be set to `BodyHandle::ground()` to indicate the multibody link is attached to the ground.
-* `joint`: The multibody joint linking the newly created multibody link to its `parent`.
-* `parent_shift`: The position of the joint wrt. `parent`, expressed in the local frame of `parent`.
-* `body_shift`: The position of the newly created multibody link wrt. the joint, expressed in the local frame of the joint.
-* `local_inertia`: The inertia of the multibody link on its reference frame.
-* `local_center_of_mass`: The center of mass of the multibody link on its reference frame.
+Creating a multibody is done link-by-link using the `MultibodyDesc` structure based on the builder pattern. Each link
+of a multibody is describe by a single `MultibodyDesc` to which children links can be added by calling the `.add_child`
+method. This method will itself return a new `MultibodyDesc` that can be used to initialize the child, create even
+more nested children, etc.
 
 
-The following table summarizes the types corresponding to the joints mentioned at the beginning of this chapter that can be used for the `joint` argument:
+<ul class="nav nav-tabs">
+  <li class="active"><a id="tab_nav_link" data-toggle="tab" href="#multibody_desc_2D">2D example</a></li>
+  <li><a id="tab_nav_link" data-toggle="tab" href="#multibody_desc_3D">3D example</a></li>
+</ul>
+
+<div class="tab-content" markdown="1">
+  <div id="multibody_desc_2D" class="tab-pane in active">
+```rust
+use na::{Vector2, Point2, Isometry2, Matrix2};
+use nphysics2d::object::MultibodyDesc;
+use nphysics2d::joint::{RevoluteJoint, PrismaticJoint};
+use nphysics2d::math::{Velocity, Inertia};
+
+let joint = RevoluteJoint::new(-0.1);
+let mut multibody_desc = MultibodyDesc::new(joint)
+    // The velocity of this body.
+    // Default: zero velocity.
+    .velocity(Velocity::linear(1.0, 2.0))
+    // The angular inertia tensor of this rigid body, expressed on its local-space.
+    // Default: the zero matrix.
+    .angular_inertia(3.0)
+    // The rigid body mass.
+    // Default: 0.0
+    .mass(1.2)
+    // The mass and angular inertia of this rigid body expressed in
+    // its local-space. Default: zero.
+    // Will override `.mass(...)` and `.angular_inertia(...)`.
+    .local_inertia(Inertia::new(1.0, 3.0))
+    // The center of mass of this rigid body expressed in its local-space.
+    // Default: the origin.
+    .local_center_of_mass(Point2::new(1.0, 2.0))
+    /// The position of the joint wrt. `parent`, expressed in the local 
+    /// frame of `parent`.
+    /// Default: Vector2::zeros()
+    .parent_shift(Vector2::new(1.0, 2.0))
+    /// The position of the newly created multibody link wrt. the joint,
+    /// expressed in the local frame of the joint.
+    /// Default: Vector2::zeros()
+    .body_shift(Vector2::new(1.0, 2.0))
+    // Add a collider that will be attached to this rigid body.
+    // If the collider has a non-zero density, its mass and angular
+    // inertia will be added to this rigid body.
+    // Default: no collider.
+    .collider(&collider_desc);
+    
+/// Add a children link to the multibody link represented by `multibody_desc`.
+let child_joint = PrismaticJoint::new(Vector2::y_axis(), 0.0);
+multibody_desc.add_child(child_joint)
+    // The `add_child` method returns another `MultibodDesc` used to
+    // set the properties of the child. It is also possible to call
+    // `.add_child` on this child.
+    .body_shift(Vector2::x() * 2.0);
+    
+    
+/// We can add a second child to our multibody by re-using the initial `multibody_desc`:
+let second_child_joint = RevoluteJoint::new(2.3);
+multibody_desc.add_child(second_child_joint);
+
+/// Actually build the multibody.
+multibody_desc.build(&mut world);
+```
+  </div>
+  <div id="multibody_desc_3D" class="tab-pane">
+```rust
+use na::{Vector3, Point3, Isometry3, Matrix3};
+use nphysics3d::object::MultibodyDesc;
+use nphysics3d::joint::{RevoluteJoint, PrismaticJoint, HelicalJoint};
+use nphysics3d::math::{Velocity, Inertia};
+
+let joint = RevoluteJoint::new(-0.1);
+let mut multibody_desc = MultibodyDesc::new(joint)
+    // The name of this multibody link.
+    // Default: ""
+    .name("my multibody link".to_owned())
+    // The velocity of this body.
+    // Default: zero velocity.
+    .velocity(Velocity::linear(1.0, 2.0, 3.0))
+    // The angular inertia tensor of this rigid body, expressed on its local-space.
+    // Default: the zero matrix.
+    .angular_inertia(Matrix3::from_diagonal_element(3.0))
+    // The rigid body mass.
+    // Default: 0.0
+    .mass(1.2)
+    // The mass and angular inertia of this rigid body expressed in
+    // its local-space. Default: zero.
+    // Will override `.mass(...)` and `.angular_inertia(...)`.
+    .local_inertia(Inertia::new(1.0, Matrix3::from_diagonal_element(3.0)))
+    // The center of mass of this rigid body expressed in its local-space.
+    // Default: the origin.
+    .local_center_of_mass(Point3::new(1.0, 2.0, 3.0))
+    /// The position of the joint wrt. `parent`, expressed in the local 
+    /// frame of `parent`.
+    /// Default: Vector3::zeros()
+    .parent_shift(Vector3::new(1.0, 2.0, 3.0))
+    /// The position of the newly created multibody link wrt. the joint,
+    /// expressed in the local frame of the joint.
+    /// Default: Vector3::zeros()
+    .body_shift(Vector3::new(1.0, 2.0, 3.0))
+    // Add a collider that will be attached to this rigid body.
+    // If the collider has a non-zero density, its mass and angular
+    // inertia will be added to this rigid body.
+    // Default: no collider.
+    .collider(&collider_desc);
+    
+/// Add a children link to the multibody link represented by `multibody_desc`.
+let child_joint = PrismaticJoint::new(Vector2::y_axis(), 0.0);
+multibody_desc.add_child(child_joint)
+    // The `add_child` method returns another `MultibodDesc` used to
+    // set the properties of the child. It is also possible to call
+    // `.add_child` on this child.
+    .body_shift(Vector3::x() * 2.0);
+    
+    
+/// We can add a second child to our multibody by re-using the initial `multibody_desc`:
+let second_child_joint = HelicalJoint::new(Vector3::y_axis(), 1.0, 0.0);
+multibody_desc.add_child(second_child_joint);
+
+/// Actually build the multibody.
+multibody_desc.build(&mut world);
+```
+  </div>
+</div>
+
+
+The following table summarizes the types corresponding to the joints mentioned at the beginning of this chapter that 
+an be used for the `MultibodyDesc`:
 
 | Joint name | Multibody joint type on **nphysics** |
 |------------|---------|
@@ -99,21 +220,52 @@ The following table summarizes the types corresponding to the joints mentioned a
 | _Universal joint_   | [`UniversalJoint`](/rustdoc/nphysics3d/joint/struct.UniversalJoint.html)   |
 
 !!! Note
-    The first multibody link of a multibody is necessarily attached to `BodyHandle::ground()`. Note however that "attached" is a bit misleading here. Indeed if `joint` is set to an instance of `FreeJoint`, then this first multibody link will have all the possible degrees of freedom, making it completely free to perform any movement wrt. the ground.
+    The first multibody link of a multibody is necessarily attached to `BodyHandle::ground()`. Note however that
+    "attached" is a bit misleading here. Indeed if `joint` is set to an instance of `FreeJoint`, then this first
+    multibody link will have all the possible degrees of freedom, making it completely free to perform any movement wrt.
+    the ground.
 
 !!! Warning
-    The `FreeJoint` can be used only if `parent` is set to `BodyHandle::ground()` otherwise, the creation of the multibody link with `.add_multibody_link(...)` will panic.
+    The `FreeJoint` can be used only if `parent` is set to `BodyHandle::ground()` otherwise, the creation of the
+    multibody will panic.
+    
+It is possible to add new links to a multibody that has already been created into the `World`:
 
-You may refer to the [code](https://github.com/rustsim/nphysics/blob/master/examples3d/joints3.rs) of this [demo](/demo_joints3/) for concrete examples of multibody creation.
+```rust
+// This will create the multibody links identified by `multibody_desc`
+// and all its children. The multibody link identified by `multibody_desc`
+// is then attached as a child of the pre-existing multibody link identified
+// by `parent_handle`.
+multibody_desc.build_with_parent(parent_handle, &mut world);
+```
+
+!!! Note "Multibody link part handles"
+    The `BodyPartHandle` identifying a specific link of a multibody can be constructed with `BodyPartHandle(handle, i)`
+    where `handle` is the multibody handle, and `i` designates the `i`-th link of the multibody. Multibody links
+    are indexed in their creation order.
+    
+    Alternatively, you may retrieve a multibody link handle by its name set during its construction:
+    
+```rust
+for link in multibody.links_with_name("my multibody link name") {
+    /// ...
+}
+```
+
+You may refer to the [code](https://github.com/rustsim/nphysics/blob/master/examples3d/joints3.rs) of
+[that demo](/demo_joints3/) for concrete examples of multibody creation.
 
 ### Removing a multibody
-It is possible to either remove a multibody completely or to just remove some of its links. The removal of a multibody uses the same method as the removal of a rigid-body: `world.remove_bodies(handles)`. This will remove all the multibody links part of the same multibody as at least one link with an handle given in the slice `handles`.
-
-Calling `world.remove_multibody_links(handles)` on the other hand will only remove the given set of links. If a link is removed, the parent of its children on the multibody assembly will be automatically be set to `BodyHandle::ground()` with a `FreeJoint` linking them.
-
+The removal of a multibody uses the same method as the removal of a rigid-body: `world.remove_bodies(handles)`.
+It is not possible to remove a single link of a multibody without removing the whole multibody altogether.
 
 ### Multibody joint limits and motors
-It is often desirable to limit the amplitude of movement a multibody link can have with regard to its parent. For example we might want to limit the minimum and maximum value for the DOF of a prismatic joint in order to simulate a piston with finite stroke. Or we might want to limit the maximum angle a revolute joint can make with regard to its parent. Those are modeled by **joint limits**. Joint limits are currently only implemented for multibody joints with DOF that are independent from each other. Therefore, it is not implemented for the `FreeJoint`, `BallJoint`, and `CartesianJoint`. All other joints have methods similar to the following:
+It is often desirable to limit the amplitude of movement a multibody link can have with regard to its parent. For
+example we might want to limit the minimum and maximum value for the DOF of a prismatic joint in order to simulate a
+piston with finite stroke. Or we might want to limit the maximum angle a revolute joint can make with regard to its
+parent. Those are modeled by **joint limits**. Joint limits are currently only implemented for multibody joints with
+DOF that are independent from each other. Therefore, it is not implemented for the `FreeJoint`, `BallJoint`, and 
+`CartesianJoint`. All other joints have methods similar to the following:
 
 | Method                 | Description                                                           |
 |--                      | --                                                                    |

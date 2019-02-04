@@ -12,23 +12,18 @@ entities for collision shapes (spheres, cubes, triangle meshes, etc.)
 
 ```toml
 [dependencies]
-nalgebra = "0.16"
+nalgebra = "0.17"
 # Choose the one you need, or both.
-ncollide2d = "0.17"
-ncollide3d = "0.17"
+ncollide2d = "0.18"
+ncollide3d = "0.18"
 # Choose the one you need, or both.
-nphysics2d = "0.9"
-nphysics3d = "0.9"
+nphysics2d = "0.10"
+nphysics3d = "0.10"
 ```
 
 Until **nphysics** reaches 1.0, it is strongly recommended to always use its
 latest version, though you might encounter breaking changes from time to time.
-Once your `Cargo.toml` file is set up, the corresponding crate must be imported
-by your project with the usual `extern crate` directive:
-```rust
-extern crate nphysics2d; // If you need 2D.
-extern crate nphysics3d; // If you need 3D.
-```
+
 
 ## Cargo example
 Here is an example of Cargo file for compiling an executable depending on **nphysics**:
@@ -47,9 +42,9 @@ version = "0.0.0"
 authors = [ "You" ]
 
 [dependencies]
-nalgebra = "0.16"
-ncollide2d = "0.17"
-nphysics2d = "0.9"
+nalgebra = "0.17"
+ncollide2d = "0.18"
+nphysics2d = "0.10"
 
 [[bin]]
 name = "example"
@@ -64,9 +59,9 @@ version = "0.0.0"
 authors = [ "You" ]
 
 [dependencies]
-nalgebra = "0.16"
-ncollide3d = "0.17"
-nphysics3d = "0.9"
+nalgebra = "0.17"
+ncollide3d = "0.18"
+nphysics3d = "0.10"
 
 [[bin]]
 name = "example"

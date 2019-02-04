@@ -50,16 +50,30 @@
     </td>
 </tr>
 <tr>
-    <td>[![](../img/feature_event_handling_and_sensors.svg)](../event_handling_and_sensors)</td>
+    <td>[![](../img/feature_deformable_bodies.svg)](../deformable_bodies)</td>
     <td style="vertical-align:middle">
-    <a href="../event_handling_and_sensors" id="no_highlight">
+    <a href="../deformable_bodies" id="no_highlight">
     <div>
-    <big>**Event handling and sensors**</big>
+    <big>**Deformable bodies simulation**</big>
+    <span class="home_dummy_link">&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></span>
+    <br>
+    Simulate deformable bodies that can interact with all other kinds of bodies implemented in **nphysics**.
+    The computation of deformation are either based in a mass-spring system or a finite-element method.
+    </div>
+    </a>
+    </td>
+</tr>
+<tr>
+    <td>[![](../img/feature_event_handling_and_sensors.svg)](../interaction_handling_and_sensors)</td>
+    <td style="vertical-align:middle">
+    <a href="../interaction_handling_and_sensors" id="no_highlight">
+    <div>
+    <big>**Interaction handling and sensors**</big>
     <span class="home_dummy_link">&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></span>
     <br>
     Retrieve collision events to apply logic depending on the interaction between objects.
     Use a special type of collider, sensors, which won't interact physically with other objects
-    but will still generate events.
+    but will generate proximity events.
     </div>
     </a>
     </td>

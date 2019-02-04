@@ -70,12 +70,17 @@ cargo web deploy --target=wasm32-unknown-unknown --release
 ```
 
 Further details on the `cargo web` command can be found [here](https://github.com/koute/cargo-web#features).
-Using **nphysics** itself on your WASM project is just as simple as using **nphysics** for other platforms: add an `extern crate nphysics2d` (or `extern crate nphysics3d`) to your `main.rs` file and use all the features you need as usual!
+Using **nphysics** itself on your WASM project is just as simple as using **nphysics** for other platforms: add an
+`extern crate nphysics2d` (or `extern crate nphysics3d`) to your `main.rs` file and use all the features you need as
+usual!
 
 ## Working with wasm-bindgen
-The tutorial presented so far relied on the [stdweb](https://crates.io/crates/stdweb) crate. You might however prefer to use the competing solution [wasm-bindgen](https://github.com/rustwasm/wasm-bindgen) instead.
-To achieve this, you will need to prevent **nphysics** from depending on stdweb to avoid incompatibilities. In your `Cargo.toml` file, you have to disable the default nphysics features, and enable `use-wasm-bindgen`.
-For example:
+The tutorial presented so far relied on the [stdweb](https://crates.io/crates/stdweb) crate. You might however prefer
+to use the competing solution [wasm-bindgen](https://github.com/rustwasm/wasm-bindgen) instead.
+To achieve this, you will need to prevent **nphysics** from depending on stdweb to avoid incompatibilities. In your
+`Cargo.toml` file, you have to disable the default nphysics features, and enable `use-wasm-bindgen`. For example:
 
 ```.toml
-nphysics3d = { version = "*", default-features = false, features = [ "use-wasm-bindgen" ] }
+nphysics3d = { version = "*", default-features = false, features = [ "dim3", "use-wasm-bindgen" ] }
+nphysics2d = { version = "*", default-features = false, features = [ "dim2", "use-wasm-bindgen" ] }
+```

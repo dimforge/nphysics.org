@@ -1,8 +1,14 @@
 # The nphysics testbed
-The **nphysics_testbed2d** and **nphysic_testbed3d** crates provide pure-Rust, WASM-compatible, tools for displaying and interacting easily with a physical scene. They are based on the [kiss3d](https://crates.io/crates/kiss3d) graphics engine. Basically, all you have to do is setup your physics `World`, and then call `Testbed::new(world).run()` to obtain a fully-functional windowed application with 2D or 3D display of every colliders on your `World`. This application will allow some controls like starting/stopping/pausing the simulation, and grabbing an object with the mouse.
+The **nphysics_testbed2d** and **nphysic_testbed3d** crates provide pure-Rust, WASM-compatible, tools for displaying and
+interacting easily with a physical scene. They are based on the [kiss3d](https://crates.io/crates/kiss3d) graphics engine.
+Basically, all you have to do is setup your physics `World`, and then call `Testbed::new(world).run()` to obtain a
+fully-functional windowed application with 2D or 3D display of every colliders on your `World`. This application
+allows some controls like starting/stopping/pausing the simulation, and grabbing an object with the mouse.
 
 !!! Note
-    All the interactive demos from this website have been built using those testbeds. Their source codes can be found on the [examples2d](https://github.com/rustsim/nphysics/tree/master/examples2d) and [examples3d](https://github.com/rustsim/nphysics/tree/master/examples3d) of the **nphysics** repository.
+    All the interactive demos from this website have been built using those testbeds. The source code of those demos
+    can be found on the [examples2d](https://github.com/rustsim/nphysics/tree/master/examples2d) and
+    [examples3d](https://github.com/rustsim/nphysics/tree/master/examples3d) of the **nphysics** github repository.
 
 In this chapter we will describe an example of the setup of a 3D physical scene with a pile of boxes. This scene will then be displayed and simulated using the **nphysics_testbed3d** crate. The full code can be found [on github](https://github.com/rustsim/nphysics/blob/master/examples3d/boxes3.rs). The end-result corresponds to the 3D [Stack of boxes](/demo_boxes3/) demo. The code for 2D analogous of this demo can be found [on github](https://github.com/rustsim/nphysics/blob/master/examples2d/boxes2.rs) which corresponds to the 2D [Stack of boxes](/demo_boxes2/) demo.
 
@@ -23,31 +29,28 @@ version = "0.1.0"
 authors = [ "you" ]
 
 [dependencies]
-nalgebra   = "0.16"
-ncollide3d = "0.17"
-nphysics3d = "0.9"
-nphysics_testbed3d = "0.1"
+nalgebra   = "0.17"
+ncollide3d = "0.18"
+nphysics3d = "0.10"
+nphysics_testbed3d = "0.4"
 ```
 
-Now modify the `src/main.rs` to add the corresponding `extern crate` directives. Here, we use `na` as an alias for `nalgebra`:
+Now modify the `src/main.rs` to use `na` as an alias for `nalgebra`:
 
 ```rust
 extern crate nalgebra as na;
-extern crate ncollide3d;
-extern crate nphysics3d;
-extern crate nphysics_testbed3d;
 ```
 
 ## Setting-up the physics world
 The next step is to setup the physics world. First we will `use` a few elements to get the tools we need to initialize our `World`:
 
 ```rust
-use na::{Isometry3, Point3, Vector3};            // For configuring and positioning bodies.
+use na::{Point3, Vector3};                       // For configuring and positioning bodies.
 use ncollide3d::shape::{Cuboid, ShapeHandle};    // Shapes for colliders.
-use nphysics3d::object::{BodyHandle, Material};  // Body handle and collider material.
-use nphysics3d::volumetric::Volumetric;          // To retrieve the center of mass and inertia properties of a shape.
+use nphysics3d::object::{RigidBodyDesc, ColliderDesc}; // Builders for rigid bodies and colliders.
 use nphysics3d::world::World;                    // The physics world to be initialized.
 use nphysics_testbed3d::Testbed;                 // The testbed to display/run the simulation.
+
 ```
 
 The first thing we want to do is create a new physics world with its default parameters, and change the default gravity (initialized to zero by default) so that it points toward the negative $y$-axis:
@@ -60,40 +63,40 @@ world.set_gravity(Vector3::y() * -9.81);
 Then, we initialize the ground represented as a huge box.
 
 ```rust
-const COLLIDER_MARGIN: f32 = 0.01;
-
 let ground_size = 50.0;
 let ground_shape =
-    ShapeHandle::new(Cuboid::new(Vector3::repeat(ground_size - COLLIDER_MARGIN)));
-let ground_pos = Isometry3::new(Vector3::y() * -ground_size, na::zero());
+    ShapeHandle::new(Cuboid::new(Vector3::repeat(ground_size)));
 
-world.add_collider(
-    COLLIDER_MARGIN,
-    ground_shape,
-    BodyHandle::ground(),
-    ground_pos,
-    Material::default(),
-);
+ColliderDesc::new(ground_shape)
+    .translation(Vector3::y() * -ground_size)
+    .build(&mut world);
 ```
-Two elements are notable here:
+Note that this collider will never move so we don't need a body and can simply attach it to the `BodyHandle::ground()`.
 
-1. This collider will never move so we don't need a body and can simply attach it to the `BodyHandle::ground()`.
-2. We want our cube to have a half-width of 50 exactly. Therefore, we remove `COLLIDER_MARGIN` (here equal to 0.01) from the cuboid half-extents. This is then regained by the margin added by **nphysics** on the collider (and specified as the first parameter of `.add_collider(...)`). This concept of margin is explained in the [section on colliders](rigid_body_simulations_with_contacts/#colliders).
-
-Finally, we can setup our pile of boxes. This time, because our boxes are dynamic, we will have to create one rigid-body for each box, and attach one collider to each rigid-body.
+Finally, we can setup our pile of boxes. This time, because our boxes are dynamic, we will have to create one rigid-body
+for each box, and attach one collider to each rigid-body.
 
 ```rust
-let num = 7; // There will be 7 * 7 * 7 = 343 boxes here.
+let num = 7; // We create 7 × 7 × 7 boxes.
 let rad = 0.1;
-let shift = rad * 2.0;
+
+// First create a collider builder that will be reused by every rigid body.
+let cuboid = ShapeHandle::new(Cuboid::new(Vector3::repeat(rad)));
+let collider_desc = ColliderDesc::new(cuboid)
+    .density(1.0);
+
+// Then a rigid body builder to which we give the collider builder. That
+// way, each time this rigid body builder will be used to `.build(&mut world)`,
+// the corresponding collider will be created as well.
+let mut rb_desc = RigidBodyDesc::new()
+    .collider(&collider_desc);
+
+
+let shift = (rad + collider_desc.get_margin()) * 2.0;
 let centerx = shift * (num as f32) / 2.0;
 let centery = shift / 2.0;
 let centerz = shift * (num as f32) / 2.0;
-let height = 2.0;
-
-let geom = ShapeHandle::new(Cuboid::new(Vector3::repeat(rad - COLLIDER_MARGIN)));
-let inertia = geom.inertia(1.0);
-let center_of_mass = geom.center_of_mass();
+let height = 3.0;
 
 for i in 0usize..num {
     for j in 0usize..num {
@@ -102,32 +105,25 @@ for i in 0usize..num {
             let y = j as f32 * shift + centery + height;
             let z = k as f32 * shift - centerz;
 
-            /*
-             * Create the rigid-body.
-             */
-            let pos = Isometry3::new(Vector3::new(x, y, z), na::zero());
-            let handle = world.add_rigid_body(pos, inertia, center_of_mass);
-
-            /*
-             * Create the collider and attach it to the body we just created.
-             */
-            world.add_collider(
-                COLLIDER_MARGIN,
-                geom.clone(),
-                handle,
-                Isometry3::identity(),
-                Material::default(),
-            );
+            // Build the rigid body and its collider.
+            // Note that we re-use the same RigidBodyDesc every time after
+            // changing its position.
+            rb_desc
+                .set_translation(Vector3::new(x, y, z))
+                .build(&mut world);
         }
     }
 }
 ```
 
 !!! Note
-    The `inertia` and `center_of_mass` properties needed for the rigid-body creation are computed from the collision shape here using `geom.inertia(1.0)` (with 1.0 the desired density of the solid) and `geom.center_of_mass()`. This required importing the [Volumetric](/rustdoc/nphysics3d/volumetric/trait.Volumetric.html) trait with `use nphysics3d::volumetric::Volumetric;`.
+    The `shift` value is used to move each rigid body into a place where it does not overlap with any others. It is
+    equal to `(rad + collider_desc.get_margin()) * 2.0` because each collider has a radius equal to `rad`, and a margin
+    equal to `collider_desc.get_margin()` (or equivalently `ColliderDesc::<f32>::default_margin()`) since we did not
+    specify a collider margin explicitly.
 
 ## Running the testbed
-Finally, all that remains to do is set-up the testbed:
+Finally, all that remains to do is set-up the testbed and run it:
 
 ```rust
 let mut testbed = Testbed::new(world);

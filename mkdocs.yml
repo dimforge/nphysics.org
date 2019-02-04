@@ -5,8 +5,9 @@ pages:
     - 'Getting started': getting_started.md
     - 'Rigid body simulation': rigid_body_simulations_with_contacts.md
     - 'Joint constraints and multibodies': joint_constraints_and_multibodies.md
+    - 'Deformable bodies': deformable_bodies.md
     - 'Contact models': contact_models.md
-    - 'Event handling and sensors': event_handling_and_sensors.md
+    - 'Interaction handling and sensors': interaction_handling_and_sensors.md
     - 'Performance tuning': performance_tuning.md
     - 'The nphysics testbed': nphysics_testbed.md
     - 'WASM compatibility': wasm_compatibility.md
@@ -50,7 +51,7 @@ site_author: 'Sébastion Crozet'
 site_favicon: img/favicon.ico
 site_url: http://nphysics.org
 
-# the third-party extenison mdx_math.py comes with a setup.py script
+# the third-party extension mdx_math.py comes with a setup.py script
 # Thank you Dmitry Shachnev (https://github.com/mitya57/python-markdown-math)
 markdown_extensions:
     - extra
