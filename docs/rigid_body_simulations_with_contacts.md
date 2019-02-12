@@ -1,7 +1,7 @@
 # Rigid-body simulation with contacts
 The real-time simulation of rigid-bodies subjected to forces and contacts is the main feature of a physics engine for
-video-games or animation. Rigid-bodies are typically used to simulate the dynamics of non-deformable solids as well as
-well as to integrate the trajectory of solids which velocities are controlled by the user (e.g. moving platforms). On
+video-games or animation. Rigid-bodies are typically used to simulate the dynamics of non-deformable solids as well
+as to integrate the trajectory of solids whose velocities are controlled by the user (e.g. moving platforms). On
 the other hand, rigid-bodies are not enough to simulate, e.g., cars, ragdolls, or robotic systems, as those use-cases
 require adding restrictions on the relative motion between their parts with joints. Joints are the topic of
 [the next chapter](joint_constraints_and_multibodies.md).
