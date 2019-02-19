@@ -77,7 +77,7 @@ Finally, we can setup our pile of boxes. This time, because our boxes are dynami
 for each box, and attach one collider to each rigid-body.
 
 ```rust
-let num = 7; // We create 7 × 7 × 7 boxes.
+let num = 6; // We create 6 × 6 × 6 boxes.
 let rad = 0.1;
 
 // First create a collider builder that will be reused by every rigid body.

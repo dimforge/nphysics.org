@@ -102,6 +102,9 @@ ColliderDesc::new(shape)
     // Whether this collider is a sensor, i.e., generate only proximity events.
     // Default: false
     .sensor(true)
+    // Arbitrary user-defined data associated to the rigid body to be built.
+    // Default: no associated data
+    .user_data(10)
     // All done, actually build the collider into the `world`.
     .build(&mut world);
 ```
@@ -154,6 +157,9 @@ ColliderDesc::new(shape)
     // Whether this collider is a sensor, i.e., generate only proximity events.
     // Default: false
     .sensor(true)
+    // Arbitrary user-defined data associated to the colliders to be built.
+    // Default: no associated data
+    .user_data(10)
     // All done, actually build the collider into the `world`.
     .build(&mut world);
 ```
@@ -220,6 +226,8 @@ remove it from the world using `world.remove_colliders(...)`. A reference to a c
 | `.position_wrt_body()` | The position of this collider relative to the body it is attached to. |
 | `.material()`          | The material given to this collider.                                  |
 | `.material_mut()`      | Mutable reference to the material given to this collider.             |
+| `.user_data()`         | Reference to the user-data associated to this collider.             |
+| `.user_data_mut()`     | Reference to the user-data associated to this collider.             |
 
 ### Collider with parent
 It is possible to attach a collider to a body part by specifying the body part handle when building the collider:
@@ -352,6 +360,9 @@ RigidBodyDesc::new()
     // inertia will be added to this rigid body.
     // Default: no collider.
     .collider(&collider_desc)
+    // Arbitrary user-defined data associated to the rigid body to be built.
+    // Default: no associated data
+    .user_data(10)
     // All done, actually build the rigid-body into the `world`.
     .build(&mut world);
 ```
@@ -411,6 +422,9 @@ RigidBodyDesc::new()
     // inertia will be added to this rigid body.
     // Default: no collider.
     .collider(&collider_desc)
+    // Arbitrary user-defined data associated to the rigid body to be built.
+    // Default: no associated data
+    .user_data(10)
     // All done, actually build the rigid-body into the `world`.
     .build(&mut world);
 ```
