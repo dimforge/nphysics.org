@@ -35,7 +35,7 @@ let mut world = World::new();
 This constructor will initialize the physics engine with all its default parameters, including:
 
 * A gravity set to zero. This can be changed using, e.g., `world.set_gravity(Vector3::y() * -9.81)`.
-* The initialization a [ColliderWorld](/rustdoc/nphysics3d/world/struct.ColliderWorld.html) which is a wrapper for the
+* The initialization of a [ColliderWorld](/rustdoc/nphysics3d/world/struct.ColliderWorld.html) which is a wrapper for the
   `CollisionWorld` from the **ncollide2d** or **ncollide3d** [crate](https://ncollide.org) to handle collision detection.
 * The use of an impulse-based constraint solver to handle contacts. By default a Sinorini-Coulomb contact model with
 polyhedral friction cones is used. Other contact models can be chosen afterward. Refer to the dedicated [section](contact_models.md).
