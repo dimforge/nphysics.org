@@ -656,7 +656,6 @@ impl ForceGenerator<f32> for RadialForce {
             if let Some(body) = bodies.body_mut(handle.0) {
                 let part = body.part(handle.1).unwrap();
 
-                // The `.as_ref()` retrieves a `BodyPart` from the `BodyPartMut`.
                 let delta_pos = part.center_of_mass() - self.center;
 
                 // We set the attraction force such that it is equal to ten times the distance
@@ -710,7 +709,6 @@ impl ForceGenerator<f32> for RadialForce {
             if let Some(body) = bodies.body_mut(handle.0) {
                 let part = body.part(handle.1).unwrap();
 
-                // The `.as_ref()` retrieves a `BodyPart` from the `BodyPartMut`.
                 let delta_pos = part.center_of_mass() - self.center;
 
                 // We set the attraction force such that it is equal to ten times the distance
