@@ -6,10 +6,14 @@ One of the most appealing features of a physics engine is to simulate articulati
 Joints can be modeled in various ways but let's talk about the concept of **Degrees Of Freedom (DOF)** first. In 3D, a rigid-body is capable of translating along the 3 coordinates axises $\mathbf{x}$, $\mathbf{y}$ and $\mathbf{z}$, and to rotate along those three axises as well. Therefore, a rigid-body is said to have  **3 translational DOF** and **3 rotational DOF**. We can also say a 3D rigid-body has a total of **6 DOF**. The 2D case is similar but with less possibilities of movements: a 2D rigid-body has 2 translational DOF and only 1 rotational DOF (which forms a total of 3 DOF). The number of **relative DOF** of a body part wrt. another body part is the number of possible relative translations and rotations.
 
 !!! Note
-    The `BodyHandle::ground()` on the other hand cannot move at all. Therefore it has 0 DOFs. Moreover a [multibody](#multibodies) has a number of DOF equal to the sum of the number of DOF of its multibody links.
+    The `Ground` body on the other hand cannot move at all. Therefore it has 0 DOFs. Moreover a [multibody](#multibodies) has a number of DOF equal to the sum of the number of DOF of its multibody links.
 
 !!! Warning
-    The number of DOF of a body or body part can be retrieved by `body.ndofs()`. The [status](/rigid_body_simulations_with_contacts/#rigid-body-statuses) of a body (dynamic, static, kinematic) does not affect the result of `body.ndofs()` even if strictly speaking a static or kinematic body should be seen as having no DOF (because it cannot move freely wrt. any axis). The `body.status_dependent_ndofs()` method will take this body status into account and return 0 for static and kinematic bodies.
+    The number of DOF of a body can be retrieved by `body.ndofs()`. The
+    [status](/rigid_body_simulations_with_contacts/#rigid-body-statuses) of a body (dynamic, static, kinematic) does not
+    affect the result of `body.ndofs()` even if strictly speaking a static or kinematic body should be seen as having
+    no DOF (because it cannot move freely wrt. any axis). The `body.status_dependent_ndofs()` method will take this body
+    status into account and return 0 for static and kinematic bodies.
 
 The goal of a joint is to reduce the number of DOF a body part has. For example, the aforementioned ball joint removes all relative translations between two body parts. Therefore, it allows only the 3 rotational DOF in 3D simulations or the 1 rotational DOF in 2D simulations. Other joints exist allowing other combinations of relative DOF. Note that because there are less possible motions in 2D, some joints are only defined in 3D. This is illustrated by empty cells in the following table for joints that are not defined in 2D:
 
@@ -40,11 +44,11 @@ This description shows only one aspect of the difference between the reduced-coo
 
 | Reduced-coordinates approach | Constraints-based approach |
 |------------------------------|----------------------------|
-| <font color="green">Joints cannot be violated.</font>                 | <font color="IndianRed">Joints can be violated if the solver does not converge.</font> |
+| <font color="green">Joints cannot be violated at all.</font>                 | <font color="IndianRed">Joints can be violated if the solver does not converge.</font> |
 | <font color="green">Moderately large time-step are possible.</font>   | <font color="IndianRed">Moderately large time-step may make the simulation explode.</font> |
 | <font color="green">Large assemblies are stable.</font>               | <font color="IndianRed">Large assemblies easily break without a large number of solver iterations.</font> |
-| <font color="IndianRed">Adding/removing a joint is slower.</font>     | <font color="green">Adding/removing a joint is fast.</font> |
-| <font color="IndianRed">Joint forces are never computed, thus cannot be retrieved.</font> | <font color="green">Joint forces are always computed and can be retrieved.</font> |
+| <font color="IndianRed">Adding/removing a joint is slow.</font>     | <font color="green">Adding/removing a joint is fast.</font> |
+| <font color="IndianRed">Joint forces are never computed explicitly, thus cannot be retrieved.</font> | <font color="green">Joint forces are always computed and can be retrieved.</font> |
 | <font color="IndianRed">Topological restriction: body parts must be linked following a tree structure.</font> | <font color="green">The link between body parts can form any graph.</font> |
 
 The following schematics illustrate a configuration that can be simulated by a multibody (left assembly with a tree structure), and one that cannot (right assembly with a graph structure). The assembly on the left models a SCARA robotic arm with 3 rotational DOF (due to three revolute joints) and 1 translational DOF (due to one prismatic joint). The assembly on the right models a necklace with five perls. It has a total of 15 rotational DOF (due to five ball joints):
@@ -117,12 +121,7 @@ let mut multibody_desc = MultibodyDesc::new(joint)
     /// The position of the newly created multibody link wrt. the joint,
     /// expressed in the local frame of the joint.
     /// Default: Vector2::zeros()
-    .body_shift(Vector2::new(1.0, 2.0))
-    // Add a collider that will be attached to this rigid body.
-    // If the collider has a non-zero density, its mass and angular
-    // inertia will be added to this rigid body.
-    // Default: no collider.
-    .collider(&collider_desc);
+    .body_shift(Vector2::new(1.0, 2.0));
     
 /// Add a children link to the multibody link represented by `multibody_desc`.
 let child_joint = PrismaticJoint::new(Vector2::y_axis(), 0.0);
@@ -138,7 +137,10 @@ let second_child_joint = RevoluteJoint::new(2.3);
 multibody_desc.add_child(second_child_joint);
 
 /// Actually build the multibody.
-multibody_desc.build(&mut world);
+let multibody = multibody_desc.build();
+// Finally, wa may add this multibody to a body set.
+let multibody_handle = body_set.insert(multibody);
+
 ```
   </div>
   <div id="multibody_desc_3D" class="tab-pane">
@@ -176,12 +178,7 @@ let mut multibody_desc = MultibodyDesc::new(joint)
     /// The position of the newly created multibody link wrt. the joint,
     /// expressed in the local frame of the joint.
     /// Default: Vector3::zeros()
-    .body_shift(Vector3::new(1.0, 2.0, 3.0))
-    // Add a collider that will be attached to this rigid body.
-    // If the collider has a non-zero density, its mass and angular
-    // inertia will be added to this rigid body.
-    // Default: no collider.
-    .collider(&collider_desc);
+    .body_shift(Vector3::new(1.0, 2.0, 3.0));
     
 /// Add a children link to the multibody link represented by `multibody_desc`.
 let child_joint = PrismaticJoint::new(Vector2::y_axis(), 0.0);
@@ -197,7 +194,9 @@ let second_child_joint = HelicalJoint::new(Vector3::y_axis(), 1.0, 0.0);
 multibody_desc.add_child(second_child_joint);
 
 /// Actually build the multibody.
-multibody_desc.build(&mut world);
+let multibody = multibody_desc.build();
+// Finally, wa may add this multibody to a body set.
+let multibody_handle = body_set.insert(multibody);
 ```
   </div>
 </div>
@@ -220,23 +219,22 @@ an be used for the `MultibodyDesc`:
 | _Universal joint_   | [`UniversalJoint`](/rustdoc/nphysics3d/joint/struct.UniversalJoint.html)   |
 
 !!! Note
-    The first multibody link of a multibody is necessarily attached to `BodyHandle::ground()`. Note however that
+    The first multibody link of a multibody is necessarily attached to an implicit static ground. Note however that
     "attached" is a bit misleading here. Indeed if `joint` is set to an instance of `FreeJoint`, then this first
-    multibody link will have all the possible degrees of freedom, making it completely free to perform any movement wrt.
-    the ground.
+    multibody link will have all the possible degrees of freedom, making it completely free to perform any movement.
 
 !!! Warning
-    The `FreeJoint` can be used only if `parent` is set to `BodyHandle::ground()` otherwise, the creation of the
+    The `FreeJoint` can be used only by the first link of the multibody otherwise, the creation of the
     multibody will panic.
-    
-It is possible to add new links to a multibody that has already been created into the `World`:
+ 
+While it is not possible to remove a link from an existing multibody, it is possible to add new links:
 
 ```rust
 // This will create the multibody links identified by `multibody_desc`
 // and all its children. The multibody link identified by `multibody_desc`
 // is then attached as a child of the pre-existing multibody link identified
 // by `parent_handle`.
-multibody_desc.build_with_parent(parent_handle, &mut world);
+multibody_desc.build_with_parent(multibody, link_id);
 ```
 
 !!! Note "Multibody link part handles"
@@ -244,7 +242,7 @@ multibody_desc.build_with_parent(parent_handle, &mut world);
     where `handle` is the multibody handle, and `i` designates the `i`-th link of the multibody. Multibody links
     are indexed in their creation order.
     
-    Alternatively, you may retrieve a multibody link handle by its name set during its construction:
+Alternatively, you may retrieve a reference to a multibody link and its index using its name set during its construction:
     
 ```rust
 for link in multibody.links_with_name("my multibody link name") {
@@ -252,11 +250,11 @@ for link in multibody.links_with_name("my multibody link name") {
 }
 ```
 
-You may refer to the [code](https://github.com/rustsim/nphysics/blob/master/examples3d/joints3.rs) of
-[that demo](/demo_joints3/) for concrete examples of multibody creation.
+You may refer to the [code](https://github.com/rustsim/nphysics/blob/master/examples3d/multibody3.rs) of
+[that demo](/demo_multibody3/) for concrete examples of multibody creation.
 
 ### Removing a multibody
-The removal of a multibody uses the same method as the removal of a rigid-body: `world.remove_bodies(handles)`.
+The removal of a multibody from the body set uses the same method as the removal of a rigid-body: `body_set.remove(handle)`.
 It is not possible to remove a single link of a multibody without removing the whole multibody altogether.
 
 ### Multibody joint limits and motors
@@ -320,12 +318,18 @@ Joint constraints implement the constraints-based approach. The following table 
 | _Rectangular joint_ | [`RectangularConstraint`](/rustdoc/nphysics3d/joint/struct.RectangularConstraint.html) |
 | _Universal joint_   | [`UniversalConstraint`](/rustdoc/nphysics3d/joint/struct.UniversalConstraint.html)   |
 
-A joint constraint is completely configured at its creation, and added to the world by the `world.add_constraint(constraint)` method. Each joint constraint requires specific information for being constructed, but all roughly need:
+A joint constraint is completely configured at its creation, and added to the constraint set by the `constraint_set.insert(constraint)` method.
+Each joint constraint requires specific information for being constructed, but all roughly need:
 
-1. The handles of the two body parts attached at each end of the joint. Handle of **any** type of body part is accepted. This includes rigid-bodies, `BodyHandle::ground()`, as well as a multibody link. Attaching a joint to a multibody link can be especially useful to handle complex assemblies with loops as described in the [next section](#combining-both).
-2. The position of the joint endpoints with regard to each body part. A joint endpoint is often referred to as an **anchor** throughout the documentation of **nphysics**.
+1. The handles of the two body parts attached at each end of the joint. Handle of **any** type of body part is accepted.
+   This includes rigid-bodies, `Ground` bodies, an element of a deformable bodies, as well as a multibody link. Attaching
+   a joint to a multibody link can be especially useful to handle complex assemblies with loops as described in the
+   [next section](#combining-both).
+2. The position of the joint endpoints with regard to each body part. A joint endpoint is often referred to as an
+    **anchor** throughout the documentation of **nphysics**.
 
-You may refer to the [code](https://github.com/rustsim/nphysics/blob/master/examples3d/constraints3.rs) of this [demo](/demo_constraints3/) for concrete examples of joint constraint configurations.
+You may refer to the [code](https://github.com/rustsim/nphysics/blob/master/examples3d/constraints3.rs) of this
+[demo](/demo_constraints3/) for concrete examples of joint constraint configurations.
 
 
 ## Combining both

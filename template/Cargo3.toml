@@ -7,9 +7,9 @@ edition = "2018"
 [dependencies]
 rand       = { version = "0.6", features = [ "stdweb" ] }
 num-traits = "0.2"
-nalgebra   = "0.17"
-ncollide3d = "0.18"
-kiss3d     = "0.18"
+nalgebra   = "0.18"
+ncollide3d = "0.19"
+kiss3d     = "0.20"
 
 [profile.release]
 lto = true
@@ -24,3 +24,7 @@ path = "{{testbed3d_dir}}"
 [[bin]]
 name = "{{demo}}"
 path = "./{{demo}}.rs"
+
+
+[patch.crates-io]
+ncollide3d = { path = "../rust-dev/ncollide-dev/build/ncollide3d" }

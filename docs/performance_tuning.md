@@ -1,14 +1,28 @@
 # Performance and accuracy tuning
-Unfortunately in the world of physics simulation, performance and accuracy are not always compatible. It is often necessary to sacrifice performance for accuracy and vice versa. For example, video games will often favor performance to simulate a visually-appealing but not totally realistic scene. On the other hand, higher accuracy is often needed for, e.g., virtual training applications where the accuracy of the simulation directly affects the quality of the training. This section discusses several parameters that may be worth tuning to achieve the best performance/accuracy compromise for your application.
+Unfortunately in the world of physics simulation, performance and accuracy are not always compatible. It is often
+necessary to sacrifice performance for accuracy and vice versa. For example, video games will often favor performance
+to simulate a visually-appealing but not totally realistic scene. On the other hand, higher accuracy is often needed
+for, e.g., virtual training applications where the accuracy of the simulation directly affects the quality of the
+training. This section discusses several parameters that may be worth tuning to achieve the best performance/accuracy
+compromise for your application.
 
 ## Choice of contact model
-Contact models control the nature and number of constraints generated for each contact. Therefore, the choice of a contact model adapted to your simulation strongly affects the overall performance and accuracy. Contact models are presented on a dedicated [chapter](contact_models.md) of this guide. As a rule of thumb, you should:
+Contact models control the nature and number of constraints generated for each contact. Therefore, the choice of a
+contact model adapted to your simulation strongly affects the overall performance and accuracy. Contact models are
+presented on a dedicated [chapter](contact_models.md) of this guide. As a rule of thumb, you should:
 
 * Use the `SignoriniModel` if you only care about non-penetration (and don't care about friction).
 * Use the `SignoriniCoulombPyramidModel` for handling friction as well.
 
 ## Integration parameters
-Various aspects of the integrator implemented on **nphysics** can be modified through the [integration parameters](/rustdoc/nphysics3d/solver/struct.IntegrationParameters.html). Those parameters can be modified by retrieving a mutable reference to the `IntegrationParameters` structure associated to a physics world: `world.integration_parameters_mut()`. Most of those parameters are somewhat advanced and should not be modified unless you know their meaning and effect. Several of them are about tuning parameters for optimal simulation stability, or for compromising between efficiency and accuracy. They are given default values that work well in the context of video-games or animations. For more realistic simulations you may want to change those parameters to favor accuracy over performances:
+Various aspects of the integrator implemented on **nphysics** can be modified through the
+[integration parameters](/rustdoc/nphysics3d/solver/struct.IntegrationParameters.html). Those parameters can be modified
+by retrieving a mutable reference to the `IntegrationParameters` structure associated to a mechanical world:
+`mechanical_world.integration_parameters`. Most of those parameters are somewhat advanced and should not be modified
+unless you know their meaning and effect. Several of them are about tuning parameters for optimal simulation stability,
+or for compromising between efficiency and accuracy. They are given default values that work well in the context of
+video-games or animations. For more realistic simulations you may want to change those parameters to favor accuracy over
+performances:
 
 
 | Field                 | Description                                                           |

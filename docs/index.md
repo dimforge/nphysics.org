@@ -64,6 +64,20 @@
     </td>
 </tr>
 <tr>
+    <td>[![](../img/feature_contact_models.svg)](../contact_models)</td>
+    <td style="vertical-align:middle">
+    <a href="../contact_models" id="no_highlight">
+    <div>
+    <big>**Contact models**</big>
+    <span class="home_dummy_link">&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></span>
+    <br>
+    Choose the appropriate contact model to achieve the desired level of accuracy and performances.
+    Are included the Signorini and an approximate Signorini-Coulomb contact models.
+    </div>
+    </a>
+    </td>
+</tr>
+<tr>
     <td>[![](../img/feature_event_handling_and_sensors.svg)](../interaction_handling_and_sensors)</td>
     <td style="vertical-align:middle">
     <a href="../interaction_handling_and_sensors" id="no_highlight">
@@ -79,15 +93,16 @@
     </td>
 </tr>
 <tr>
-    <td>[![](../img/feature_contact_models.svg)](../contact_models)</td>
+    <td>[![](../img/feature_continuous_collision_detection.svg)](../continuous_collision_detection)</td>
     <td style="vertical-align:middle">
-    <a href="../contact_models" id="no_highlight">
+    <a href="../continuous_collision_detection" id="no_highlight">
     <div>
-    <big>**Contact models**</big>
+    <big>**Continuous collision detection**</big>
     <span class="home_dummy_link">&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></span>
     <br>
-    Choose the appropriate contact model to achieve the desired level of accuracy and performances.
-    Are included the Signorini and an approximate Signorini-Coulomb contact models.
+    Don't miss any contact by enabling continuous collision detection (CCD) on any collider.
+    Prevent the tunneling problem between fast-moving bodies, and don't miss any proximity
+    event thanks to full CCD support on sensors.
     </div>
     </a>
     </td>

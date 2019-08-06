@@ -8,6 +8,7 @@ pages:
     - 'Deformable bodies': deformable_bodies.md
     - 'Contact models': contact_models.md
     - 'Interaction handling and sensors': interaction_handling_and_sensors.md
+    - 'Continuous collision detection': continuous_collision_detection.md
     - 'Performance tuning': performance_tuning.md
     - 'The nphysics testbed': nphysics_testbed.md
     - 'WASM compatibility': wasm_compatibility.md
@@ -16,40 +17,8 @@ pages:
     - 'nphysics2d': rustdoc_nphysics2d.md
     - 'nphysics3d': rustdoc_nphysics3d.md
   - '<i class="fa fa-play"></i>&nbsp Demos':
-    - '2D demos':
-        - 'Stack of balls': demo_balls2.md
-        - 'Stack of boxes': demo_boxes2.md
-        - 'Stack of capsules': demo_capsules2.md
-        - 'Convex solids': demo_convex2.md
-        - 'Polyline terrain': demo_polyline2.md
-        - 'Heightfield terrain': demo_heightfield2.md
-        - 'Compound shapes': demo_cross2.md
-        - 'Kinematic body': demo_kinematic2.md
-        - 'Collision groups': demo_collision_groups2.md
-        - 'Multibody joints': demo_joints2.md
-        - 'Joint constraints': demo_constraints2.md
-        - 'Ragdolls': demo_ragdoll2.md
-        - 'Sensor': demo_sensor2.md
-        - 'Conveyor belt': demo_conveyor_belt2.md
-        - 'Plasticity': demo_plasticity2.md
-        - 'FEM surface': demo_fem_surface2.md
-    - '3D demos':
-        - 'Stack of balls': demo_balls3.md
-        - 'Stack of boxes': demo_boxes3.md
-        - 'Stack of capsules': demo_capsules3.md
-        - 'Convex solids': demo_convex3.md
-        - 'Triangle mesh terrain': demo_trimesh3.md
-        - 'Heightfield terrain': demo_heightfield3.md
-        - 'Compound shapes': demo_cross3.md
-        - 'Kinematic body': demo_kinematic3.md
-        - 'Collision groups': demo_collision_groups3.md
-        - 'Multibody joints': demo_joints3.md
-        - 'Joint constraints': demo_constraints3.md
-        - 'Ragdolls': demo_ragdoll3.md
-        - 'Sensor': demo_sensor3.md
-        - 'Conveyor belt': demo_conveyor_belt3.md
-        - 'Plasticity': demo_plasticity3.md
-        - 'FEM volume': demo_fem_volume3.md
+    - '2D demos': demo_all_examples2.md
+    - '3D demos': demo_all_examples3.md
 
   - '<i class="fa fa-question-circle"></i>&nbsp About':
       - 'Contributing': about.md

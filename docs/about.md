@@ -101,19 +101,24 @@ The list of contributors can be found [there](https://github.com/rustsim/nphysic
 * 8zu
 * A
 * Adam Rzepka
+* Aidan Grant
 * Andreas Longva
 * Andrei Vasiliu
+* Andrew O'Neil
 * Anselm Eickhoff
 * Alain Cuvillier
 * Alexander Atman
 * Alexandre Chêne
 * Andre Braga Reis
 * batonius
+* Boris-Chengbiao Zhou
 * Camille Viot
 * Casey Primozic
 * Casey Rodarmor
+* Chai T. Rex
 * Chris Heyes
 * Christopher Armstrong
+* Conor Byron
 * Connor McCluskey
 * Damien Dubé
 * Danny Fritz
@@ -122,8 +127,12 @@ The list of contributors can be found [there](https://github.com/rustsim/nphysic
 * Erlend Sogge Heggen
 * Florian Hanke
 * Frederic Wagner
+* Geert Depuydt
 * Gohla
+* Gustav Palmqvist
+* Hadrien Grasland
 * Ian Danforth
+* is8ac
 * Jac
 * Jack Wrenn
 * Jan Nockemann
@@ -135,20 +144,25 @@ The list of contributors can be found [there](https://github.com/rustsim/nphysic
 * Jeff Parsons
 * Jeremy Stucki
 * Johan Andersson
+* Jonathan Shook
 * Jordan Miner
 * Joseph Catrambone
 * J. Ryan Stinnett
 * Kasper Møller Andersen
 * Kipton Barros
+* Krishna
 * Kristian Fjeld Hasselknippe
 * Kjetil Kjeka
 * Kyle Gretchev
 * Leander Gilles
 * Leonard Dahlmann
+* Lukas Eller
 * Lucas Kent
+* Mabry Cervin
 * Maksim Ustichenko
 * Mark McCaskey
 * Mark Stacey
+* Mason Smith
 * Matthieu Pizenberg
 * memoryruins
 * Michael Carpenter
@@ -164,18 +178,25 @@ The list of contributors can be found [there](https://github.com/rustsim/nphysic
 * ozkriff
 * Pascal
 * Paul Houghton
+* popa910
 * Rafael
 * rage
 * Rick Richardson
 * Ruben Schmidmeister
 * Sanghyeon Seo
+* Satoshi Yoshikawa
 * Scott Beca
 * Sean Jensen-Grey
 * Sebastian Waisbrot
 * Simon N Heath
+* Stefan Berndtsson
+* Stephen Oates
 * Suddenly Corporeal
-* Thomas Niederberger
+* Sven-Hendrik Haase
+* taintur
 * tdittr
+* Thomas Niederberger
+* Tiago Antao
 * Trym Nilsen
 * Ty Overby
 * Tyler Hallada
@@ -208,5 +229,10 @@ open an issue on [GitHub](https://github.com/rustsim/nphysics/issues).
 # Image credits
 Some images were downloaded from [flaticon](https://www.flaticon.com). Some have
 been modified to fit with the overall theme. We thank the authors for providing
-those images under the CC 3.0 BY license: [Vectors Market](https://www.flaticon.com/authors/vectors-market),
-[Alfredo Hernandez](https://www.flaticon.com/authors/alfredo-hernandez), [Maxim Basinski](https://www.flaticon.com/authors/maxim-basinski), [Freepik](https://www.freepik.com), and [OCHA](https://www.flaticon.com/authors/ocha).
+those images under the CC 3.0 BY license:
+[Vectors Market](https://www.flaticon.com/authors/vectors-market),
+[Alfredo Hernandez](https://www.flaticon.com/authors/alfredo-hernandez),
+[Maxim Basinski](https://www.flaticon.com/authors/maxim-basinski),
+[Freepik](https://www.freepik.com),
+[prettycons](https://www.flaticon.com/authors/prettycons),
+and [OCHA](https://www.flaticon.com/authors/ocha).
