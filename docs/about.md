@@ -131,6 +131,7 @@ The list of contributors can be found [there](https://github.com/rustsim/nphysic
 * Gohla
 * Gustav Palmqvist
 * Hadrien Grasland
+* Hrvoje Bandov
 * Ian Danforth
 * is8ac
 * Jac
