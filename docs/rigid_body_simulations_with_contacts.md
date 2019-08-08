@@ -43,15 +43,14 @@ fn main() {
     let mut joint_constraints = DefaultJointConstraintSet::new();
     let mut force_generators = DefaultForceGeneratorSet::new();
     
-    
     loop {
         // Run the simulation.
         mechanical_world.step(
             &mut geometrical_world,
             &mut bodies,
             &mut colliders,
-            &mut constraints,
-            &mut forces
+            &mut joint_constraints,
+            &mut force_generators
         )
     }
 }
