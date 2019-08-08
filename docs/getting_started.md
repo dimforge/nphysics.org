@@ -12,7 +12,7 @@ entities for collision shapes (spheres, cubes, triangle meshes, etc.)
 
 ```toml
 [dependencies]
-nalgebra = "0.19"
+nalgebra = "0.18"
 # Choose the one you need, or both.
 ncollide2d = "0.20"
 ncollide3d = "0.20"
@@ -42,7 +42,7 @@ version = "0.0.0"
 authors = [ "You" ]
 
 [dependencies]
-nalgebra = "0.19"
+nalgebra = "0.18"
 ncollide2d = "0.20"
 nphysics2d = "0.12"
 
@@ -59,7 +59,7 @@ version = "0.0.0"
 authors = [ "You" ]
 
 [dependencies]
-nalgebra = "0.19"
+nalgebra = "0.18"
 ncollide3d = "0.20"
 nphysics3d = "0.12"
 

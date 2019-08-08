@@ -8,11 +8,12 @@ edition = "2018"
 rand       = { version = "0.6", features = [ "stdweb" ] }
 num-traits = "0.2"
 nalgebra   = "0.18"
-ncollide2d = "0.19"
-kiss3d     = "0.20"
+ncollide2d = "0.20"
+kiss3d     = "0.21"
 
 [profile.release]
 lto = true
+codegen-units = 1
 
 [dependencies.nphysics2d]
 path = "{{nphysics2d_dir}}"

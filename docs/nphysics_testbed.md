@@ -33,7 +33,7 @@ version = "0.1.0"
 authors = [ "you" ]
 
 [dependencies]
-nalgebra   = "0.19"
+nalgebra   = "0.18"
 ncollide3d = "0.20"
 nphysics3d = "0.12"
 nphysics_testbed3d = "0.6"
