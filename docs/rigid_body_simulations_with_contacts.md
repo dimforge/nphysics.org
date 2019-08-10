@@ -519,7 +519,7 @@ a collider. The `DefaultColliderSet` is the one to use unless you are using othe
 work with their own collider set.
 
 ```rust
-let mut collider_set = DefaultBodySet::new();
+let mut collider_set = DefaultColliderSet::new();
 let handle = collider_set.insert(collider);
 ```
 
@@ -647,7 +647,7 @@ let rigid_body = RigidBodyDesc::new()
 // along the `z` axis.
 ```
 
-This second example changes the kinematic degrees of freedom of a rigid body after its creation and additoin to the body
+This second example changes the kinematic degrees of freedom of a rigid body after its creation and addition to the body
 set, using its handle. Now the translations along `x` as well as rotations wrt. the axis `x` and `z` will be locked and
 controllable at the velocity level:
 
@@ -714,10 +714,10 @@ rb.enable_gravity(false);
 
 ### Permanent force generators
 Other external forces can also be applied to the bodies on the physics world. This is what
-[`ForceGenerators`](/rustdoc/nphysics3d/force_generator/trait.ForceGenerator.html) are for. A force generator as a
+[`ForceGenerators`](/rustdoc/nphysics3d/force_generator/trait.ForceGenerator.html) are for. A force generator is a
 structure implementing the `ForceGenerator` trait which requires one method: `.apply(params, bodies)`. The `params` is
 a reference to [integration parameters](/performance_tuning/#integration-parameters) allowing you to retrieve, e.g., the
-timestep duration (in second) for the current update of the physical world with `params.dt()`, or the total time `params.t`
+timestep duration (in seconds) for the current update of the physical world with `params.dt()`, or the total time `params.t`
 elapsed in the physics world since its creation. The `bodies` parameter allows you to retrieve mutable references to the
 rigid-bodies to be affected by the force generator. The following example shows the definition of a generator of a radial
 force proportional to the position of a body wrt. a point:
@@ -856,10 +856,10 @@ apply at the center of mass of a body part. We distinguish four kinds of forces 
 * `ForceType::VelocityChange`: a direct velocity change that immediately adds $~f$ to the body part's velocity.
 
 !!! Note
-    All forces applied to a body part are cleared during the next timestep. Therefore, a persistent force
+    All forces applied to a body part are cleared during the next timestep. Therefore a persistent force
     should be re-applied at each frame.
     
-Several methods part of the `Body` trait can be called in order to apply a force to a body part:
+Several methods of the `Body` trait can be called in order to apply a force to a body part:
     
 ```rust
 use nphysics2d::math::{Force, ForceType}; // For 2D
@@ -876,7 +876,7 @@ fn apply_force_at_local_point(&mut self, part_id: usize, f: &Vector<N>, point: &
 fn apply_local_force_at_local_point(&mut self, part_id: usize, f: &Vector<N>, point: &Point<N>, force_type: ForceType, auto_wake_up: bool);
 ```
 
-Every method take very similar arguments among which:
+Every method takes very similar arguments among which:
 
 * **part_id** is the index of the body's part you want to apply the force to. For rigid bodies, this argument should be
 zero since a rigid body has only one part.
