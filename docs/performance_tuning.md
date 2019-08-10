@@ -9,7 +9,7 @@ compromise for your application.
 ## Choice of contact model
 Contact models control the nature and number of constraints generated for each contact. Therefore, the choice of a
 contact model adapted to your simulation strongly affects the overall performance and accuracy. Contact models are
-presented on a dedicated [chapter](contact_models.md) of this guide. As a rule of thumb, you should:
+presented in a dedicated [chapter](contact_models.md) of this guide. As a rule of thumb, you should:
 
 * Use the `SignoriniModel` if you only care about non-penetration (and don't care about friction).
 * Use the `SignoriniCoulombPyramidModel` for handling friction as well.
@@ -22,13 +22,13 @@ by retrieving a mutable reference to the `IntegrationParameters` structure assoc
 unless you know their meaning and effect. Several of them are about tuning parameters for optimal simulation stability,
 or for compromising between efficiency and accuracy. They are given default values that work well in the context of
 video-games or animations. For more realistic simulations you may want to change those parameters to favor accuracy over
-performances:
+performance:
 
 
 | Field                 | Description                                                           |
 |--                      | --                                                                    |
 | `dt` | The timestep used for each update of the physics engine. The default is $1 / 60$ seconds. This typically corresponds to a refresh rate of 60Hz. Smaller timesteps yield better accuracy of the integrator. Large timesteps increase the negative effect of some approximations (linearization of various parts of the equations of motion) and may result in missed collisions (because of collisions that may occur in-between timesteps for fast-moving objects). |
-| `erp` | The Error Reduction Parameter in $[0, 1]$ is the proportion of the positional error to be corrected at each time step. The default is $0.2$. An ERP set to 0 means that no penetration will be corrected, and an ERP set to 1 means all the penetration between two solid will be corrected in a single timestep. While setting 1 seems appealing, this will cause objects to jitter in practice because penetration correction may add or remove kinetic energy to the system. |
+| `erp` | The Error Reduction Parameter in $[0, 1]$ is the proportion of the positional error to be corrected at each time step. The default is $0.2$. An ERP set to 0 means that no penetration will be corrected, and an ERP set to 1 means all the penetrations between two solids will be corrected in a single timestep. While setting 1 seems appealing, this will cause objects to jitter in practice because penetration correction may add or remove kinetic energy to the system. |
 | `warmstart_coeff` | Each cached impulse are multiplied by this coefficient in $[0, 1]$ when they are re-used to initialize the constraints solver. The default is $1.0$. A high warm-start coefficient causes faster convergence but may add kinetic energy to the system (and cause jitters) for fast objects subject to non-elastic contacts. However $1.0$ still remains a good choice for practical applications as it allows convergence of the constraints solver even if the maximum number of solver iterations is small. |
 | `restitution_velocity_threshold` | Contacts at points where the involved bodies have a relative velocity smaller than this threshold wont be affected by the restitution force. The default is $1.0$. |
 | `allowed_linear_error` | Amount of penetration the engine wont attempt to fix. The default is $0.001$ meters. Setting this to 0 would cause jittering because contacts would start and stop being active at a high frequency for resting objects (due to inevitable numerical errors). A value too large would cause noticeable penetrations. |
