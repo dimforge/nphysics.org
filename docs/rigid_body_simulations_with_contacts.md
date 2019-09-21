@@ -547,7 +547,7 @@ Every collider must be attached to a body part by specifying the body part handl
 
 ```rust
 let parent_rigid_body = RigidBodyDesc::new()
-    .build(&mut world);
+    .build();
 let parent_handle = body_set.insert(parent_rigid_body);
 
 let shape = ShapeHandle::new(Ball::new(1.5));
