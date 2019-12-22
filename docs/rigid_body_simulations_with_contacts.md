@@ -134,7 +134,7 @@ to the dedicated [section](contact_models.md).
 
 | Public field              | Description                                                  |
 |--                         | --                                                           |
-| `.counters`               | Various counters that measure inetrnal performance of the physics engine. They are disabled by default. |
+| `.counters`               | Various counters that measure internal performance of the physics engine. They are disabled by default. |
 | `.solver`                 | The impulse-based constraints solver responsible for computing contact forces and fixing penetrations. |
 | `.integration_parameters` | Parameters affecting the whole simulation. Find more details [there](/performance_tuning/#integration-parameters). |
 | `.material_coefficients`  | A table that maps pairs of materials to material coefficients (for friction, restitution, and surface velocity). |
