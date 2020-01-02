@@ -43,7 +43,7 @@
     <big>**Joint constraints and multibodies**</big>
     <span class="home_dummy_link">&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></span>
     <br>
-    Constraint the relative motion of two bodies either using forces (with joint constraints) or by
+    Constrain the relative motion of two bodies either using forces (with joint constraints) or by
     reducing their relative degrees of freedom (with multibodies).
     </div>
     </a>
@@ -58,7 +58,7 @@
     <span class="home_dummy_link">&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></span>
     <br>
     Simulate deformable bodies that can interact with all other kinds of bodies implemented in **nphysics**.
-    The computation of deformation are either based in a mass-spring system or a finite-element method.
+    The computation of deformation is either based on a mass-spring system or a finite-element method.
     </div>
     </a>
     </td>
@@ -71,8 +71,8 @@
     <big>**Contact models**</big>
     <span class="home_dummy_link">&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></span>
     <br>
-    Choose the appropriate contact model to achieve the desired level of accuracy and performances.
-    Are included the Signorini and an approximate Signorini-Coulomb contact models.
+    Choose the appropriate contact model to achieve the desired level of accuracy and performance.
+    Included are the Signorini and an approximate Signorini-Coulomb contact models.
     </div>
     </a>
     </td>
@@ -115,7 +115,7 @@
     <big>**Accuracy and performance tuning**</big>
     <span class="home_dummy_link">&nbsp;<i class="fa fa-external-link" aria-hidden="true"></i></span>
     <br>
-    Choose the right compromise between accuracy and performances for your application.
+    Choose the right compromise between accuracy and performance for your application.
     </div>
     </a>
     </td>

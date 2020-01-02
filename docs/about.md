@@ -11,7 +11,7 @@ Sébastien Crozet (aka.  [sebcrozet](https://github.com/sebcrozet)), a French
 R&D engineer with a Ph.D about fast
 collision detection between complex smooth CAD models without using tessellations.
 Besides his part-time job, he works on **nphysics** trying
-to help making Rust a great language for the development of real-time
+to help make Rust a great language for the development of real-time
 geometry-intensive applications. For more information about his professional
 background, check out his
 [LinkedIn](https://www.linkedin.com/pub/s%C3%A9bastien-crozet/25/875/416/en)
@@ -22,7 +22,7 @@ profile.
 
 # How to contribute
 
-Contribution are greatly appreciated and can be technical as well as financial.
+Contributions are greatly appreciated and can be technical as well as financial.
 
 ### Technical contribution
 
@@ -45,8 +45,8 @@ website is composed of a set of markdown files located on the
 you need to fork, fix, and create a pull request to make your contribution
 integrable into our code base. There are no
 specific rules, except that all compilable code to generate illustrations must
-be located on the `src` folder.  Downloadable examples have to be located on
-the `examples2d` and `examples3d` directories of the main project, i.e., on
+be located in the `src` folder. Downloadable examples have to be located in
+the `examples2d` and `examples3d` directories of the main project, i.e., in
 the [nphysics](https://github.com/rustsim/nphysics) repository.
 
 

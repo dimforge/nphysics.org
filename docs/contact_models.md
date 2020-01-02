@@ -27,7 +27,7 @@ for each contact.
 
 ## Signorini-Coulomb model
 The Signorini-Coulomb contact model combines the non-penetration constraint of the aforementioned Signorini model with
-additional constraints to handle friction. The **nphysics** implements an approximation of the Coulomb friction model
+additional constraints to handle friction. **nphysics** implements an approximation of the Coulomb friction model
 which states that friction forces are restricted to a friction cone. The `SignoriniCoulombPyramidModel` structure
 implements friction by approximating the friction cone (left) by a pyramid (right):
 
@@ -38,7 +38,7 @@ implements friction by approximating the friction cone (left) by a pyramid (righ
 In 2D, this pyramidal representation is actually exact since only one friction direction is possible. In 3D however
 this is an approximation since the boundaries of the friction cone are now polyhedral instead of smooth. The consequence
 is that the resulting friction force actually applied at the contact point will be stronger than it should in some
-directions (namely directions that are not collinear with the coordinate axises). Overall, the `SignoriniCoulombPyramidModel`
+directions (namely directions that are not collinear with the coordinate axes). Overall, the `SignoriniCoulombPyramidModel`
 will generate one constraint for handling both non-penetration and restitution (just like the `SignoriniModel`) as well
 as one additional constraint in 2D (or two additional constraints in 3D) for handling friction. This is the contact model
 used by default by the physics world.

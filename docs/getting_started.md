@@ -26,7 +26,7 @@ latest version, though you might encounter breaking changes from time to time.
 
 
 ## Cargo example
-Here is an example of Cargo file for compiling an executable depending on **nphysics**:
+Here is an example Cargo file for compiling an executable depending on **nphysics**:
 
 <ul class="nav nav-tabs">
   <li class="active"><a id="tab_nav_link" data-toggle="tab" href="#cargo_2D">2D example</a></li>

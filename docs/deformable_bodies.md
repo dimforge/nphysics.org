@@ -1,7 +1,7 @@
 # Deformable bodies
 
 !!! Warning
-    The documentation of deformable bodies is still work-in-progress. You may refer to the examples
+    The documentation of deformable bodies is still a work-in-progress. You may refer to the examples
     for details on how to use those bodies:
     
     * [`mass_constraint_system2.rs`](https://github.com/rustsim/nphysics/blob/master/examples2d/mass_constraint_system2.rs):
@@ -19,6 +19,6 @@
     * [`fem_volume3.rs`](https://github.com/rustsim/nphysics/blob/master/examples3d/fem_volume3.rs):
       a 3D deformable object modeled with the finite-element method (linear elasticity).
     * [`plasticity2.rs`](https://github.com/rustsim/nphysics/blob/master/examples2d/plasticity2.rs):
-      a 2D deformable object that can suffer to permanent deformations.
+      a 2D deformable object that can suffer permanent deformations.
     * [`plasticity3.rs`](https://github.com/rustsim/nphysics/blob/master/examples3d/plasticity3.rs):
-      a 3D deformable object that can suffer to permanent deformations.
+      a 3D deformable object that can suffer permanent deformations.

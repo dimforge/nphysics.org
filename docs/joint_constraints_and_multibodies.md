@@ -3,7 +3,7 @@ One of the most appealing features of a physics engine is to simulate articulati
 
 ## Fundamental concepts
 
-Joints can be modeled in various ways but let's talk about the concept of **Degrees Of Freedom (DOF)** first. In 3D, a rigid-body is capable of translating along the 3 coordinates axises $\mathbf{x}$, $\mathbf{y}$ and $\mathbf{z}$, and to rotate along those three axises as well. Therefore, a rigid-body is said to have  **3 translational DOF** and **3 rotational DOF**. We can also say a 3D rigid-body has a total of **6 DOF**. The 2D case is similar but with less possibilities of movements: a 2D rigid-body has 2 translational DOF and only 1 rotational DOF (which forms a total of 3 DOF). The number of **relative DOF** of a body part wrt. another body part is the number of possible relative translations and rotations.
+Joints can be modeled in various ways but let's talk about the concept of **Degrees Of Freedom (DOF)** first. In 3D, a rigid-body is capable of translating along the 3 coordinates axes $\mathbf{x}$, $\mathbf{y}$ and $\mathbf{z}$, and to rotate along those three axes as well. Therefore, a rigid-body is said to have **3 translational DOF** and **3 rotational DOF**. We can also say a 3D rigid-body has a total of **6 DOF**. The 2D case is similar but with less possibilities of movements: a 2D rigid-body has 2 translational DOF and only 1 rotational DOF (which forms a total of 3 DOF). The number of **relative DOF** of a body part wrt. another body part is the number of possible relative translations and rotations.
 
 !!! Note
     The `Ground` body on the other hand cannot move at all. Therefore it has 0 DOFs. Moreover a [multibody](#multibodies) has a number of DOF equal to the sum of the number of DOF of its multibody links.
@@ -27,7 +27,7 @@ The goal of a joint is to reduce the number of DOF a body part has. For example,
 | _Cartesian joint_   | 2 Translations | 3 Translations |
 | _Planar joint_      |                | 2 Translations + 1 Rotation |
 | _Cylindrical joint_ |                | 1 Translation + 1 Rotation (along the same axis) |
-| _Pin-slot joint_    |                | 1 Translation + 1 Rotation (along different axises) |
+| _Pin-slot joint_    |                | 1 Translation + 1 Rotation (along different axes) |
 | _Rectangular joint_ |                | 2 Translations |
 | _Universal joint_   |                | 2 Rotations |
 
@@ -37,21 +37,21 @@ In 3D, a special _Helical joint_ also exists: it allows only one DOF which is a 
 
 In practice, there are two main ways of modeling joints. Both are implemented by **nphysics** because each have very different advantages and limitations:
 
-1. The **reduced-coordinates approach** encodes the reduction of DOF directly into the equations of motion. For example, a 3D rigid-body attached to the ground with a revolute joint will have its position encoded by only one variable: the rotation angle. Therefore, integrating its motion only changes this one variable and don't need additional forces or mathematical constraints to be generated. The clear advantage is that there is no way for the physics engine to apply any motion other than that single rotation to this boby, meaning there is no way the body shifts to a position that is not realistic, even if the dynamics solver does not converge completely.
-2. The **constraints-based approach** (or full-coordinates approach) is the most commonly available approach on other physics engines for video-games and animations. Here, a 3D rigid-body attached to the ground with a revolute joint will still have its position encoded by 6 variables (3 for translations and 3 for rotations) just like any rigid-body without joint. Then the integrator will add mathematical constraints to the dynamic system to ensure forces are applied to simulate the reduction of the number of DOF as imposed by the joints. In practice, this means that the rigid-body will break the joint constraint if the constrain solver does not converge completely.
+1. The **reduced-coordinates approach** encodes the reduction of DOF directly into the equations of motion. For example, a 3D rigid-body attached to the ground with a revolute joint will have its position encoded by only one variable: the rotation angle. Therefore, integrating its motion only changes this one variable and doesn't need additional forces or mathematical constraints to be generated. The clear advantage is that there is no way for the physics engine to apply any motion other than that single rotation to this body, meaning there is no way the body shifts to a position that is not realistic, even if the dynamics solver does not converge completely.
+2. The **constraints-based approach** (or full-coordinates approach) is the most commonly available approach on other physics engines for video-games and animations. Here, a 3D rigid-body attached to the ground with a revolute joint will still have its position encoded by 6 variables (3 for translations and 3 for rotations) just like any rigid-body without a joint. Then the integrator will add mathematical constraints to the dynamic system to ensure forces are applied to simulate the reduction of the number of DOF as imposed by the joints. In practice, this means that the rigid-body will break the joint constraint if the constraint solver does not converge completely.
 
 This description shows only one aspect of the difference between the reduced-coordinates approach and the constraints-based approach. More generally, the reduced-coordinates approach favors accuracy while the constraints-based approach favors versatility. The following table compares the advantages and limitations of both approaches:
 
 | Reduced-coordinates approach | Constraints-based approach |
 |------------------------------|----------------------------|
 | <font color="green">Joints cannot be violated at all.</font>                 | <font color="IndianRed">Joints can be violated if the solver does not converge.</font> |
-| <font color="green">Moderately large time-step are possible.</font>   | <font color="IndianRed">Moderately large time-step may make the simulation explode.</font> |
+| <font color="green">Moderately large time-steps are possible.</font>   | <font color="IndianRed">Moderately large time-steps may make the simulation explode.</font> |
 | <font color="green">Large assemblies are stable.</font>               | <font color="IndianRed">Large assemblies easily break without a large number of solver iterations.</font> |
 | <font color="IndianRed">Adding/removing a joint is slow.</font>     | <font color="green">Adding/removing a joint is fast.</font> |
 | <font color="IndianRed">Joint forces are never computed explicitly, thus cannot be retrieved.</font> | <font color="green">Joint forces are always computed and can be retrieved.</font> |
 | <font color="IndianRed">Topological restriction: body parts must be linked following a tree structure.</font> | <font color="green">The link between body parts can form any graph.</font> |
 
-The following schematics illustrate a configuration that can be simulated by a multibody (left assembly with a tree structure), and one that cannot (right assembly with a graph structure). The assembly on the left models a SCARA robotic arm with 3 rotational DOF (due to three revolute joints) and 1 translational DOF (due to one prismatic joint). The assembly on the right models a necklace with five perls. It has a total of 15 rotational DOF (due to five ball joints):
+The following schematics illustrate a configuration that can be simulated by a multibody (left assembly with a tree structure), and one that cannot (right assembly with a graph structure). The assembly on the left models a SCARA robotic arm with 3 rotational DOF (due to three revolute joints) and 1 translational DOF (due to one prismatic joint). The assembly on the right models a necklace with five pearls. It has a total of 15 rotational DOF (due to five ball joints):
 
 <center>
 <br/>
@@ -78,7 +78,7 @@ Multibodies implement the reduced-coordinates approach. A multibody is a set of 
 
 ### Creating a multibody
 Creating a multibody is done link-by-link using the `MultibodyDesc` structure based on the builder pattern. Each link
-of a multibody is describe by a single `MultibodyDesc` to which children links can be added by calling the `.add_child`
+of a multibody is described by a single `MultibodyDesc` to which children links can be added by calling the `.add_child`
 method. This method will itself return a new `MultibodyDesc` that can be used to initialize the child, create even
 more nested children, etc.
 
@@ -202,8 +202,8 @@ let multibody_handle = body_set.insert(multibody);
 </div>
 
 
-The following table summarizes the types corresponding to the joints mentioned at the beginning of this chapter that 
-an be used for the `MultibodyDesc`:
+The following table summarizes the types corresponding to the joints mentioned at the beginning of this chapter that
+can be used for the `MultibodyDesc`:
 
 | Joint name | Multibody joint type on **nphysics** |
 |------------|---------|
@@ -303,7 +303,7 @@ For the moment, joint motors are only implemented for multibody joints with DOF 
     Joints with no angular DOF will not  have the methods related to the angular motors. Similarly, joints with no linear DOF will not  have the methods related to the linear motors. Joints with several angular or linear DOF will have those methods with an index appended to their name, e.g., the `.enable_angular_motor_1()` method of an universal joint will enable a motor for its first angular DOF.
 
 ## Joint constraints
-Joint constraints implement the constraints-based approach. The following table summarizes the types corresponding to the joints mentioned on at the beginning of this chapter:
+Joint constraints implement the constraints-based approach. The following table summarizes the types corresponding to the joints mentioned at the beginning of this chapter:
 
 | Joint name | Joint constraint type on **nphysics** |
 |------------|---------|
@@ -322,7 +322,7 @@ A joint constraint is completely configured at its creation, and added to the co
 Each joint constraint requires specific information for being constructed, but all roughly need:
 
 1. The handles of the two body parts attached at each end of the joint. Handle of **any** type of body part is accepted.
-   This includes rigid-bodies, `Ground` bodies, an element of a deformable bodies, as well as a multibody link. Attaching
+   This includes rigid-bodies, `Ground` bodies, an element of a deformable body, as well as a multibody link. Attaching
    a joint to a multibody link can be especially useful to handle complex assemblies with loops as described in the
    [next section](#combining-both).
 2. The position of the joint endpoints with regard to each body part. A joint endpoint is often referred to as an
@@ -338,7 +338,7 @@ Combining multibodies and joint constraints is a useful way of combining the sta
 1. Define a multibody from a spanning-tree of the graph.
 2. Create joint constraints for each articulation missing from this multibody to complete the graph. Those joint constraints are therefore attached to two multibody links. They are often called "loop-closing constraints" since they close the loops of the assembly's graph structure.
 
-The following shows an example of combination of multibodies and joint constraints for the simulation of a necklace. It is composed of 5 perls forming a single loop attached together by 5 ball joints. Since such a loop cannot be simulated by a multibody, we first start to create 5 multibody links attached together with 4 `BallJoint`. Only 4 joints can be added here since a 5th would close the loop.
+The following shows an example of combination of multibodies and joint constraints for the simulation of a necklace. It is composed of 5 pearls forming a single loop attached together by 5 ball joints. Since such a loop cannot be simulated by a multibody, we first start to create 5 multibody links attached together with 4 `BallJoint`. Only 4 joints can be added here since a 5th would close the loop.
 The 5th joint that closes the loop must be modeled as a joint constraint, here a `BallConstraint` between the first and the last link:
 
 <center>
