@@ -3,7 +3,7 @@
 !!! Warning
     The documentation of deformable bodies is still a work-in-progress. You may refer to the examples
     for details on how to use those bodies:
-    
+
     * [`mass_constraint_system2.rs`](https://github.com/rustsim/nphysics/blob/master/examples2d/mass_constraint_system2.rs):
       the fastest approach: a 2D deformable object modeled with the mass-spring system
       modeling where each spring is simulated by a constraint.

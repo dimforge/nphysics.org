@@ -62,7 +62,7 @@ for contact in geometrialc_world.contact_events() {
 ```
 
 !!! Warning
-    Iterating through all events will not clear the internal event pool. Therefore, it is possible to write several loops 
+    Iterating through all events will not clear the internal event pool. Therefore, it is possible to write several loops
     like above, each of which will yield the same events in the same order. However, keep in mind all events that occurred
     before the last call to `mechanical_world.step(...)` are no longer retrievable.
 
@@ -124,7 +124,7 @@ one using the `GeometricalWorld` (or its type alias `DefaultGeometricalWorld`).
 
 !!! Note "The **is_effective** flag"
     In the following table, the `is_effective` parameter is something you likely want to always set to `true`.
-    
+
     Setting it to `false` will yield results that may be misleading. Indeed, setting this to `false` will return **all**
     the pairs created by the narrow-phase of the collision detection pipeline. Therefore, it will include all pairs that
     are close enough to require the narrow phase to deal with them but that may not actually be in contact or proximity,

@@ -114,7 +114,7 @@ let mut multibody_desc = MultibodyDesc::new(joint)
     // The center of mass of this rigid body expressed in its local-space.
     // Default: the origin.
     .local_center_of_mass(Point2::new(1.0, 2.0))
-    /// The position of the joint wrt. `parent`, expressed in the local 
+    /// The position of the joint wrt. `parent`, expressed in the local
     /// frame of `parent`.
     /// Default: Vector2::zeros()
     .parent_shift(Vector2::new(1.0, 2.0))
@@ -122,7 +122,7 @@ let mut multibody_desc = MultibodyDesc::new(joint)
     /// expressed in the local frame of the joint.
     /// Default: Vector2::zeros()
     .body_shift(Vector2::new(1.0, 2.0));
-    
+
 /// Add a children link to the multibody link represented by `multibody_desc`.
 let child_joint = PrismaticJoint::new(Vector2::y_axis(), 0.0);
 multibody_desc.add_child(child_joint)
@@ -130,8 +130,8 @@ multibody_desc.add_child(child_joint)
     // set the properties of the child. It is also possible to call
     // `.add_child` on this child.
     .body_shift(Vector2::x() * 2.0);
-    
-    
+
+
 /// We can add a second child to our multibody by re-using the initial `multibody_desc`:
 let second_child_joint = RevoluteJoint::new(2.3);
 multibody_desc.add_child(second_child_joint);
@@ -171,7 +171,7 @@ let mut multibody_desc = MultibodyDesc::new(joint)
     // The center of mass of this rigid body expressed in its local-space.
     // Default: the origin.
     .local_center_of_mass(Point3::new(1.0, 2.0, 3.0))
-    /// The position of the joint wrt. `parent`, expressed in the local 
+    /// The position of the joint wrt. `parent`, expressed in the local
     /// frame of `parent`.
     /// Default: Vector3::zeros()
     .parent_shift(Vector3::new(1.0, 2.0, 3.0))
@@ -179,7 +179,7 @@ let mut multibody_desc = MultibodyDesc::new(joint)
     /// expressed in the local frame of the joint.
     /// Default: Vector3::zeros()
     .body_shift(Vector3::new(1.0, 2.0, 3.0));
-    
+
 /// Add a children link to the multibody link represented by `multibody_desc`.
 let child_joint = PrismaticJoint::new(Vector2::y_axis(), 0.0);
 multibody_desc.add_child(child_joint)
@@ -187,8 +187,8 @@ multibody_desc.add_child(child_joint)
     // set the properties of the child. It is also possible to call
     // `.add_child` on this child.
     .body_shift(Vector3::x() * 2.0);
-    
-    
+
+
 /// We can add a second child to our multibody by re-using the initial `multibody_desc`:
 let second_child_joint = HelicalJoint::new(Vector3::y_axis(), 1.0, 0.0);
 multibody_desc.add_child(second_child_joint);
@@ -226,7 +226,7 @@ can be used for the `MultibodyDesc`:
 !!! Warning
     The `FreeJoint` can be used only by the first link of the multibody otherwise, the creation of the
     multibody will panic.
- 
+
 While it is not possible to remove a link from an existing multibody, it is possible to add new links:
 
 ```rust
@@ -241,9 +241,9 @@ multibody_desc.build_with_parent(multibody, link_id);
     The `BodyPartHandle` identifying a specific link of a multibody can be constructed with `BodyPartHandle(handle, i)`
     where `handle` is the multibody handle, and `i` designates the `i`-th link of the multibody. Multibody links
     are indexed in their creation order.
-    
+
 Alternatively, you may retrieve a reference to a multibody link and its index using its name set during its construction:
-    
+
 ```rust
 for link in multibody.links_with_name("my multibody link name") {
     /// ...
@@ -262,7 +262,7 @@ It is often desirable to limit the amplitude of movement a multibody link can ha
 example we might want to limit the minimum and maximum value for the DOF of a prismatic joint in order to simulate a
 piston with finite stroke. Or we might want to limit the maximum angle a revolute joint can make with regard to its
 parent. Those are modeled by **joint limits**. Joint limits are currently only implemented for multibody joints with
-DOF that are independent from each other. Therefore, it is not implemented for the `FreeJoint`, `BallJoint`, and 
+DOF that are independent from each other. Therefore, it is not implemented for the `FreeJoint`, `BallJoint`, and
 `CartesianJoint`. All other joints have methods similar to the following:
 
 | Method                 | Description                                                           |
@@ -277,7 +277,7 @@ DOF that are independent from each other. Therefore, it is not implemented for t
 | `.disable_max_offset()` | Disable the upper offset limit. |
 
 !!! Note
-    Joints with no angular DOF will not  have the methods related to the angular limits. Similarly, joints with no linear DOF will not  have the methods related to the linear limits. Joints with several angular or linear DOF will have those methods with an index appended to their name, e.g., the `.enable_min_angle_1(limit)` method of an universal joint will enable a lower limit for its first angular DOF.
+    Joints with no angular DOF will not have the methods related to the angular limits. Similarly, joints with no linear DOF will not have the methods related to the linear limits. Joints with several angular or linear DOF will have those methods with an index appended to their name, e.g., the `.enable_min_angle_1(limit)` method of an universal joint will enable a lower limit for its first angular DOF.
 
 ---------------
 
@@ -300,7 +300,7 @@ For the moment, joint motors are only implemented for multibody joints with DOF 
 | `.set_max_linear_motor_force(max)` |  Sets the maximum linear force the motor can deliver to reach the desired velocity. |
 
 !!! Note
-    Joints with no angular DOF will not  have the methods related to the angular motors. Similarly, joints with no linear DOF will not  have the methods related to the linear motors. Joints with several angular or linear DOF will have those methods with an index appended to their name, e.g., the `.enable_angular_motor_1()` method of an universal joint will enable a motor for its first angular DOF.
+    Joints with no angular DOF will not have the methods related to the angular motors. Similarly, joints with no linear DOF will not have the methods related to the linear motors. Joints with several angular or linear DOF will have those methods with an index appended to their name, e.g., the `.enable_angular_motor_1()` method of an universal joint will enable a motor for its first angular DOF.
 
 ## Joint constraints
 Joint constraints implement the constraints-based approach. The following table summarizes the types corresponding to the joints mentioned at the beginning of this chapter:
