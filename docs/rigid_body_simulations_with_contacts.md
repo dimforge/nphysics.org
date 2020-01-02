@@ -7,7 +7,7 @@ require adding restrictions on the relative motion between their parts with join
 [the next chapter](joint_constraints_and_multibodies.md).
 
 In this chapter, we first show how to initialize a [physics world](#initializing-the-physics-world) which will construct
-all that is to be physically simulated and will drive the physics simulation. 
+all that is to be physically simulated and will drive the physics simulation.
 
 Then we introduce [colliders](#colliders) which are geometric shapes responsible for generating contacts or simulating
 sensors. Those colliders may be attached to [rigid-bodies](#rigid-bodies) which are responsible for the simulation of
@@ -37,12 +37,12 @@ use nphysics3d::world::{DefaultMechanicalWorld, DefaultGeometricalWorld};
 fn main() {
     let mut mechanical_world = DefaultMechanicalWorld::new(Vector3::new(0.0, -9.81, 0.0));
     let mut geometrical_world = DefaultGeometricalWorld::new();
-    
+
     let mut bodies = DefaultBodySet::new();
     let mut colliders = DefaultColliderSet::new();
     let mut joint_constraints = DefaultJointConstraintSet::new();
     let mut force_generators = DefaultForceGeneratorSet::new();
-    
+
     loop {
         // Run the simulation.
         mechanical_world.step(
@@ -94,7 +94,7 @@ A working physics simulation requires two world structures to be created: the g
 computing sets of contacts between touching objects, detecting when two objects start interacting with each other, etc.
 It is basically a wrapper around the data structures provided by the **ncollide2d** or **ncollide3d** [crate](https://ncollide.org).
 A geometrical world can either be created with its default configuration:
- 
+
 ```rust
 let mut geometrical_world = DefaultGeometricalWorld::new();
 ```
@@ -301,10 +301,10 @@ let rigid_body = RigidBodyDesc::new()
 </div>
 
 All the properties are optional. The only calls that are required are `RigidBodyDesc::new()` to initialize the builder,
- and `.build()` to actually build the rigid body. Note that a single builder can be re-used to build several
- rigid bodies. It is possible to change some of the builder properties with methods prefixed by `set_` before building
- another rigid body:
- 
+and `.build()` to actually build the rigid body. Note that a single builder can be re-used to build several
+rigid bodies. It is possible to change some of the builder properties with methods prefixed by `set_` before building
+another rigid body:
+
 ```rust
 let mut rb_desc = RigidBodyDesc::new()
    .rotation(Vector3::new(1.0, 2.0, 3.0))
@@ -329,7 +329,7 @@ they don't contribute to this inertia and center of mass.
 !!! Note
     The `.build()` method of the `RigidBodyDesc` returns the newly created rigid-body. It is
     still possible to further modify it after creation:
-    
+
 ```rust
 let mut rigid_body = RigidBodyDesc::new()
                         .translation(Vector3::x() * 2.0)
@@ -358,9 +358,9 @@ let body = body_set.get_mut(handle); // Retrieve a mutable reference of the rigi
 
 !!! Note
     No two bodies in the same body set can share the same handle. This handle is what you should store for future
-    addressing of this rigid body as it is required by various operations  including: attaching colliders or constraints
+    addressing of this rigid body as it is required by various operations including: attaching colliders or constraints
     to the rigid-body.
-    
+
 !!! Warning
     The mechanical world and geometrical world will not be aware of bodies added or removed from the body set until the
     next call to `mechanical_world.step(...)`. Alternatively, you can call `mechanical_world.maintain(...)` in order to
@@ -534,14 +534,14 @@ let collider = body_set.get_mut(handle); // Retrieve a mutable reference.
 !!! Note
     No two colliders in the same body set can share the same handle. This handle is what you should store for future
     addressing of this collider.
-    
+
 !!! Warning
     The mechanical world and geometrical world will not be aware of colliders added or removed from the collider set until the
     next call to `mechanical_world.step(...)`. In particular, a collider with non-zero density won't affect the inertia
     properties of the body part it is attached to until the next timestep. Alternatively, you can call `mechanical_world.maintain(...)`
     in order to perform all the setup and cleanup tasks resulting from those collider additions or removals without actually performing
     a timestep.
-    
+
 ### Collider with parent
 Every collider must be attached to a body part by specifying the body part handle when building the collider:
 
@@ -557,7 +557,7 @@ let collider = ColliderDesc::new(shape)
     .build(BodyPartHandle(parent_handle, 0));
 let collider_handle = collider_set.insert(collider);
 ```
-    
+
 In this example the body part handle we specified was `BodyPartHandle(parent_handle, 0)`. This means that the collider
 will be attached to the first part (indexing of body parts starts at 0) of the body identified by `parent_handle`. A rigid
 body always has one part. Other bodies like [multibodies](/joint_constraints_and_multibodies/#multibodies) are composed
@@ -632,7 +632,7 @@ Some bodies allow to mark only some of their degrees of freedom as kinematic. Fo
   all translations and/or rotations wrt. some specific coordinate axes, or to control them at the velocity level.
   This is achieved by the `.kinematic_translations` and `kinematic_rotations` modifiers at construction-time, or by
   the `.set_translations_kinematic` and `.set_rotations_kinematic` methods after construction:
-  
+
 ```rust
 let rigid_body = RigidBodyDesc::new()
     // Translations along the y and z axises will be locked and controllable at the
@@ -640,7 +640,7 @@ let rigid_body = RigidBodyDesc::new()
     .kinematic_translations(Vector3::new(false, true, true));
     .velocity(Velocity::linear(1.0, 0.0, 3.0))
     .build();
-    
+
 // NOTE: the velocity of the rigid body along the `y` and `z` axis will remain
 // constant independently from any forces. Therefore this body will be fixed
 // in translation wrt the `y` axis, and will translate with a velocity of `3.0`
@@ -662,10 +662,10 @@ rb.set_rotations_kinematic(Vector3::new(true, false, true));
     This can be achieved by setting all its rotations as kinematic, or, equivalently, by calling
     `.disable_all_rotations()` on the rigid body. Note that `.disable_all_rotations()` will also set the rigid-body
     angular velocity to zero in addition to marking all its rotational degrees of freedom as kinematic.
-  
+
 * It is possible to mark some nodes of a deformable body as kinematic so that those nodes remain fixed in space or can
   be controlled by the user at the velocity level. See the [deformable bodies](/deformable_bodies/) section.
-  
+
 !!! Note ""Controllable at the velocity level""
     We used the term **controllable at the velocity level** multiple times here. This means it is still possible for the
     user to set a non-zero velocity to a kinematic body or a dynamic body with kinematic degrees of freedom. A kinematic
@@ -702,11 +702,11 @@ let mut rigid_body = RigidBodyDesc::new()
    .gravity_enabled(false)
    .build();
 ```
-  
+
 * Or by calling `body.enable_gravity(false)` on a body that has already been created into the physics world. This
     `.enable_gravity` method is part of the [`Body`](https://www.nphysics.org/rustdoc/nphysics3d/object/trait.Body.html)
     trait:
-    
+
 ```rust
 let mut rb = body_set.body_mut(rb_handle).expect("Rigid body not found.");
 rb.enable_gravity(false);
@@ -838,7 +838,7 @@ impl ForceGenerator<f32> for RadialForce {
 
 Two force generators are currently implemented in **nphysics**:
 
-2. The [ConstantAcceleration](/rustdoc/nphysics3d/force_generator/struct.ConstantAcceleration.html) force generator 
+2. The [ConstantAcceleration](/rustdoc/nphysics3d/force_generator/struct.ConstantAcceleration.html) force generator
 applies a linear and angular force at the center of mass of some specified body parts. The force is such that the linear
 and angular accelerations specified at the construction of this force generator are added to the affected bodies.
 1. The [Spring](/rustdoc/nphysics3d/force_generator/struct.Spring.html) applies opposite forces to two bodies. The forces
@@ -849,7 +849,7 @@ It is possible to apply a force to any body part, at any of its points. In the f
 apply at the center of mass of a body part. We distinguish four kinds of forces listed in the `ForceType` enum:
 
 * `ForceType::Force`: a force as in the formula $~f = mass × acceleration$. Applying this force to a body will
-   add a velocity of $~\frac{f}{mass} × dt$ (where $~dt$ is the time step length) to the body part's velocity at the next 
+   add a velocity of $~\frac{f}{mass} × dt$ (where $~dt$ is the time step length) to the body part's velocity at the next
    timestep.
 * `ForceType::AccelerationChange`: a direct acceleration change that will add $~f × dt$ to the body part's velocity at the next timestep.
 * `ForceType::Impulse`: an impulsive force that immediately adds $~\frac{f}{mass}$ to the body part's velocity.
@@ -858,9 +858,9 @@ apply at the center of mass of a body part. We distinguish four kinds of forces 
 !!! Note
     All forces applied to a body part are cleared during the next timestep. Therefore a persistent force
     should be re-applied at each frame.
-    
+
 Several methods of the `Body` trait can be called in order to apply a force to a body part:
-    
+
 ```rust
 use nphysics2d::math::{Force, ForceType}; // For 2D
 use nphysics3d::math::{Force, ForceType}; // For 3D
