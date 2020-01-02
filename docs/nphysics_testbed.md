@@ -1,13 +1,13 @@
 # The nphysics testbed
-The **nphysics_testbed2d** and **nphysic_testbed3d** crates provide pure-Rust, WASM-compatible, tools for displaying and
+The **nphysics_testbed2d** and **nphysic_testbed3d** crates provide pure-Rust, WASM-compatible tools for displaying and
 interacting easily with a physical scene. They are based on the [kiss3d](https://crates.io/crates/kiss3d) graphics engine.
 Basically, all you have to do is setup your physics `World`, and then call `Testbed::new(world).run()` to obtain a
-fully-functional windowed application with 2D or 3D display of every colliders on your `World`. This application
+fully-functional windowed application with 2D or 3D display of every collider in your `World`. This application
 allows some controls like starting/stopping/pausing the simulation, and grabbing an object with the mouse.
 
 !!! Note
     All the interactive demos from this website have been built using those testbeds. The source code of those demos
-    can be found on the [examples2d](https://github.com/rustsim/nphysics/tree/master/examples2d) and
+    can be found in [examples2d](https://github.com/rustsim/nphysics/tree/master/examples2d) and
     [examples3d](https://github.com/rustsim/nphysics/tree/master/examples3d) of the **nphysics** github repository.
 
 In this chapter we will describe an example of the setup of a 3D physical scene with a pile of boxes. This scene will
@@ -58,7 +58,7 @@ use nphysics3d::world::{DefaultMechanicalWorld, DefaultGeometricalWorld};  // Th
 use nphysics_testbed3d::Testbed;                                      // The testbed to display/run the simulation.
 ```
 
-The first thing we want to do is create a geometrical world as well as a mechanical world world with its default parameters
+The first thing we want to do is create a geometrical world as well as a mechanical world with its default parameters
 and a gravity that points toward the negative $y$-axis:
 
 ```rust
@@ -66,7 +66,7 @@ let mut geometrical_world = DefaultGeometricalWorld::new();
 let mut mechanical_world = DefaultMechanicalWorld::new(Vector3::y() * -9.81);
 ```
 
-Then we create all the sets needed for stepping te simulation. We will not actually add joints nor force generators in
+Then we create all the sets needed for stepping the simulation. We will not actually add joints nor force generators in
 this example, so their sets don't have to be mutable.
 
 ```rust
@@ -153,7 +153,7 @@ for i in 0usize..num {
 Finally, all that remains to do is set-up the testbed and run it:
 
 ```rust
-// Tell the testbed your ground has an handle equal to `ground_handle`.
+// Tell the testbed your ground has a handle equal to `ground_handle`.
 // This will make it be drawn in gray.
 testbed.set_ground_handle(Some(ground_handle));
 // Provide to the testbed all the components of our physics simulation.

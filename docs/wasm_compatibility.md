@@ -37,7 +37,7 @@ nphysics2d = "0.12"
 ```
 
 Before compiling our project, we need to add a `.html` file which will serve as a web page containing our WASM app.
-This can be done by adding an `index.html` file on a new `static/` folder.
+This can be done by adding an `index.html` file in a new `static/` folder.
 
 ```html
 <!doctype html>

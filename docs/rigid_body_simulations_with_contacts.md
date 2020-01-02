@@ -9,10 +9,10 @@ require adding restrictions on the relative motion between their parts with join
 In this chapter, we first show how to initialize a [physics world](#initializing-the-physics-world) which will construct
 all that is to be physically simulated and will drive the physics simulation. 
 
-Then we introduce the [colliders](#colliders) which are geometric shapes responsible for generating contacts or simulating
+Then we introduce [colliders](#colliders) which are geometric shapes responsible for generating contacts or simulating
 sensors. Those colliders may be attached to [rigid-bodies](#rigid-bodies) which are responsible for the simulation of
-the object trajectory under various forces including gravity. Colliders may also be attached to other kind of bodies
-like multibodies and deformable bodies described in next chapters.
+the object trajectory under various forces including gravity. Colliders may also be attached to other kinds of bodies
+like multibodies and deformable bodies described in the next chapters.
 
 Finally, external forces can be applied to some bodies of the world by creating [force generators](#gravity-and-external-forces).
 
@@ -65,10 +65,10 @@ The physics engine is split into two _worlds_ which we will refer to as _"physic
     Here the mechanical world has the type `DefaultMechanicalWorld<f32>` which is a type alias for the more generic
     `MechanicalWorld` type.
 
-Those worlds will affect a set of elements: bodies, colliders, joints and force generators. Each of those elements come
-into a separate data set:
+Those worlds will affect a set of elements: bodies, colliders, joints and force generators. Each of those elements belong
+to a separate data set:
 
-- The `DefaultBodySet` is a set of all sort of bodies like rigid-bodies, multibodies as well as deformable bodies.
+- The `DefaultBodySet` is a set of all sorts of bodies like rigid-bodies, multibodies as well as deformable bodies.
 - The `DefaultColliderSet` is a set of colliders.
 - The `DefaultJointConstraintSet` is a set of joints modeled with constraints.
 - The `DefaultForceGeneratorSet` is a set of persistent force generators.
@@ -79,17 +79,17 @@ flexible as it allows, for example, to iterate through all the contact pairs sto
 at each iteration an immutable reference to a collider involved in the contact at the same time as a mutable reference to
 the body it is attached to so you can apply a force to it. All this is possible without getting borrowing issues.
 
-The subsequent sections provides more details on each of those element.
+The subsequent sections provide more details on each of those elements.
 
 !!! Note
-    All those types of sets have a name that begin by `Default`. This is because those are the sets can use if you don't
-    have any reasons to define your own set data structure. If you need to use your own data structures are sets for
+    All those types of sets have a name that begin with `Default`. This is because those are the sets you can use if you don't
+    have any reasons to define your own set data structure. If you need to use your own data structures for
     physical elements, you have to implement the `BodySet` trait for sets of bodies, the `ColliderSet` trait for sets of
     colliders, the `JointConstraintSet` trait for sets of joint constraints, and the `ForceGeneratorSet` trait for sets
     of force generators. This can be useful when integrating nphysics to a larger system like an ECS or a game engine.
 
 ## Initializing the physics worlds
-A working physics simulation requires to world structures to be created: the geometrical world and the mechanical world. The
+A working physics simulation requires two world structures to be created: the geometrical world and the mechanical world. The
 **geometrical world** contains all the data structures and algorithms necessary to perform efficiently geometric operations like
 computing sets of contacts between touching objects, detecting when two objects start interacting with each other, etc.
 It is basically a wrapper around the data structures provided by the **ncollide2d** or **ncollide3d** [crate](https://ncollide.org).
@@ -99,7 +99,7 @@ A geometrical world can either be created with its default configuration:
 let mut geometrical_world = DefaultGeometricalWorld::new();
 ```
 
-or by manually giving it an instance of a broad-phase and a narrow-phase. This allows you to configure the them with
+or by manually giving it an instance of a broad-phase and a narrow-phase. This allows you to configure them with
 custom parameters and contact/proximity algorithm dispatchers:
 
 ```rust
@@ -115,7 +115,7 @@ let narrow_phase = NarrowPhase::new(coll_dispatcher, prox_dispatcher);
 let mut geometrical_world = DefaultGeometricalWorld::from_parts(broad_phase, narrow_phase);
 ```
 
-The **mechanical world** contains all the data structures and algoritms necessary to perform efficiently the simulation of
+The **mechanical world** contains all the data structures and algorithms necessary to perform efficiently the simulation of
 physical phenomena like gravity, contact forces, deformations, etc. It can be constructed with a given gravity vector:
 
 ```rust
@@ -123,12 +123,12 @@ let gravity = Vector3::y() * -9.81;
 let mut mechanical_world = DefaultMechanicalWorld::new(gravity);
 ```
 
-The mechanical world has several fields you are free to change them if you need some specific configuration.
-For example if the gravity has to be changed, simple do `mechanical_world.gravity = new_gravity;` and it will be taken into
+The mechanical world has several fields, you are free to change them if you need some specific configuration.
+For example if the gravity has to be changed, simply do `mechanical_world.gravity = new_gravity;` and it will be taken into
 account during subsequent timesteps. Keep in mind however, that it is discouraged to change the constraints solver once
-you started performing timesteps (with the `.step` method) as you may cause some cashed data that improve stability and
-performance to be reset. By default, the constraint solver handles contacts using the Signorini-Coulom contact model (to
-enforce non-penetration with friction). This can be changed for other contact models dependending on your needs. Refer
+you started performing timesteps (with the `.step` method) as you may cause some cached data, that improves stability and
+performance, to be reset. By default, the constraint solver handles contacts using the Signorini-Coulomb contact model (to
+enforce non-penetration with friction). This can be changed for other contact models depending on your needs. Refer
 to the dedicated [section](contact_models.md).
 
 
@@ -136,11 +136,11 @@ to the dedicated [section](contact_models.md).
 |--                         | --                                                           |
 | `.counters`               | Various counters that measure internal performance of the physics engine. They are disabled by default. |
 | `.solver`                 | The impulse-based constraints solver responsible for computing contact forces and fixing penetrations. |
-| `.integration_parameters` | Parameters affecting the whole simulation. Find more details [there](/performance_tuning/#integration-parameters). |
+| `.integration_parameters` | Parameters affecting the whole simulation. Find more details [here](/performance_tuning/#integration-parameters). |
 | `.material_coefficients`  | A table that maps pairs of materials to material coefficients (for friction, restitution, and surface velocity). |
 | `.gravity`                | The gravity affecting all dynamic bodies in the scene except those that are configured to ignore gravity. |
 
-Once the physics world is created, the next step is to create some bodies that will take part of the simulation.
+Once the physics world is created, the next step is to create some bodies that will take part in the simulation.
 
 
 ## Rigid-bodies
@@ -151,8 +151,8 @@ to it. A rigid-body with no collider will be affected by all the forces the worl
 but not by contacts (because it does not have any shape that can be collided to).
 
 ### Creating a rigid-body
-A rigid-body can only created by a `RigidBodyDesc` structure that is based on the builder pattern:
 
+A rigid-body can only be created by a `RigidBodyDesc` structure that is based on the builder pattern:
 
 <ul class="nav nav-tabs">
   <li class="active"><a id="tab_nav_link" data-toggle="tab" href="#rigid_body_2D">2D example</a></li>
@@ -363,7 +363,7 @@ let body = body_set.get_mut(handle); // Retrieve a mutable reference of the rigi
     
 !!! Warning
     The mechanical world and geometrical world will not be aware of bodies added or removed from the body set until the
-    next call to `mechanical_world.step(...)`. Altenatively, you can call `mechanical_world.maintain(...)` in order to
+    next call to `mechanical_world.step(...)`. Alternatively, you can call `mechanical_world.maintain(...)` in order to
     perform all the setup and cleanup tasks resulting from those body additions or removals without actually performing
     a timestep.
 
@@ -537,8 +537,8 @@ let collider = body_set.get_mut(handle); // Retrieve a mutable reference.
     
 !!! Warning
     The mechanical world and geometrical world will not be aware of colliders added or removed from the collider set until the
-    next call to `mechanical_world.step(...)`. In particular, the a collider with non-zero density won't affect the inertia
-    properties of the body part it is attached to until the next timestep. Altenatively, you can call `mechanical_world.maintain(...)`
+    next call to `mechanical_world.step(...)`. In particular, a collider with non-zero density won't affect the inertia
+    properties of the body part it is attached to until the next timestep. Alternatively, you can call `mechanical_world.maintain(...)`
     in order to perform all the setup and cleanup tasks resulting from those collider additions or removals without actually performing
     a timestep.
     
@@ -563,7 +563,7 @@ will be attached to the first part (indexing of body parts starts at 0) of the b
 body always has one part. Other bodies like [multibodies](/joint_constraints_and_multibodies/#multibodies) are composed
 of several body parts. Thus, attaching a collider to a multibody link requires specifying the index of the specific
 link: `BodyPartHandle(parent_handle, link_index)` where `link_index` is an integer lying between 0 and the total number
-of link the multibody has.
+of links the multibody has.
 
 !!! Note
     If a collider is given a density, it will contribute to the mass and angular inertia of the body part it is
@@ -602,12 +602,12 @@ enumeration:
 
 !!! Note
     It is possible to attach all colliders that will never move to a body of type `Ground`. This body will always be static
-    and have a position set to the identity. It will be slightly more memory-efficient and CPU-efficient than attaching thoses
+    and have a position set to the identity. It will be slightly more memory-efficient and CPU-efficient than attaching those
     colliders to a rigid-body with a `Static` status.
 
 * **`BodyStatus::Kinematic`:** Indicates the body velocity must not be altered by the physics engine. The user is
     free to set any velocity and the body position will be integrated at each update accordingly. This is typically
-    used for **platforms** as shown in [that demo](/demo_body_status3/).
+    used for **platforms** as shown in [this demo](/demo_body_status3/).
 * **`BodyStatus::Disabled`:** Indicates the body should be completely ignored by the physics engine. In practice,
     this will remove all contacts this body is involved with and disable (but not remove) all joint constraints
     attached to it.
@@ -629,7 +629,7 @@ Note that those statuses can also be applied to other types of bodies, including
 Some bodies allow to mark only some of their degrees of freedom as kinematic. For example:
 
 * It is possible to mark as kinematic some translations or rotations of a rigid body. This is useful to prevent
-  all translations and/or rotations wrt. some specific coordinate axises, or to control them at the velocity level.
+  all translations and/or rotations wrt. some specific coordinate axes, or to control them at the velocity level.
   This is achieved by the `.kinematic_translations` and `kinematic_rotations` modifiers at construction-time, or by
   the `.set_translations_kinematic` and `.set_rotations_kinematic` methods after construction:
   
@@ -648,7 +648,7 @@ let rigid_body = RigidBodyDesc::new()
 ```
 
 This second example changes the kinematic degrees of freedom of a rigid body after its creation and addition to the body
-set, using its handle. Now the translations along `x` as well as rotations wrt. the axis `x` and `z` will be locked and
+set, using its handle. Now the translations along `x` as well as rotations wrt. the axes `x` and `z` will be locked and
 controllable at the velocity level:
 
 ```rust
@@ -669,19 +669,19 @@ rb.set_rotations_kinematic(Vector3::new(true, false, true));
 !!! Note ""Controllable at the velocity level""
     We used the term **controllable at the velocity level** multiple times here. This means it is still possible for the
     user to set a non-zero velocity to a kinematic body or a dynamic body with kinematic degrees of freedom. A kinematic
-    body or the kinematic degrees of freedoms will keep this velocity constant no matter what. This is useful for platform
+    body or the kinematic degrees of freedom will keep this velocity constant no matter what. This is useful for platforms
     that should have a specific trajectory without being disturbed by any force of the world. Of course, the user can
     still modify this trajectory by changing the velocity of those kinematic elements at any time.
 
 
 ## Gravity, forces, and impulses
-There are three ways of applying forces to a body in **nphysics**. The most common force is the gravity and
+There are three ways of applying forces to a body in **nphysics**. The most common force is gravity and
 is treated as a special case by **nphysics**. Other permanent external forces can be simulated using
 [force generators](#permanent-force-generators). Finally, forces, impulses, and instantaneous velocity or acceleration
 changes can be [applied](#one-time-force-application-and-impulses) for a single timestep to each body part individually.
 
 ### Gravity
-Because the gravity is such a common force, it is a special case within **nphysics**.
+Because gravity is such a common force, it is a special case within **nphysics**.
 It is set at the creation of the mechanical world and can be changed later with the mechanical world's
 `.gravity` public field:
 
@@ -690,7 +690,7 @@ let mut mechanical_world = MechanicalWorld::new();
 mechanical_world.gravity = Vector3::y() * -9.81; // or Vector2 in 2D.
 ```
 
-Even though the gravity automatically affect all the dynamic bodies, it is possible to cancel the effect of the gravity
+Even though gravity automatically affects all the dynamic bodies, it is possible to cancel the effect of gravity
 on a specific body:
 
 * By disabling gravity for this body before it is constructed by calling the `.gravity_enabled(false)` setter. Example:
@@ -836,7 +836,7 @@ impl ForceGenerator<f32> for RadialForce {
 </div>
 </div>
 
-Two forces generators are currently implemented in **nphysics**:
+Two force generators are currently implemented in **nphysics**:
 
 2. The [ConstantAcceleration](/rustdoc/nphysics3d/force_generator/struct.ConstantAcceleration.html) force generator 
 applies a linear and angular force at the center of mass of some specified body parts. The force is such that the linear
@@ -880,7 +880,7 @@ Every method takes very similar arguments among which:
 
 * **part_id** is the index of the body's part you want to apply the force to. For rigid bodies, this argument should be
 zero since a rigid body has only one part.
-* **auto_wake_up** controls whether the body affected by the force should be waken-up automatically because of this force
+* **auto_wake_up** controls whether the body affected by the force should be woken up automatically because of this force
   application. This should typically be set to `true` whenever you are applying a one-time force manually. This should
   likely be set to `false` if you are applying a continuous force from a force generator (so that bodies reaching a dynamic
   equilibrium can be put to sleep again).
