@@ -16,7 +16,7 @@ Finally it is possible to retrieve at any time the set of colliders interacting 
 Sensors are a special type of [collider](/rigid_body_simulations_with_contacts/#colliders) that don't generate any contact.
 Like regular colliders, they have to be added to the world, are given a geometric shape, and are attached to a body part.
 They are commonly used for detecting proximity, e.g., to detect when a player enters a
-specific area or is close to a door. The sensor [demo](/demo_sensor3/) shows a ball-shaped sensor attached to a cube.
+specific area or is close to a door. The sensor [demo](/all_examples3/?sensor) shows a ball-shaped sensor attached to a cube.
 All colliders (except the ground) that intersect with this ball are colored in yellow.
 
 The creation of a sensor is identical to the creation of a regular collider except that its sensor flag is set to `true`:

@@ -51,7 +51,7 @@
         {% include "nav.html" %}
 
         <div class="container">
-          {% if not page.is_homepage and "demo_" not in page.canonical_url %}
+          {% if not page.is_homepage and "all_examples" not in page.canonical_url %}
             <div class="col-md-3">{% include "toc.html" %}</div>
             <div class="col-md-9" role="main">
                 {% include "content.html" %}
@@ -60,14 +60,14 @@
                     <hr>
                     {% if page.previous_page.title != "Home" %}
                         <span style="float:left">
-                        <a href="{{ page.previous_page.url }}">
+                        <a href="{{ page.previous_page.url|url }}">
                             <i class="fa fa-arrow-left"></i> {{ page.previous_page.title }}
                         </a>
                         </span>
                     {% endif %}
                     {% if page.next_page.title != "nphysics2d" %}
                         <span style="float:right">
-                        <a href="{{ page.next_page.url }}">
+                        <a href="{{ page.next_page.url|url }}">
                            {{ page.next_page.title }} <i class="fa fa-arrow-right"></i>
                         </a>
                         </span>

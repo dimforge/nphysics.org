@@ -5,11 +5,14 @@ authors = [ "Sébastien Crozet <developer@crozet.re>" ]
 edition = "2018"
 
 [dependencies]
-rand       = { version = "0.6", features = [ "stdweb" ] }
+rand       = { version = "0.7", features = [ "stdweb" ] }
+rand_distr = "0.2"
+Inflector  = "0.11"
 num-traits = "0.2"
-nalgebra   = "0.18"
-ncollide3d = "0.20"
-kiss3d     = "0.21"
+nalgebra   = "0.20"
+ncollide3d = "0.22"
+kiss3d     = "0.23"
+stdweb = "0.4"
 
 [profile.release]
 lto = true
@@ -28,4 +31,4 @@ path = "./{{demo}}.rs"
 
 
 [patch.crates-io]
-ncollide3d = { path = "../rust-dev/ncollide-dev/build/ncollide3d" }
+ncollide3d = { path = "../ncollide/build/ncollide3d" }

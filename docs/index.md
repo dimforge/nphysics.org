@@ -4,12 +4,12 @@
 <br/>
 <center>
 [![Join us on Discord](https://img.shields.io/discord/507548572338880513.svg?logo=discord&colorB=7289DA)](https://discord.gg/vt9DJSW)
-[![Travis.ci Status](https://travis-ci.org/rustsim/nphysics.svg?branch=master)](https://travis-ci.org/rustsim/nphysics)
+[![CircleCI](https://circleci.com/gh/rustsim/nphysics.svg?style=svg)](https://circleci.com/gh/circleci/circleci-docs)
 [![Crates.io Status](https://meritbadge.herokuapp.com/nphysics3d)](https://crates.io/crates/nphysics3d)
 [![License (3-Clause BSD)](https://img.shields.io/badge/license-BSD%203--Clause-blue.svg?style=flat)](https://opensource.org/licenses/BSD-3-Clause)
 <div style="text-align:center">
 <br/>
-<a href="https://www.patreon.com/bePatron?u=7111380" ><img src="../img/become_a_patron_button.png" alt="Become a Patron!" /></a>
+<a href="https://www.patreon.com/bePatron?u=7111380" ><img src="/img/become_a_patron_button.png" alt="Become a Patron!" /></a>
 
 -----
 
@@ -22,7 +22,7 @@
 
 <table markdown="1">
 <tr>
-    <td>[![](../img/feature_rigid_body_simulation.svg)](../rigid_body_simulations_with_contacts)</td>
+    <td>[![](/img/feature_rigid_body_simulation.svg)](../rigid_body_simulations_with_contacts)</td>
     <td style="vertical-align:middle">
     <a href="../rigid_body_simulations_with_contacts" id="no_highlight">
     <div>
@@ -36,7 +36,7 @@
     </td>
 </tr>
 <tr>
-    <td>[![](../img/feature_multibody_and_constraints.svg)](../joint_constraints_and_multibodies)</td>
+    <td>[![](/img/feature_multibody_and_constraints.svg)](../joint_constraints_and_multibodies)</td>
     <td style="vertical-align:middle">
     <a href="../joint_constraints_and_multibodies" id="no_highlight">
     <div>
@@ -50,7 +50,7 @@
     </td>
 </tr>
 <tr>
-    <td>[![](../img/feature_deformable_bodies.svg)](../deformable_bodies)</td>
+    <td>[![](/img/feature_deformable_bodies.svg)](../deformable_bodies)</td>
     <td style="vertical-align:middle">
     <a href="../deformable_bodies" id="no_highlight">
     <div>
@@ -64,7 +64,7 @@
     </td>
 </tr>
 <tr>
-    <td>[![](../img/feature_contact_models.svg)](../contact_models)</td>
+    <td>[![](/img/feature_contact_models.svg)](../contact_models)</td>
     <td style="vertical-align:middle">
     <a href="../contact_models" id="no_highlight">
     <div>
@@ -78,7 +78,7 @@
     </td>
 </tr>
 <tr>
-    <td>[![](../img/feature_event_handling_and_sensors.svg)](../interaction_handling_and_sensors)</td>
+    <td>[![](/img/feature_event_handling_and_sensors.svg)](../interaction_handling_and_sensors)</td>
     <td style="vertical-align:middle">
     <a href="../interaction_handling_and_sensors" id="no_highlight">
     <div>
@@ -93,7 +93,7 @@
     </td>
 </tr>
 <tr>
-    <td>[![](../img/feature_continuous_collision_detection.svg)](../continuous_collision_detection)</td>
+    <td>[![](/img/feature_continuous_collision_detection.svg)](../continuous_collision_detection)</td>
     <td style="vertical-align:middle">
     <a href="../continuous_collision_detection" id="no_highlight">
     <div>
@@ -108,7 +108,7 @@
     </td>
 </tr>
 <tr>
-    <td>[![](../img/feature_performances_tuning.svg)](../performance_tuning)</td>
+    <td>[![](/img/feature_performances_tuning.svg)](../performance_tuning)</td>
     <td style="vertical-align:middle">
     <a href="../performance_tuning" id="no_highlight">
     <div>
@@ -121,7 +121,7 @@
     </td>
 </tr>
 <tr>
-    <td>[![](../img/nphysics_testbed.svg)](../nphysics_testbed)</td>
+    <td>[![](/img/nphysics_testbed.svg)](../nphysics_testbed)</td>
     <td style="vertical-align:middle">
     <a href="../nphysics_testbed" id="no_highlight">
     <div>
@@ -135,7 +135,7 @@
     </td>
 </tr>
 <tr>
-    <td>[![](../img/feature_wasm.svg)](../wasm_compatibility)</td>
+    <td>[![](/img/feature_wasm.svg)](../wasm_compatibility)</td>
     <td style="vertical-align:middle">
     <a href="../wasm_compatibility" id="no_highlight">
     <div>

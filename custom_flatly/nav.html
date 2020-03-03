@@ -44,12 +44,12 @@
               {% else %}
                 <li {% if nav_item.active %}class="active"{% endif %}>
                   {% if nav_item.title == "Home" %}
-                  <a id="noborder" href="{{ nav_item.url }}">
+                  <a id="noborder" href="{{ nav_item.url|url }}">
                     <span id="hide_small" class="navbar_icon" height = "1em"></span>
                     <span id="show_small"><i class="fa fa-home"></i> Home</span>
                   </a>
                   {% else %}
-                  <a href="{{ nav_item.url }}">
+                  <a href="{{ nav_item.url|url }}">
                     <span>{{ nav_item.title }}</span>
                   </a>
                   {% endif %}
@@ -69,12 +69,12 @@
                 </li>
                 -->
           <li id="hide_medium" {% if not page.previous_page or page.previous_page.title == "nphysics3d" or page.previous_page.title == "nphysics2d" %}class="disabled"{% endif %}>
-          <a rel="next" {% if page.previous_page and page.previous_page.title != "nphysics3d" and page.previous_page.title != "nphysics2d" %}href="{{ page.previous_page.url }}"{% endif %}>
+          <a rel="next" {% if page.previous_page and page.previous_page.title != "nphysics3d" and page.previous_page.title != "nphysics2d" %}href="{{ page.previous_page.url|url }}"{% endif %}>
             <i class="fa fa-arrow-left"></i> Previous
           </a>
           </li>
           <li id="hide_medium" {% if not page.next_page or page.next_page.title == "nphysics2d" or page.next_page.title == "nphysics3d" %}class="disabled"{% endif %}>
-          <a rel="prev" {% if page.next_page and page.next_page.title != "nphysics2d" and page.next_page.title != "nphysics3d" %}href="{{ page.next_page.url }}"{% endif %}>
+          <a rel="prev" {% if page.next_page and page.next_page.title != "nphysics2d" and page.next_page.title != "nphysics3d" %}href="{{ page.next_page.url|url }}"{% endif %}>
             Next <i class="fa fa-arrow-right"></i>
           </a>
           </li>

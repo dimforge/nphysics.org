@@ -27,20 +27,20 @@ is moving so fast that its final position seen by the mechanical and geometrical
 of the discrete nature of position integration and collision detection, the physics engine did not see that there was a wall between those two positions
 because it did not consider the whole trajectory (shown with dotted lines) of the moving rectangle for collision detection:
 
-![tunneling effect](../img/tunneling_effect.svg)
+![tunneling effect](/img/tunneling_effect.svg)
 
 CCD prevents this issue by performing more computations to make the geometric world aware of the full trajectory of the
 moving object. That way, the first time the moving rectangle touches the wall can be detected. This time is also called
 their first _time of impact_ (TOI). Detecting this will allow the mechanical world to teleport the moving rectangle back to
 its first impact, and apply forces. This will yield the expected behavior:
 
-![ccd_nonlinear](../img/ccd_nonlinear.svg)
+![ccd_nonlinear](/img/ccd_nonlinear.svg)
 
 But taking the exact motion of the moving rectangle can be quite computationally intensive, so that's why most physics engines
 only assume a linear motion when performing CCD. This implies a similar result as the previous picture, except that the
 orientation of the moving rectangle will not be corrected and will remain the same as if CCD is were enabled:
 
-![ccd_linear](../img/ccd_linear.svg)
+![ccd_linear](/img/ccd_linear.svg)
 
 
 !!! Note
@@ -108,7 +108,7 @@ to miss the collision with the yellow floor (left image). If CCD is enabled with
 By allowing the mechanical world to perform two substeps, the ball will continue its trajectory after this first contact
 is resolved, causing it it bounce and touch the vertical wall (right image).
 
-![ccd_substeps](../img/ccd_substeps.svg)
+![ccd_substeps](/img/ccd_substeps.svg)
 
 The number of allowed substeps will control the number of allowed bounces handled in a single call of `mechanical_world.step(...)`.
 Keeping the number of substeps to 1 is generally sufficient to get visually plausible results for most application so it

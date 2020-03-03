@@ -580,7 +580,7 @@ let body_handle = collider.body();
 
 ### Collision groups
 It is possible to configure a subset of colliders to collide only with another subset of colliders. This is the goal of
-**collision groups**. Collision groups are demonstrated on the [Collision groups](demo_collision_groups3) example where
+**collision groups**. Collision groups are demonstrated on the [Collision groups](/all_examples3/?collision_groups) example where
 only colliders with the same colors can collide with one another. The source-code of the demo is available on
 [github](https://github.com/rustsim/nphysics/blob/master/examples3d/collision_groups3.rs). A collider's collision group
 can be configured in a `ColliderDesc` before it is built into the physics world.
@@ -607,7 +607,7 @@ enumeration:
 
 * **`BodyStatus::Kinematic`:** Indicates the body velocity must not be altered by the physics engine. The user is
     free to set any velocity and the body position will be integrated at each update accordingly. This is typically
-    used for **platforms** as shown in [this demo](/demo_body_status3/).
+    used for **platforms** as shown in [this demo](/all_examples3/?kinematic_body).
 * **`BodyStatus::Disabled`:** Indicates the body should be completely ignored by the physics engine. In practice,
     this will remove all contacts this body is involved with and disable (but not remove) all joint constraints
     attached to it.

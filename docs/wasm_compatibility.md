@@ -33,7 +33,7 @@ version = "0.1.0"
 authors = [ "you" ]
 
 [dependencies]
-nphysics2d = "0.12"
+nphysics2d = "0.14"
 ```
 
 Before compiling our project, we need to add a `.html` file which will serve as a web page containing our WASM app.
@@ -81,6 +81,6 @@ To achieve this, you will need to prevent **nphysics** from depending on stdweb 
 `Cargo.toml` file, you have to disable the default nphysics features, and enable `use-wasm-bindgen`. For example:
 
 ```.toml
-nphysics3d = { version = "0.12", default-features = false, features = [ "dim3", "use-wasm-bindgen" ] }
-nphysics2d = { version = "0.12", default-features = false, features = [ "dim2", "use-wasm-bindgen" ] }
+nphysics3d = { version = "0.14", default-features = false, features = [ "dim3", "use-wasm-bindgen" ] }
+nphysics2d = { version = "0.14", default-features = false, features = [ "dim2", "use-wasm-bindgen" ] }
 ```

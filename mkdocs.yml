@@ -17,8 +17,8 @@ pages:
     - 'nphysics2d': rustdoc_nphysics2d.md
     - 'nphysics3d': rustdoc_nphysics3d.md
   - '<i class="fa fa-play"></i>&nbsp Demos':
-    - '2D demos': demo_all_examples2.md
-    - '3D demos': demo_all_examples3.md
+    - '2D demos': all_examples2.md
+    - '3D demos': all_examples3.md
 
   - '<i class="fa fa-question-circle"></i>&nbsp About':
       - 'Contributing': about.md

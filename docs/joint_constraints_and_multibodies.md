@@ -70,7 +70,7 @@ The following schematics illustrate a configuration that can be simulated by a m
 
     Simulating **closed loops** like for a necklace cannot be achieved with the reduced-coordinates approach only. However, it is possible to combine both approaches by using joint constraints only to close the loops. Refer to the [last section](#combining-both) for details.
 
-The use of the reduced-coordinates approach is detailed in the [multibodies](#multibodies) section and demonstrated by the [Multibody joints](/demo_joints3/) demo. The constraints-based approach is detailed in the [joint constraints](#joint-constraints) section and demonstrated by the [Joint constraints](/demo_constraints3/) demo.
+The use of the reduced-coordinates approach is detailed in the [multibodies](#multibodies) section and demonstrated by the [Multibody joints](/all_examples3/?multibody) demo. The constraints-based approach is detailed in the [joint constraints](#joint-constraints) section and demonstrated by the [Joint constraints](/all_examples3/?constraints) demo.
 
 ## Multibodies
 Multibodies implement the reduced-coordinates approach. A multibody is a set of **multibody links** attached together by a **multibody joint**.
@@ -251,7 +251,7 @@ for link in multibody.links_with_name("my multibody link name") {
 ```
 
 You may refer to the [code](https://github.com/rustsim/nphysics/blob/master/examples3d/multibody3.rs) of
-[that demo](/demo_multibody3/) for concrete examples of multibody creation.
+[that demo](/all_examples3/?multibody) for concrete examples of multibody creation.
 
 ### Removing a multibody
 The removal of a multibody from the body set uses the same method as the removal of a rigid-body: `body_set.remove(handle)`.
@@ -329,7 +329,7 @@ Each joint constraint requires specific information for being constructed, but a
     **anchor** throughout the documentation of **nphysics**.
 
 You may refer to the [code](https://github.com/rustsim/nphysics/blob/master/examples3d/constraints3.rs) of this
-[demo](/demo_constraints3/) for concrete examples of joint constraint configurations.
+[demo](/all_examples3/?constraints) for concrete examples of joint constraint configurations.
 
 
 ## Combining both
