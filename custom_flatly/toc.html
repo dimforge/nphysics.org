@@ -5,7 +5,7 @@
         {% for toc_item in toc_item.children %}
         <li><a href="{{ toc_item.url }}">
 
-          {% if page_title == "FAQ" %}
+          {% if page.title == "FAQ" %}
             {{ toc_item.title }}
           {% else %}
             <span class="toc_pad">{{ toc_item.title }}</span>
