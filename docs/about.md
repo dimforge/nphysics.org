@@ -117,6 +117,7 @@ The list of contributors can be found [there](https://github.com/rustsim/nphysic
 * Casey Rodarmor
 * Chai T. Rex
 * Chris Heyes
+* Christen Thomson
 * Christopher Armstrong
 * Conor Byron
 * Connor McCluskey
@@ -133,6 +134,7 @@ The list of contributors can be found [there](https://github.com/rustsim/nphysic
 * Hadrien Grasland
 * Hrvoje Bandov
 * Ian Danforth
+* Ilya Epifanov
 * is8ac
 * Jac
 * Jack Wrenn
@@ -143,11 +145,13 @@ The list of contributors can be found [there](https://github.com/rustsim/nphysic
 * Jeb Brooks
 * Jeff Muizelaar
 * Jeff Parsons
+* Jeff Petkau
 * Jeremy Stucki
 * Johan Andersson
 * Jonathan Shook
 * Jordan Miner
 * Joseph Catrambone
+* Joshua Powers
 * J. Ryan Stinnett
 * Kasper Møller Andersen
 * Kipton Barros
@@ -196,6 +200,7 @@ The list of contributors can be found [there](https://github.com/rustsim/nphysic
 * Sven-Hendrik Haase
 * taintur
 * tdittr
+* Thanadol Chitthamlerd
 * Thomas Niederberger
 * Tiago Antao
 * Trym Nilsen
